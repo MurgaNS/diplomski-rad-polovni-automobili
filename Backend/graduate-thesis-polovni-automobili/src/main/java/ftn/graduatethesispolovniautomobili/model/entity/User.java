@@ -1,12 +1,13 @@
 package ftn.graduatethesispolovniautomobili.model.entity;
 
 
-import jakarta.persistence.*;
+import ftn.graduatethesispolovniautomobili.model.enumeration.EUserRole;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,6 +32,10 @@ public class User {
     private Integer zip;
     private String address;
     private String phoneNumber;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private EUserRole role;
 
     @OneToMany(mappedBy = "user")
     private Set<Ad> ads = new HashSet<>();

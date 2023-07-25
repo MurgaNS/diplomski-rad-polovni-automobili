@@ -1,6 +1,6 @@
 package ftn.graduatethesispolovniautomobili.model.entity;
 
-import jakarta.persistence.Entity;
+import javax.persistence.*;
 
 @Entity
 public class Administrator extends User{

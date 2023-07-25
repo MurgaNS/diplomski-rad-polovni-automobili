@@ -1,13 +1,14 @@
 package ftn.graduatethesispolovniautomobili.model.entity;
 
 import ftn.graduatethesispolovniautomobili.model.enumeration.EReportReason;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+
+import javax.persistence.*;
 
 @Entity
 @AllArgsConstructor
