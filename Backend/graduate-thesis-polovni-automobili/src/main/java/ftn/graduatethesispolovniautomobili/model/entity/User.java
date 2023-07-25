@@ -37,7 +37,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private EUserRole role;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Ad> ads = new HashSet<>();
 
     @OneToMany

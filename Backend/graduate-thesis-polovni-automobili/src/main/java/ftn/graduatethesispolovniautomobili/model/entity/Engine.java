@@ -17,6 +17,8 @@ import javax.persistence.*;
 public class Engine {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true, nullable = false)
     private Integer id;
 
     @Column
@@ -33,8 +35,11 @@ public class Engine {
     private Integer power;
     private Integer mileage;
 
-    @ManyToOne
-    @JoinColumn(name = "car_id", nullable = false)
+    //    @ManyToOne
+//    @JoinColumn(name = "car_id", nullable = false)
+//    private Car car;
+
+    @OneToOne(mappedBy = "engine")
     private Car car;
 
 }

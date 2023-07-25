@@ -8,4 +8,6 @@ public interface UserService {
     UserDTO registerUser(UserRegistrationRequestDTO userRegistrationRequestDTO);
 
     User findByUsername(String username);
+
+//    User findById(Integer id);
 }
