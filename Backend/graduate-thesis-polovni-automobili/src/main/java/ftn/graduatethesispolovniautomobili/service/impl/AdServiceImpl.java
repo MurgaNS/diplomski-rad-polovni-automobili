@@ -17,9 +17,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class AdServiceImpl implements AdService {
@@ -148,5 +146,22 @@ public class AdServiceImpl implements AdService {
         save(AdMapper.mapForUpdate(adForUpdate, adRequestDTO));
         return adForUpdate;
 
+    }
+
+    @Override
+    public Ad followAd(Integer id, Authentication authentication) {
+
+        Ad adForFollow = getById(id);
+
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User user = userService.findByUsername(userDetails.getUsername());
+
+        Set<Ad> ads = user.getFollowedAds();
+        ads.add(adForFollow);
+
+        user.setFollowedAds(ads);
+
+        userService.save(user);
+        return adForFollow;
     }
 }

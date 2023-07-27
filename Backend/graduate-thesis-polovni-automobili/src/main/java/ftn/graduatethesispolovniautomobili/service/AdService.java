@@ -25,5 +25,7 @@ public interface AdService
 
     Ad updateAd(Integer id, AdRequestDTO adRequestDTO, Authentication authentication);
 
+    Ad followAd(Integer id, Authentication authentication);
+
 
 }
