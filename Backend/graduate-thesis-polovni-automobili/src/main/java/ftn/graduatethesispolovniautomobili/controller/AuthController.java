@@ -1,10 +1,14 @@
 package ftn.graduatethesispolovniautomobili.controller;
 
+import ftn.graduatethesispolovniautomobili.exception.BadRequestException;
+import ftn.graduatethesispolovniautomobili.exception.PasswordMatchException;
+import ftn.graduatethesispolovniautomobili.model.dto.auth.request.ChangePasswordRequestDTO;
 import ftn.graduatethesispolovniautomobili.model.dto.auth.request.LoginRequestDTO;
 import ftn.graduatethesispolovniautomobili.model.dto.auth.response.UserTokenState;
 import ftn.graduatethesispolovniautomobili.model.dto.user.request.UserRegistrationRequestDTO;
 import ftn.graduatethesispolovniautomobili.model.dto.user.response.UserDTO;
 import ftn.graduatethesispolovniautomobili.security.TokenUtils;
+import ftn.graduatethesispolovniautomobili.service.AuthService;
 import ftn.graduatethesispolovniautomobili.service.impl.UserServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +18,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "api/auth")
@@ -26,10 +27,13 @@ public class AuthController {
     private final TokenUtils tokenUtils;
     private final UserServiceImpl userService;
 
-    public AuthController(TokenUtils tokenUtils, UserServiceImpl userService, AuthenticationManager authenticationManager) {
+    private final AuthService authService;
+
+    public AuthController(TokenUtils tokenUtils, UserServiceImpl userService, AuthenticationManager authenticationManager, AuthService authService) {
         this.tokenUtils = tokenUtils;
         this.userService = userService;
         this.authenticationManager = authenticationManager;
+        this.authService = authService;
     }
 
     @PostMapping(value = "/login")
@@ -58,4 +62,17 @@ public class AuthController {
 
         return new ResponseEntity<>(createdUser, HttpStatus.OK);
     }
+
+    @PutMapping(value = "/change-password")
+    public ResponseEntity<String> changePassword(@RequestBody @Validated ChangePasswordRequestDTO changePasswordDTO, Authentication authentication) {
+
+        try {
+            authService.changePassword(changePasswordDTO, authentication);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (BadRequestException | PasswordMatchException exception) {
+            return new ResponseEntity<>(exception.getMessage(),HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
 }
