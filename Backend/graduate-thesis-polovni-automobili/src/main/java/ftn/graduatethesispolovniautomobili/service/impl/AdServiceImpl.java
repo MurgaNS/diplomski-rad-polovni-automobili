@@ -100,6 +100,12 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
+    public List<Ad> getUserAds(Authentication authentication) {
+
+        return adRepository.getUserAds(userService.findCurrentLoggedUser(authentication).getId());
+    }
+
+    @Override
     public Ad changeStatus(Integer id, AdChangeStatusDTO adChangeStatusDTO) {
 
         Ad ad = getById(id);

@@ -20,4 +20,9 @@ public interface AdRepository extends JpaRepository<Ad, Integer> {
 
     @Query(nativeQuery = true, value = "SELECT * FROM ad where ad.status = 'INACTIVE'")
     List<Ad> getAllInactive();
+
+    @Query(nativeQuery = true, value = "SELECT * FROM ad where ad.user_id = ? ")
+    List<Ad> getUserAds(Integer user_id);
+
+
 }

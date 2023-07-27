@@ -4,7 +4,6 @@ import ftn.graduatethesispolovniautomobili.exception.BadRequestException;
 import ftn.graduatethesispolovniautomobili.exception.PasswordMatchException;
 import ftn.graduatethesispolovniautomobili.model.dto.auth.request.ChangePasswordRequestDTO;
 import ftn.graduatethesispolovniautomobili.model.entity.User;
-import ftn.graduatethesispolovniautomobili.security.TokenUtils;
 import ftn.graduatethesispolovniautomobili.service.AuthService;
 import ftn.graduatethesispolovniautomobili.service.UserService;
 import org.springframework.security.core.Authentication;
@@ -16,12 +15,10 @@ public class AuthServiceImpl implements AuthService {
 
     private final UserService userService;
 
-    private final TokenUtils tokenUtils;
     private final PasswordEncoder passwordEncoder;
 
-    public AuthServiceImpl(UserService userService, TokenUtils tokenUtils, PasswordEncoder passwordEncoder) {
+    public AuthServiceImpl(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
-        this.tokenUtils = tokenUtils;
         this.passwordEncoder = passwordEncoder;
     }
 
