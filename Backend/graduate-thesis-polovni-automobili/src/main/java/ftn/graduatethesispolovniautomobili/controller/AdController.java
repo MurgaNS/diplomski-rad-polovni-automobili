@@ -94,4 +94,16 @@ public class AdController {
 
         return new ResponseEntity(adResponseDTO, HttpStatus.OK);
     }
+
+    @PostMapping(value = "/{id}/follow")
+    public ResponseEntity<AdResponseDTO> followAd(@PathVariable Integer id, Authentication authentication){
+
+        Ad followedAd = adService.followAd(id, authentication);
+
+        AdResponseDTO adResponseDTO = AdMapper.toAdResponseDTO(followedAd);
+
+        return new ResponseEntity(adResponseDTO, HttpStatus.OK);
+    }
+
+
 }

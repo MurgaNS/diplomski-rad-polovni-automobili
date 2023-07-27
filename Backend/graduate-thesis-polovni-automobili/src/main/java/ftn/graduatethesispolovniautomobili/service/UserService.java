@@ -11,5 +11,7 @@ public interface UserService {
     User findByUsername(String username);
     User findCurrentLoggedUser(Authentication authentication);
 
+    User save(User user);
+
 //    User findById(Integer id);
 }
