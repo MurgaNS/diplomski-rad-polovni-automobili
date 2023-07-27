@@ -2,6 +2,7 @@ package ftn.graduatethesispolovniautomobili.model.mapper;
 
 import ftn.graduatethesispolovniautomobili.model.dto.ad.request.AdRequestDTO;
 import ftn.graduatethesispolovniautomobili.model.dto.ad.response.AdResponseDTO;
+import ftn.graduatethesispolovniautomobili.model.dto.ad.response.AdResponseForReportDTO;
 import ftn.graduatethesispolovniautomobili.model.entity.Ad;
 
 import java.util.List;
@@ -44,5 +45,16 @@ public class AdMapper {
 
         return ads.stream().map(AdMapper::toAdResponseDTO).toList();
 
+    }
+
+    public static AdResponseForReportDTO toReportDTO(Ad ad){
+
+        AdResponseForReportDTO adResponseForReportDTO = new AdResponseForReportDTO();
+
+        adResponseForReportDTO.setId(ad.getId());
+        adResponseForReportDTO.setDescription(ad.getDescription());
+        adResponseForReportDTO.setPrice(ad.getPrice());
+
+        return adResponseForReportDTO;
     }
 }

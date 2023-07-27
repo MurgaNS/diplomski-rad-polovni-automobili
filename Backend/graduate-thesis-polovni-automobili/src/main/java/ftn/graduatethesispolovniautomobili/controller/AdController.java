@@ -83,7 +83,6 @@ public class AdController {
         AdResponseDTO adResponseDTO = AdMapper.toAdResponseDTO(ad);
 
         return new ResponseEntity(adResponseDTO, HttpStatus.OK);
-
     }
 
     @PutMapping(value = "/{id}")
@@ -95,8 +94,4 @@ public class AdController {
 
         return new ResponseEntity(adResponseDTO, HttpStatus.OK);
     }
-
-
-
-
 }
