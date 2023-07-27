@@ -6,6 +6,8 @@ import ftn.graduatethesispolovniautomobili.model.entity.User;
 import ftn.graduatethesispolovniautomobili.model.mapper.UserMapper;
 import ftn.graduatethesispolovniautomobili.repository.UserRepository;
 import ftn.graduatethesispolovniautomobili.service.UserService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,12 @@ public class UserServiceImpl implements UserService {
 
     public User save(User user) {
         return userRepository.save(user);
+    }
+
+    @Override
+    public User findCurrentLoggedUser(Authentication authentication) {
+        UserDetails user = (UserDetails) authentication.getPrincipal();
+        return userRepository.findByUsername(user.getUsername());
     }
 
     public UserDTO registerUser(UserRegistrationRequestDTO userRegistrationRequestDTO) {

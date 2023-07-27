@@ -8,6 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AdResponseDTO {
+
     private Double price;
     private String description;
     private CarResponseDTO carResponseDTO;
