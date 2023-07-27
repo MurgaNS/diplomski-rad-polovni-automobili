@@ -10,6 +10,7 @@ public class UserMapper {
 
     public static UserDTO mapUserDTO(User user) {
         UserDTO userDTO = new UserDTO();
+        userDTO.setId(user.getId());
         userDTO.setCity(user.getCity());
         userDTO.setAddress(user.getAddress());
         userDTO.setCountry(user.getCountry());
@@ -39,5 +40,4 @@ public class UserMapper {
 
         return user;
     }
-
 }

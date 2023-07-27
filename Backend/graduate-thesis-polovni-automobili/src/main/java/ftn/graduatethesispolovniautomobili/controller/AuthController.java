@@ -52,10 +52,10 @@ public class AuthController {
     public ResponseEntity<UserDTO> signUp(@RequestBody @Validated UserRegistrationRequestDTO userRegistrationRequestDTO) {
 
         UserDTO createdUser = userService.registerUser(userRegistrationRequestDTO);
-
         if (createdUser == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+
         return new ResponseEntity<>(createdUser, HttpStatus.OK);
     }
 }

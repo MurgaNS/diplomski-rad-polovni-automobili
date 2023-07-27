@@ -39,7 +39,7 @@ public class Ad {
     @OneToMany(mappedBy = "ad", fetch = FetchType.EAGER)
     private Set<Report> reports = new HashSet<>();
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id")
     private User user;
 
