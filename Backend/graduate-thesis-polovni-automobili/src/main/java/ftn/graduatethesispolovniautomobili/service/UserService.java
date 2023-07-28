@@ -9,9 +9,9 @@ public interface UserService {
     UserDTO registerUser(UserRegistrationRequestDTO userRegistrationRequestDTO);
 
     User findByUsername(String username);
+
     User findCurrentLoggedUser(Authentication authentication);
 
     User save(User user);
 
-//    User findById(Integer id);
 }

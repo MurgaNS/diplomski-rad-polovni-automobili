@@ -145,4 +145,10 @@ public class AdServiceImpl implements AdService {
         userService.save(user);
         return adForFollow;
     }
+
+    @Override
+    public List<Ad> getUserAds(Authentication authentication) {
+
+        return adRepository.getUserAds(userService.findCurrentLoggedUser(authentication).getId());
+    }
 }

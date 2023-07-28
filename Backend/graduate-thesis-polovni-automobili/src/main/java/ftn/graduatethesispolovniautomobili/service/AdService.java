@@ -21,6 +21,9 @@ public interface AdService
 
     List<Ad> search(AdRequestDTO adRequestDTO);
 
+    List<Ad> getUserAds(Authentication authentication);
+
+
     Ad changeStatus(Integer id,AdChangeStatusDTO adChangeStatusDTO);
 
     Ad getById(Integer id);

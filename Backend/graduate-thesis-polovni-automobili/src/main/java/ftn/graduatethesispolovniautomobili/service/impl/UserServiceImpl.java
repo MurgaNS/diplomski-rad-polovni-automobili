@@ -29,7 +29,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findCurrentLoggedUser(Authentication authentication) {
+
         UserDetails user = (UserDetails) authentication.getPrincipal();
+
         return userRepository.findByUsername(user.getUsername());
     }
 
@@ -37,6 +39,7 @@ public class UserServiceImpl implements UserService {
 
         User newUser = UserMapper.mapRegistrationRegularUser(userRegistrationRequestDTO);
         newUser.setPassword(passwordEncoder.encode(userRegistrationRequestDTO.getPassword()));
+
         save(newUser);
 
 //        emailService.sendVerificationEmail(userDTO);
