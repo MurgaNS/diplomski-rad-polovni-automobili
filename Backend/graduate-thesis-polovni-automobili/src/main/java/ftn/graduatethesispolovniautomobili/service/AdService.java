@@ -19,6 +19,8 @@ public interface AdService
 
     List<Ad> getAllInactive();
 
+    List<Ad> search(AdRequestDTO adRequestDTO);
+
     Ad changeStatus(Integer id,AdChangeStatusDTO adChangeStatusDTO);
 
     Ad getById(Integer id);

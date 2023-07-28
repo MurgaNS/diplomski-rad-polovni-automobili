@@ -105,5 +105,15 @@ public class AdController {
         return new ResponseEntity(adResponseDTO, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/search")
+    public ResponseEntity<List<AdResponseDTO>> search(@RequestBody(required = false) AdRequestDTO adRequestDTO) {
+
+        List<Ad> ads = adService.search(adRequestDTO);
+        List<AdResponseDTO> adResponseDTOS = AdMapper.toDTOs(ads);
+
+        return new ResponseEntity(adResponseDTOS, HttpStatus.OK);
+
+    }
+
 
 }

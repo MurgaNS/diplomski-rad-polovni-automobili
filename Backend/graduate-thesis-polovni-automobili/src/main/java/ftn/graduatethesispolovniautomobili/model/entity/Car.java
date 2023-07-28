@@ -65,6 +65,14 @@ public class Car {
     private EAdditionalEquipment additionalEquipment;
 
     @Column
+    @Enumerated(EnumType.STRING)
+    private EFuelType fuelType;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private EEngineEmmisionClass engineEmmisionClass;
+
+    @Column
     private String photo;
     private String brand;
     private String model;
@@ -74,13 +82,10 @@ public class Car {
     private String interiorColor;
     private Date registeredUntil;
     private String chassisNumber;
-
-//    @OneToMany(mappedBy = "car",fetch = FetchType.LAZY)
-//    private Set<Engine> engine = new HashSet<>();
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "engine_id", referencedColumnName = "id")
-    private Engine engine;
+    private String engineType;
+    private Integer engineCubicle;
+    private Integer power;
+    private Integer mileage;
 
     @OneToOne(mappedBy = "car")
     private Ad ad;
