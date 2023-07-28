@@ -1,6 +1,5 @@
 package ftn.graduatethesispolovniautomobili.model.dto.car.request;
 
-import ftn.graduatethesispolovniautomobili.model.dto.engine.EngineForCarDTO;
 import ftn.graduatethesispolovniautomobili.model.enumeration.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,5 +30,10 @@ public class CarRequestDTO {
     private String interiorColor;
     private Date registeredUntil;
     private String chassisNumber;
-    private EngineForCarDTO engineForCarDTO;
+    private String engineType;
+    private Integer engineCubicle;
+    private Integer power;
+    private Integer mileage;
+    private EEngineEmmisionClass engineEmmisionClass;
+    private EFuelType fuelType;
 }

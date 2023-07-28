@@ -30,7 +30,12 @@ public class CarMapper {
         carResponseDTO.setInteriorColor(car.getInteriorColor());
         carResponseDTO.setRegisteredUntil(car.getRegisteredUntil());
         carResponseDTO.setChassisNumber(car.getChassisNumber());
-        carResponseDTO.setEngineForCarDTO(EngineMapper.toDTO(car.getEngine()));
+        carResponseDTO.setEngineType(car.getEngineType());
+        carResponseDTO.setEngineCubicle(car.getEngineCubicle());
+        carResponseDTO.setPower(car.getPower());
+        carResponseDTO.setMileage(car.getMileage());
+        carResponseDTO.setEngineEmmisionClass(car.getEngineEmmisionClass());
+        carResponseDTO.setFuelType(car.getFuelType());
 
         return carResponseDTO;
 
@@ -59,7 +64,12 @@ public class CarMapper {
         car.setInteriorColor(carRequestDTO.getInteriorColor());
         car.setRegisteredUntil(carRequestDTO.getRegisteredUntil());
         car.setChassisNumber(carRequestDTO.getChassisNumber());
-        car.setEngine(EngineMapper.mapToEngine(carRequestDTO.getEngineForCarDTO()));
+        car.setEngineType(carRequestDTO.getEngineType());
+        car.setEngineCubicle(carRequestDTO.getEngineCubicle());
+        car.setPower(carRequestDTO.getPower());
+        car.setMileage(carRequestDTO.getMileage());
+        car.setEngineEmmisionClass(carRequestDTO.getEngineEmmisionClass());
+        car.setFuelType(carRequestDTO.getFuelType());
 
         return car;
     }
@@ -86,7 +96,12 @@ public class CarMapper {
         car.setInteriorColor(carRequestDTO.getInteriorColor());
         car.setRegisteredUntil(carRequestDTO.getRegisteredUntil());
         car.setChassisNumber(carRequestDTO.getChassisNumber());
-        car.setEngine(EngineMapper.mapForUpdate(car.getEngine(), carRequestDTO.getEngineForCarDTO()));
+        car.setEngineType(carRequestDTO.getEngineType());
+        car.setEngineCubicle(carRequestDTO.getEngineCubicle());
+        car.setPower(carRequestDTO.getPower());
+        car.setMileage(carRequestDTO.getMileage());
+        car.setEngineEmmisionClass(carRequestDTO.getEngineEmmisionClass());
+        car.setFuelType(carRequestDTO.getFuelType());
 
         return car;
     }

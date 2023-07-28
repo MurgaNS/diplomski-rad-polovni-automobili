@@ -6,10 +6,10 @@ import ftn.graduatethesispolovniautomobili.model.dto.ad.request.AdChangeStatusDT
 import ftn.graduatethesispolovniautomobili.model.dto.ad.request.AdRequestDTO;
 import ftn.graduatethesispolovniautomobili.model.entity.Ad;
 import ftn.graduatethesispolovniautomobili.model.entity.Car;
-import ftn.graduatethesispolovniautomobili.model.entity.Engine;
 import ftn.graduatethesispolovniautomobili.model.entity.User;
 import ftn.graduatethesispolovniautomobili.model.enumeration.EAdStatus;
 import ftn.graduatethesispolovniautomobili.model.mapper.AdMapper;
+import ftn.graduatethesispolovniautomobili.model.mapper.CarMapper;
 import ftn.graduatethesispolovniautomobili.repository.AdRepository;
 import ftn.graduatethesispolovniautomobili.service.AdService;
 import ftn.graduatethesispolovniautomobili.service.UserService;
@@ -40,36 +40,7 @@ public class AdServiceImpl implements AdService {
         Ad newAd = AdMapper.mapToAd(adRequestDTO);
         newAd.setStatus(EAdStatus.INACTIVE);
 
-        Car car = new Car();
-        Engine engine = new Engine();
-        engine.setEngineCubicle(adRequestDTO.getCarRequestDTO().getEngineForCarDTO().getEngineCubicle());
-        engine.setFuelType(adRequestDTO.getCarRequestDTO().getEngineForCarDTO().getFuelType());
-        engine.setEngineType(adRequestDTO.getCarRequestDTO().getEngineForCarDTO().getEngineType());
-        engine.setEngineEmmisionClass(adRequestDTO.getCarRequestDTO().getEngineForCarDTO().getEngineEmmisionClass());
-        engine.setMileage(adRequestDTO.getCarRequestDTO().getEngineForCarDTO().getMileage());
-        engine.setPower(adRequestDTO.getCarRequestDTO().getEngineForCarDTO().getPower());
-
-        car.setCarCategory(adRequestDTO.getCarRequestDTO().getCarCategory());
-        car.setCarDrive(adRequestDTO.getCarRequestDTO().getCarDrive());
-        car.setCarGearbox(adRequestDTO.getCarRequestDTO().getCarGearbox());
-        car.setCarSafety(adRequestDTO.getCarRequestDTO().getCarSafety());
-        car.setBrand(adRequestDTO.getCarRequestDTO().getBrand());
-        car.setClimate(adRequestDTO.getCarRequestDTO().getClimate());
-        car.setAdditionalEquipment(adRequestDTO.getCarRequestDTO().getAdditionalEquipment());
-        car.setChassisNumber(adRequestDTO.getCarRequestDTO().getChassisNumber());
-        car.setColor(adRequestDTO.getCarRequestDTO().getColor());
-        car.setDamage(adRequestDTO.getCarRequestDTO().getDamage());
-        car.setDoorNumber(adRequestDTO.getCarRequestDTO().getDoorNumber());
-        car.setExchange(adRequestDTO.getCarRequestDTO().getExchange());
-        car.setInteriorColor(adRequestDTO.getCarRequestDTO().getInteriorColor());
-        car.setInteriorMaterial(adRequestDTO.getCarRequestDTO().getInteriorMaterial());
-        car.setModel(adRequestDTO.getCarRequestDTO().getModel());
-        car.setPhoto(adRequestDTO.getCarRequestDTO().getPhoto());
-        car.setRegisteredUntil(adRequestDTO.getCarRequestDTO().getRegisteredUntil());
-        car.setSeatsNumber(adRequestDTO.getCarRequestDTO().getSeatsNumber());
-        car.setSteeringWheelSide(adRequestDTO.getCarRequestDTO().getSteeringWheelSide());
-        car.setVehicleCondition(adRequestDTO.getCarRequestDTO().getVehicleCondition());
-        car.setEngine(engine);
+        Car car = CarMapper.mapToCar(adRequestDTO.getCarRequestDTO());
 
         newAd.setCar(car);
         newAd.setUser(user);
@@ -97,6 +68,16 @@ public class AdServiceImpl implements AdService {
     @Override
     public List<Ad> getAllInactive() {
         return adRepository.getAllInactive();
+    }
+
+    @Override
+    public List<Ad> search(AdRequestDTO adRequestDTO) {
+
+       /* if (adRequestDTO == null) {
+            throw new BadRequestException("Please provide a valid search parameters!");
+        }*/
+
+        return adRepository.search(adRequestDTO);
     }
 
     @Override
