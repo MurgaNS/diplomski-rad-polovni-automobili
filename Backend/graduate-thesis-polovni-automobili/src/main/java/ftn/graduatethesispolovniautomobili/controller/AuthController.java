@@ -4,9 +4,11 @@ import ftn.graduatethesispolovniautomobili.exception.BadRequestException;
 import ftn.graduatethesispolovniautomobili.exception.PasswordMatchException;
 import ftn.graduatethesispolovniautomobili.model.dto.auth.request.ChangePasswordRequestDTO;
 import ftn.graduatethesispolovniautomobili.model.dto.auth.request.LoginRequestDTO;
+import ftn.graduatethesispolovniautomobili.model.dto.auth.request.SignupVerificationDTO;
 import ftn.graduatethesispolovniautomobili.model.dto.auth.response.UserTokenState;
 import ftn.graduatethesispolovniautomobili.model.dto.user.request.UserRegistrationRequestDTO;
 import ftn.graduatethesispolovniautomobili.model.dto.user.response.UserDTO;
+import ftn.graduatethesispolovniautomobili.model.entity.User;
 import ftn.graduatethesispolovniautomobili.security.TokenUtils;
 import ftn.graduatethesispolovniautomobili.service.AuthService;
 import ftn.graduatethesispolovniautomobili.service.impl.UserServiceImpl;
@@ -38,15 +40,21 @@ public class AuthController {
 
     @PostMapping(value = "/login")
     public ResponseEntity<UserTokenState> createAuthenticationToken
-            (@Validated @RequestBody LoginRequestDTO userLoginRequestDTO) {
+            (@Validated @RequestBody LoginRequestDTO employeeLoginRequestDTO) {
 
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                userLoginRequestDTO.getUsername(), userLoginRequestDTO.getPassword()));
+                employeeLoginRequestDTO.getEmail(), employeeLoginRequestDTO.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        UserDetails user = (UserDetails) authentication.getPrincipal();
-        String jwt = tokenUtils.generateToken(user.getUsername(), user.getAuthorities().toArray()[0].toString());
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        User user = userService.findByUsername(userDetails.getUsername());
+        if (!user.isVerification()) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+
+        String jwt = tokenUtils.generateToken(userDetails.getUsername(), userDetails.getAuthorities().toArray()[0].toString());
         long expiresIn = tokenUtils.getExpiredIn();
 
         return ResponseEntity.ok(new UserTokenState(jwt, expiresIn));
@@ -71,6 +79,18 @@ public class AuthController {
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (BadRequestException | PasswordMatchException exception) {
             return new ResponseEntity<>(exception.getMessage(),HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping(value = "/verify-account")
+    public ResponseEntity<String> signupVerification(@RequestBody @Validated SignupVerificationDTO signupVerificationDTO) {
+
+        try {
+            authService.signupVerification(signupVerificationDTO);
+            return new ResponseEntity<>(HttpStatus.OK);
+
+        } catch (BadRequestException | PasswordMatchException ex) {
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 

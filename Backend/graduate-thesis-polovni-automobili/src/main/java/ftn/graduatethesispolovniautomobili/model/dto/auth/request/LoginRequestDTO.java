@@ -13,8 +13,8 @@ import javax.validation.constraints.NotBlank;
 @Setter
 public class LoginRequestDTO {
 
-    @NotBlank(message = "Username is mandatory")
-    private String username;
+    @NotBlank(message = "Email is mandatory")
+    private String email;
 
     @NotBlank(message = "Password is mandatory")
     @Length(min = 5, message = "Password must be longer than 5 characters.")

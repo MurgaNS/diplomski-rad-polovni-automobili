@@ -26,19 +26,20 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-        User user = userService.findByUsername(username);
+        User user = userService.findByEmail(email);
 
-        if (user == null) {
-            throw new UsernameNotFoundException("There is no user with username " + username);
+        if (email == null) {
+            throw new UsernameNotFoundException("There is no employee with email " + email);
+
         } else {
             List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
             String role = "ROLE_" + user.getRole().toString();
             grantedAuthorities.add(new SimpleGrantedAuthority(role));
 
             return new org.springframework.security.core.userdetails.User(
-                    user.getUsername().trim(),
+                    user.getEmail().trim(),
                     user.getPassword().trim(),
                     grantedAuthorities);
         }

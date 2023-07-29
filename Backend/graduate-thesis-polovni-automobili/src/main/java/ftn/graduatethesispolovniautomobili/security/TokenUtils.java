@@ -32,10 +32,10 @@ public class TokenUtils {
         return claims;
     }
 
-    public String getUsernameFromToken(String token) {
+    public String getEmailFromToken(String token) {
         String username;
         try {
-            Claims claims = this.getClaimsFromToken(token); // username izvlacimo iz subject polja unutar payload tokena
+            Claims claims = this.getClaimsFromToken(token);
             username = claims.getSubject();
         } catch (Exception e) {
             username = null;
@@ -60,14 +60,14 @@ public class TokenUtils {
     }
 
     public boolean validateToken(String token, UserDetails userDetails) {
-        final String username = getUsernameFromToken(token);
+        final String username = getEmailFromToken(token);
         return username.equals(userDetails.getUsername())
                 && !isTokenExpired(token);
     }
 
-    public String generateToken(String username, String role) {
+    public String generateToken(String email, String role) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("sub", username);
+        claims.put("sub", email);
         claims.put("role", new SimpleGrantedAuthority(role));
         claims.put("created", new Date(System.currentTimeMillis()));
         return Jwts.builder().setClaims(claims)
@@ -75,8 +75,8 @@ public class TokenUtils {
                 .signWith(SignatureAlgorithm.HS512, secret).compact();
     }
 
-
     public int getExpiredIn() {
         return expiration.intValue();
     }
 }
+
