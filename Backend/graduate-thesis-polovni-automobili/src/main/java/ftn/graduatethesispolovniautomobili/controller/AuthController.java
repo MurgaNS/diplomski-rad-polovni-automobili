@@ -49,7 +49,7 @@ public class AuthController {
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
-        User user = userService.findByUsername(userDetails.getUsername());
+        User user = userService.findByEmail(userDetails.getUsername());
         if (!user.isVerification()) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }

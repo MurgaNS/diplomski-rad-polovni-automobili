@@ -23,6 +23,7 @@ public interface AdService
 
     List<Ad> getUserAds(Authentication authentication);
 
+    List<Ad> getFollowedAds(Authentication authentication);
 
     Ad changeStatus(Integer id,AdChangeStatusDTO adChangeStatusDTO);
 

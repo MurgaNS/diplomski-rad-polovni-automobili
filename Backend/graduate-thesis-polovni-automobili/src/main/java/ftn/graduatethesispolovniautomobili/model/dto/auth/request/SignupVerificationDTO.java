@@ -11,8 +11,4 @@ public class SignupVerificationDTO {
 
     @NotNull(message = "Token is mandatory")
     private String token;
-    @NotNull(message = "New password is mandatory")
-    private String newPassword;
-    @NotNull(message = "Confirm password is mandatory")
-    private String confirmPassword;
 }

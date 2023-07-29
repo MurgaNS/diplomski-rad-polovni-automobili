@@ -35,7 +35,7 @@ public class AdServiceImpl implements AdService {
     public Ad addNewAd(AdRequestDTO adRequestDTO, Authentication authentication) {
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        User user = userService.findByUsername(userDetails.getUsername());
+        User user = userService.findByEmail(userDetails.getUsername());
 
         Ad newAd = AdMapper.mapToAd(adRequestDTO);
         newAd.setStatus(EAdStatus.INACTIVE);
@@ -135,7 +135,7 @@ public class AdServiceImpl implements AdService {
         Ad adForFollow = getById(id);
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        User user = userService.findByUsername(userDetails.getUsername());
+        User user = userService.findByEmail(userDetails.getUsername());
 
         Set<Ad> ads = user.getFollowedAds();
         ads.add(adForFollow);
@@ -150,5 +150,11 @@ public class AdServiceImpl implements AdService {
     public List<Ad> getUserAds(Authentication authentication) {
 
         return adRepository.getUserAds(userService.findCurrentLoggedUser(authentication).getId());
+    }
+
+    @Override
+    public List<Ad> getFollowedAds(Authentication authentication) {
+
+        return  adRepository.getFollowedAds(userService.findCurrentLoggedUser(authentication).getId());
     }
 }
