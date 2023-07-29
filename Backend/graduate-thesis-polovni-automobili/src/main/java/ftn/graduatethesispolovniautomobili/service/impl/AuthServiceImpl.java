@@ -3,7 +3,9 @@ package ftn.graduatethesispolovniautomobili.service.impl;
 import ftn.graduatethesispolovniautomobili.exception.BadRequestException;
 import ftn.graduatethesispolovniautomobili.exception.PasswordMatchException;
 import ftn.graduatethesispolovniautomobili.model.dto.auth.request.ChangePasswordRequestDTO;
+import ftn.graduatethesispolovniautomobili.model.dto.auth.request.SignupVerificationDTO;
 import ftn.graduatethesispolovniautomobili.model.entity.User;
+import ftn.graduatethesispolovniautomobili.security.TokenUtils;
 import ftn.graduatethesispolovniautomobili.service.AuthService;
 import ftn.graduatethesispolovniautomobili.service.UserService;
 import org.springframework.security.core.Authentication;
@@ -17,9 +19,13 @@ public class AuthServiceImpl implements AuthService {
 
     private final PasswordEncoder passwordEncoder;
 
-    public AuthServiceImpl(UserService userService, PasswordEncoder passwordEncoder) {
+    private final TokenUtils tokenUtils;
+
+
+    public AuthServiceImpl(UserService userService, PasswordEncoder passwordEncoder, TokenUtils tokenUtils) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
+        this.tokenUtils = tokenUtils;
     }
 
     @Override
@@ -38,6 +44,24 @@ public class AuthServiceImpl implements AuthService {
 
         } else {
             throw new PasswordMatchException("Passwords must match");
+        }
+    }
+
+    @Override
+    public void signupVerification(SignupVerificationDTO signupVerificationDTO) {
+
+        User user = userService.findByEmail(tokenUtils.getEmailFromToken(signupVerificationDTO.getToken()));
+
+        if (tokenUtils.isTokenExpired(signupVerificationDTO.getToken()) || user == null) {
+            throw new BadRequestException("Token is invalid");
+        }
+
+        if (signupVerificationDTO.getNewPassword().equals(signupVerificationDTO.getConfirmPassword())) {
+
+            user.setPassword(passwordEncoder.encode(signupVerificationDTO.getNewPassword()));
+            userService.save(user);
+        } else {
+            throw new PasswordMatchException("Password must match");
         }
     }
 }

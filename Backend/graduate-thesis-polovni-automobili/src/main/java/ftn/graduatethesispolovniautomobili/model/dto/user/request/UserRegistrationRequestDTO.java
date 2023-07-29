@@ -1,5 +1,6 @@
 package ftn.graduatethesispolovniautomobili.model.dto.user.request;
 
+import ftn.graduatethesispolovniautomobili.model.enumeration.EUserRole;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,5 +19,7 @@ public class UserRegistrationRequestDTO {
     private Integer zip;
     private String address;
     private String phoneNumber;
+    private String email;
+    private EUserRole role;
 
 }

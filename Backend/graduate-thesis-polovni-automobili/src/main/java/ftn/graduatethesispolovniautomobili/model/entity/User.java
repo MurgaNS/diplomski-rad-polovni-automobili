@@ -32,6 +32,8 @@ public class User {
     private Integer zip;
     private String address;
     private String phoneNumber;
+    private String email;
+    private boolean verification;
 
     @Column
     @Enumerated(EnumType.STRING)
