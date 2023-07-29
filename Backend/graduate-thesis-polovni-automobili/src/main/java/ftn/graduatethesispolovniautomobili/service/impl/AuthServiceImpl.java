@@ -55,14 +55,8 @@ public class AuthServiceImpl implements AuthService {
         if (tokenUtils.isTokenExpired(signupVerificationDTO.getToken()) || user == null) {
             throw new BadRequestException("Token is invalid");
         }
-
-        if (signupVerificationDTO.getNewPassword().equals(signupVerificationDTO.getConfirmPassword())) {
-
-            user.setPassword(passwordEncoder.encode(signupVerificationDTO.getNewPassword()));
-            userService.save(user);
-        } else {
-            throw new PasswordMatchException("Password must match");
-        }
+        user.setVerification(true);
+        userService.save(user);
     }
 }
 

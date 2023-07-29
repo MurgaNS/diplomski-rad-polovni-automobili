@@ -33,4 +33,14 @@ public class UserController {
         return new ResponseEntity(adResponseDTO, HttpStatus.OK);
 
     }
+
+    @GetMapping(value = "/followedAds")
+    private ResponseEntity<AdResponseDTO> getFollowedAds(Authentication authentication) {
+
+        List<Ad> ad = adService.getFollowedAds(authentication);
+
+        List<AdResponseDTO> adResponseDTO = AdMapper.toDTOs(ad);
+
+        return new ResponseEntity(adResponseDTO, HttpStatus.OK);
+    }
 }

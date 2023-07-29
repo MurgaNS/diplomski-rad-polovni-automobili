@@ -54,4 +54,11 @@ public interface AdRepository extends JpaRepository<Ad, Integer> {
             "AND (:#{#searchParameters.carRequestDTO.mileage} IS NULL OR ad.car.mileage = :#{#searchParameters.carRequestDTO.mileage})")
     List<Ad> search(@Param("searchParameters")AdRequestDTO searchParameters);
 
+    @Query(value = "SELECT * " +
+            "FROM user_followed_ads LEFT JOIN ad ON ad.id = user_followed_ads.followed_ads_id " +
+            "LEFT JOIN car ON ad.car_id = car.id " +
+            "WHERE user_followed_ads.user_id = ?;", nativeQuery = true)
+    List<Ad> getFollowedAds(Integer user_id);
+
+
 }
