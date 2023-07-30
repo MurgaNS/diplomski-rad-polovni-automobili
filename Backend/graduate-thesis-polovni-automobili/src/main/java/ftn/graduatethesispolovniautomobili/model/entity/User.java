@@ -43,7 +43,10 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Ad> ads = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    private Set<Ad> followedAds = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Ad> followedAds = new HashSet<>();
 
 

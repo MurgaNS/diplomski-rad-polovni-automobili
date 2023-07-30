@@ -25,6 +25,8 @@ public interface AdService
 
     List<Ad> getFollowedAds(Authentication authentication);
 
+    List<String> getUsersEmailByFollowedAd(Integer id);
+
     Ad changeStatus(Integer id,AdChangeStatusDTO adChangeStatusDTO);
 
     Ad getById(Integer id);
