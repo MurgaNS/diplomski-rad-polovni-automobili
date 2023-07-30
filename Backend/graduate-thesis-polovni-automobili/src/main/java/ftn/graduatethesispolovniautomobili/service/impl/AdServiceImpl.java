@@ -133,7 +133,7 @@ public class AdServiceImpl implements AdService {
 
         if (!Objects.equals(adForUpdate.getPrice(), adRequestDTO.getPrice())) {
             for(String i : getUsersEmailByFollowedAd(adForUpdate.getId())) {
-                emailService.sendEmail(i,"Price changed", "The price of the ad you are following has changed");
+                emailService.sendEmail(i,"Price changed", "The price of the ad "+ adRequestDTO.getCarRequestDTO().getBrand() + " - " + adRequestDTO.getCarRequestDTO().getModel() + " you are following has changed");
             }
         }
 
