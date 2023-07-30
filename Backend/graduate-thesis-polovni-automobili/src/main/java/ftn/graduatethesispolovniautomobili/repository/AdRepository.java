@@ -55,10 +55,15 @@ public interface AdRepository extends JpaRepository<Ad, Integer> {
     List<Ad> search(@Param("searchParameters")AdRequestDTO searchParameters);
 
     @Query(value = "SELECT * " +
-            "FROM user_followed_ads LEFT JOIN ad ON ad.id = user_followed_ads.followed_ads_id " +
+            "FROM users_followed_ads LEFT JOIN ad ON ad.id = users_followed_ads.followed_ads_id " +
             "LEFT JOIN car ON ad.car_id = car.id " +
-            "WHERE user_followed_ads.user_id = ?;", nativeQuery = true)
+            "WHERE users_followed_ads.users_id = ?;", nativeQuery = true)
     List<Ad> getFollowedAds(Integer user_id);
+
+    @Query(value = "SELECT email FROM users_followed_ads LEFT JOIN users " +
+            "ON users_followed_ads.users_id = users.id " +
+            "WHERE users_followed_ads.followed_ads_id = ? ", nativeQuery = true)
+    List<String> getUsersEmailByFollowedAd(Integer followed_ads_id);
 
 
 }

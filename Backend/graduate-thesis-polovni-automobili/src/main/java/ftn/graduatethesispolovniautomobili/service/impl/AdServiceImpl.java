@@ -12,12 +12,16 @@ import ftn.graduatethesispolovniautomobili.model.mapper.AdMapper;
 import ftn.graduatethesispolovniautomobili.model.mapper.CarMapper;
 import ftn.graduatethesispolovniautomobili.repository.AdRepository;
 import ftn.graduatethesispolovniautomobili.service.AdService;
+import ftn.graduatethesispolovniautomobili.service.EmailService;
 import ftn.graduatethesispolovniautomobili.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class AdServiceImpl implements AdService {
@@ -26,9 +30,12 @@ public class AdServiceImpl implements AdService {
 
     private final UserService userService;
 
-    public AdServiceImpl(AdRepository adRepository, UserService userService) {
+    private final EmailService emailService;
+
+    public AdServiceImpl(AdRepository adRepository, UserService userService, EmailService emailService) {
         this.adRepository = adRepository;
         this.userService = userService;
+        this.emailService = emailService;
     }
 
     @Override
@@ -124,6 +131,12 @@ public class AdServiceImpl implements AdService {
             throw new BadRequestException("You are not an ad creator");
         }
 
+        if (!Objects.equals(adForUpdate.getPrice(), adRequestDTO.getPrice())) {
+            for(String i : getUsersEmailByFollowedAd(adForUpdate.getId())) {
+                emailService.sendEmail(i,"Price changed", "The price of the ad "+ adRequestDTO.getCarRequestDTO().getBrand() + " - " + adRequestDTO.getCarRequestDTO().getModel() + " you are following has changed");
+            }
+        }
+
         save(AdMapper.mapForUpdate(adForUpdate, adRequestDTO));
         return adForUpdate;
 
@@ -156,5 +169,10 @@ public class AdServiceImpl implements AdService {
     public List<Ad> getFollowedAds(Authentication authentication) {
 
         return  adRepository.getFollowedAds(userService.findCurrentLoggedUser(authentication).getId());
+    }
+
+    @Override
+    public List<String> getUsersEmailByFollowedAd(Integer id) {
+        return adRepository.getUsersEmailByFollowedAd(id);
     }
 }
