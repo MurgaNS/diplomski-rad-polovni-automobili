@@ -94,15 +94,22 @@ public class AdServiceImpl implements AdService {
         ad.setStatus(adChangeStatusDTO.getStatus());
         ad.setRejectedReason(adChangeStatusDTO.getRejectedReason());
 
-        if (adChangeStatusDTO.getStatus() == EAdStatus.REJECTED && (adChangeStatusDTO.getRejectedReason() == "" || adChangeStatusDTO.getRejectedReason() == null)) {
+        if (adChangeStatusDTO.getStatus() == EAdStatus.REJECTED && (Objects.equals(adChangeStatusDTO.getRejectedReason(), "") || adChangeStatusDTO.getRejectedReason() == null)) {
             return null;
 
         } else if (adChangeStatusDTO.getStatus() == EAdStatus.ACTIVE ||
-                adChangeStatusDTO.getStatus() == EAdStatus.INACTIVE ||
-                adChangeStatusDTO.getStatus() == EAdStatus.DELETED) {
+                adChangeStatusDTO.getStatus() == EAdStatus.INACTIVE) {
 
             adChangeStatusDTO.setRejectedReason(null);
-            return ad;
+        }
+
+        if (adChangeStatusDTO.getStatus() == EAdStatus.DELETED) {
+
+            adChangeStatusDTO.setRejectedReason(null);
+
+            for (String i : getUsersEmailByFollowedAd(ad.getId())) {
+                emailService.sendEmail(i, "Ad you are following is deleted", "Ad " + ad.getCar().getBrand() + " - " + ad.getCar().getModel() + " that you are following is deleted");
+            }
         }
 
         save(ad);
