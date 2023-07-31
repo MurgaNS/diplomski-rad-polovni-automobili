@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Service
 public class AdServiceImpl implements AdService {
@@ -103,13 +105,17 @@ public class AdServiceImpl implements AdService {
             adChangeStatusDTO.setRejectedReason(null);
         }
 
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+
         if (adChangeStatusDTO.getStatus() == EAdStatus.DELETED) {
 
             adChangeStatusDTO.setRejectedReason(null);
 
             for (String i : getUsersEmailByFollowedAd(ad.getId())) {
-                emailService.sendEmail(i, "Ad you are following is deleted", "Ad " + ad.getCar().getBrand() + " - " + ad.getCar().getModel() + " that you are following is deleted");
+                executorService.submit(() -> emailService.sendEmail(i, "Ad you are following is deleted", "Ad " + ad.getCar().getBrand() + " - " + ad.getCar().getModel() + " that you are following is deleted"));
             }
+
+            executorService.shutdown();
         }
 
         save(ad);
@@ -138,10 +144,15 @@ public class AdServiceImpl implements AdService {
             throw new BadRequestException("You are not an ad creator");
         }
 
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+
         if (!Objects.equals(adForUpdate.getPrice(), adRequestDTO.getPrice())) {
-            for(String i : getUsersEmailByFollowedAd(adForUpdate.getId())) {
-                emailService.sendEmail(i,"Price changed", "The price of the ad "+ adRequestDTO.getCarRequestDTO().getBrand() + " - " + adRequestDTO.getCarRequestDTO().getModel() + " you are following has changed");
+
+            for (String i : getUsersEmailByFollowedAd(adForUpdate.getId())) {
+                executorService.submit(() -> emailService.sendEmail(i, "Price changed", "The price of the ad " + adRequestDTO.getCarRequestDTO().getBrand() + " - " + adRequestDTO.getCarRequestDTO().getModel() + " you are following has changed"));
             }
+
+            executorService.shutdown();
         }
 
         save(AdMapper.mapForUpdate(adForUpdate, adRequestDTO));
@@ -175,7 +186,7 @@ public class AdServiceImpl implements AdService {
     @Override
     public List<Ad> getFollowedAds(Authentication authentication) {
 
-        return  adRepository.getFollowedAds(userService.findCurrentLoggedUser(authentication).getId());
+        return adRepository.getFollowedAds(userService.findCurrentLoggedUser(authentication).getId());
     }
 
     @Override
