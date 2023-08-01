@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -73,7 +75,6 @@ public class Car {
     private EEngineEmmisionClass engineEmmisionClass;
 
     @Column
-    private String photo;
     private String brand;
     private String model;
     private Integer doorNumber;
@@ -86,6 +87,13 @@ public class Car {
     private Integer engineCubicle;
     private Integer power;
     private Integer mileage;
+
+
+    @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "photos", joinColumns = @JoinColumn(name = "ad_id"))
+    @Column(name = "filename", nullable = false)
+    private List<String> photos = new ArrayList<>();
+
 
     @OneToOne(mappedBy = "car")
     private Ad ad;
