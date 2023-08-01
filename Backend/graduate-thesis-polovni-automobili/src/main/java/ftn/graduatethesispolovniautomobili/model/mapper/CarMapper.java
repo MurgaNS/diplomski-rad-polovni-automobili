@@ -21,7 +21,7 @@ public class CarMapper {
         carResponseDTO.setCarSafety(car.getCarSafety());
         carResponseDTO.setVehicleCondition(car.getVehicleCondition());
         carResponseDTO.setAdditionalEquipment(car.getAdditionalEquipment());
-        carResponseDTO.setPhoto(car.getPhoto());
+        carResponseDTO.setPhotos(car.getPhotos());
         carResponseDTO.setBrand(car.getBrand());
         carResponseDTO.setModel(car.getModel());
         carResponseDTO.setDoorNumber(car.getDoorNumber());
@@ -55,7 +55,7 @@ public class CarMapper {
         car.setCarSafety(carRequestDTO.getCarSafety());
         car.setVehicleCondition(carRequestDTO.getVehicleCondition());
         car.setAdditionalEquipment(carRequestDTO.getAdditionalEquipment());
-        car.setPhoto(carRequestDTO.getPhoto());
+        car.setPhotos(carRequestDTO.getPhotos());
         car.setBrand(carRequestDTO.getBrand());
         car.setModel(carRequestDTO.getModel());
         car.setDoorNumber(carRequestDTO.getDoorNumber());
@@ -87,7 +87,7 @@ public class CarMapper {
         car.setCarSafety(carRequestDTO.getCarSafety());
         car.setVehicleCondition(carRequestDTO.getVehicleCondition());
         car.setAdditionalEquipment(carRequestDTO.getAdditionalEquipment());
-        car.setPhoto(carRequestDTO.getPhoto());
+        car.setPhotos(carRequestDTO.getPhotos());
         car.setBrand(carRequestDTO.getBrand());
         car.setModel(carRequestDTO.getModel());
         car.setDoorNumber(carRequestDTO.getDoorNumber());

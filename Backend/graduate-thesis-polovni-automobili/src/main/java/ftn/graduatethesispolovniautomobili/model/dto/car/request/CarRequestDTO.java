@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,7 +22,7 @@ public class CarRequestDTO {
     private ECarSafety carSafety;
     private EVehicleCondition vehicleCondition;
     private EAdditionalEquipment additionalEquipment;
-    private String photo;
+    private List<String> photos;
     private String brand;
     private String model;
     private Integer doorNumber;
