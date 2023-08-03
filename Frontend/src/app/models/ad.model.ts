@@ -9,11 +9,10 @@ export class Ad {
   price: number = 0;
   description: string = "";
   rejectedReason: string = "";
-  car: Car = new Car();
+  car: Car = new Car;
   reports:Report[]=[];
-  user: User = new User();
+  user: User = new User;
   users : User[] = [];
-
 
   Ad(id: number, status: string, price: number, description: string, rejectedReason: string, car: Car, reports: Report[], user: User, users: User[]) {
     this.id = id;

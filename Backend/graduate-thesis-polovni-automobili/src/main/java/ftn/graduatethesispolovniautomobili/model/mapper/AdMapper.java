@@ -12,6 +12,7 @@ public class AdMapper {
     public static AdResponseDTO toAdResponseDTO(Ad ad) {
 
         AdResponseDTO adResponseDTO = new AdResponseDTO();
+        adResponseDTO.setId(ad.getId());
         adResponseDTO.setPrice(ad.getPrice());
         adResponseDTO.setDescription(ad.getDescription());
         adResponseDTO.setCarResponseDTO(CarMapper.toDTO(ad.getCar()));

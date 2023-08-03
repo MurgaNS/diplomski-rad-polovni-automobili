@@ -1,1 +1,228 @@
-<p>ad-add works!</p>
+<div class="row">
+  <div class="col-md-6 mx-auto">
+    <form class="p-5" [formGroup]="adForm">
+      <h2>Create Ad</h2>
+
+      <div class="mb-3">
+        <label class="form-label">Price(€)</label>
+        <input type="number" class="form-control" formControlName="price">
+      </div>
+
+      <div>
+        <h3>General informations</h3>
+
+        <div class="mb-3">
+          <label>Brand</label>
+          <input type="text" class="form-control" formControlName="brand">
+        </div>
+
+        <div class="mb-3">
+          <label>Model</label>
+          <input type="text" class="form-control" formControlName="model">
+        </div>
+
+        <div class="mb-3">
+          <label>Mileage</label>
+          <input type="number" class="form-control" formControlName="mileage">
+        </div>
+
+        <div class="mb-3">
+          <label>Category</label>
+          <select required class="form-control" formControlName="carCategory">
+            <option value="CABRIOLET">Cabriolet</option>
+            <option value="ESTATE">Estate</option>
+            <option value="SALOON">Saloon</option>
+            <option value="COUPE">Coupe</option>
+            <option value="SUV">SUV</option>
+            <option value="MINIVAN">Minivan</option>
+            <option value="SMALL_CAR">Small car</option>
+            <option value="OFFROAD">Offroad</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label>Engine type</label>
+          <input type="text" class="form-control" formControlName="engineType">
+        </div>
+
+        <div class="mb-3">
+          <label>Fuel type</label>
+          <select required class="form-control" formControlName="fuelType">
+            <option value="DIESEL">Diesel</option>
+            <option value="PETROL">Petrol</option>
+            <option value="ElECTRIC">Electric</option>
+            <option value="HYBRID">Hybrid</option>
+            <option value="LPG">LPG</option>
+            <option value="NATURAL_GAS">Natural gas</option>
+            <option value="ETHANOL">Ethanol</option>
+            <option value="OTHER">Other</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label>Engine cubicle</label>
+          <input type="number" class="form-control" formControlName="engineCubicle">
+        </div>
+
+        <div class="mb-3">
+          <label>Power(hp)</label>
+          <input type="number" class="form-control" formControlName="power">
+        </div>
+
+        <div class="mb-3">
+          <label>Exchange</label>
+          <select required class="form-control" formControlName="exchange">
+            <option value="EXCHANGE_FOR_CHEAPER">Exchange for cheaper</option>
+            <option value="EXCHANGE_FOR_MORE_EXPENSIVE">Exchange for more expensive</option>
+            <option value="EXCHANGE_IN_THE_SAME_PRICE_RANG">Exchange in the same price rang</option>
+            <option value="ANY">Any</option>
+            <option value="NO">No</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <h3>Additional informations</h3>
+
+        <div class="mb-3">
+          <label>Engine emmision class</label>
+          <select required class="form-control" formControlName="engineEmmisionClass">
+            <option value="EURO1">Euro 1</option>
+            <option value="EURO2">Euro 2</option>
+            <option value="EURO3">Euro 3</option>
+            <option value="EURO4">Euro 4</option>
+            <option value="EURO5">Euro 5</option>
+            <option value="EURO6">Euro 6</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label>Drive</label>
+          <select required class="form-control" formControlName="carDrive">
+            <option value="FRONT">Front</option>
+            <option value="REAR">Rear</option>
+            <option value="ALL_WHEEL">All wheel</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label>Gearbox</label>
+          <select required class="form-control" formControlName="carGearbox">
+            <option value="AUTOMATIC">Automatic</option>
+            <option value="SEMI_AUTOMATIC">Semi-automatic</option>
+            <option value="MANUAL">Manual</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label>Door number</label>
+          <input type="number" class="form-control" formControlName="doorNumber">
+        </div>
+
+        <div class="mb-3">
+          <label>Seats number</label>
+          <input type="number" class="form-control" formControlName="seatsNumber">
+        </div>
+
+        <div class="mb-3">
+          <label>Steering wheel side</label>
+          <select required class="form-control" formControlName="steeringWheelSide">
+            <option value="LEFT">Left</option>
+            <option value="RIGHT">Right</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label>Climate</label>
+          <select required class="form-control" formControlName="climate">
+            <option value="YES">Yes</option>
+            <option value="NO">No</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label>Color</label>
+          <input type="text" class="form-control" formControlName="color">
+        </div>
+
+        <div class="mb-3">
+          <label>Interior material</label>
+          <select required class="form-control" formControlName="interiorMaterial">
+            <option value="CLOTH">Cloth</option>
+            <option value="NATURAL_LEATHER">Natural leather</option>
+            <option value="COMBINED_LEATHER">Combined leather</option>
+            <option value="VELOURS">Velours</option>
+            <option value="OTHER">Other</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label>Interior color</label>
+          <input type="text" class="form-control" formControlName="interiorColor">
+        </div>
+
+        <div class="mb-3">
+          <label>Registered until</label>
+          <input type="date" class="form-control" formControlName="registeredUntil">
+        </div>
+
+        <div class="mb-3">
+          <label>Damage</label>
+          <select required class="form-control" formControlName="damage">
+            <option value="NO_DAMAGE">No damage</option>
+            <option value="DAMAGED_IN_DRIVING_CONDITION">Damaged - in driving condition</option>
+            <option value="DAMAGED_NOT_IN_DRIVING_CONDITION">Damaged - not in driving condition</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label>Chassis number</label>
+          <input type="text" class="form-control" formControlName="chassisNumber">
+        </div>
+
+        <div class="mb-3">
+          <label>Car safety</label>
+          <select required class="form-control" formControlName="carSafety">
+            <option value="ABS">ABS</option>
+            <!--            add more-->
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label>Vehicle condition</label>
+          <select required class="form-control" formControlName="vehicleCondition">
+            <option value="GARAGED">Garaged</option>
+            <!--            add more-->
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label>Additional equipment</label>
+          <select required class="form-control" formControlName="additionalEquipment">
+            <option value="BLUETOOTH">Bluetooth</option>
+            <!--            add more-->
+          </select>
+        </div>
+
+        <!--        carSafety, additional equipment, vehicle condition - add items to list -->
+
+
+        <div class="mb-3">
+          <label>Description</label>
+          <input type="text" class="form-control" formControlName="description">
+        </div>
+
+      </div>
+
+      <div class="button-box col-lg-12">
+        <button type="submit" class="btn btn-primary me-2" (click)="onSubmit()">Submit data</button>
+        <a routerLink="/Main">
+          <button class="btn btn-danger">Back to the main page</button>
+        </a>
+      </div>
+
+    </form>
+
+  </div>
+
+</div>

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {AdResponseDTO} from "../../../models/dto/Ad/adResponseDTO.model";
 
 @Component({
   selector: 'app-ad-list',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./ad-list.component.css']
 })
 export class AdListComponent {
+
+  @Input() ads: AdResponseDTO[] = [];
+
 
 }

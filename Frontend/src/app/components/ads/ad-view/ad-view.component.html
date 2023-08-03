@@ -1,1 +1,66 @@
-<p>ad-view works!</p>
+<div class="card" style="width: 50rem; ">
+  <img class="card-img-top" src="assets/img.png" alt="Card image cap">
+  <div class="card-body flex-lg-grow-1">
+
+    <h2 class="">{{ad.carResponseDTO.brand}} {{ad.carResponseDTO.model}} - {{ad.carResponseDTO.engineType}}</h2>
+    <p class="">Price: {{ad.price}}</p>
+    <p class="">Posted by: {{ad.user.username}}</p>
+
+    <br>
+
+    <div>
+      <h3>General informations</h3>
+      <br>
+      <p class="">Brand: {{ad.carResponseDTO.brand}}</p>
+      <p class="">Model: {{ad.carResponseDTO.model}}</p>
+      <p class="">Mileage: {{ad.carResponseDTO.mileage}}</p>
+      <p class="">Category: {{ad.carResponseDTO.carCategory}}</p>
+      <p class="">Engine type: {{ad.carResponseDTO.engineType}}</p>
+      <p class="">Fuel type: {{ad.carResponseDTO.fuelType}}</p>
+      <p class="">Engine cubicle: {{ad.carResponseDTO.engineCubicle}}</p>
+      <p class="">Power(hp): {{ad.carResponseDTO.power}}</p>
+      <p class="">Exchange: {{ad.carResponseDTO.exchange}}</p>
+    </div>
+
+    <div>
+      <h3>Additional informations</h3>
+      <br>
+      <p class="">Engine emmision class: : {{ad.carResponseDTO.engineEmmisionClass}}</p>
+      <p class="">Drive: {{ad.carResponseDTO.carDrive}}</p>
+      <p class="">Gearbox: {{ad.carResponseDTO.carGearbox}}</p>
+      <p class="">Door number: {{ad.carResponseDTO.doorNumber}}</p>
+      <p class="">Seats number: {{ad.carResponseDTO.seatsNumber}}</p>
+      <p class="">Steering wheel side: {{ad.carResponseDTO.steeringWheelSide}}</p>
+      <p class="">Climate: {{ad.carResponseDTO.climate}}</p>
+      <p class="">Color: {{ad.carResponseDTO.color}}</p>
+      <p class="">Interior material: {{ad.carResponseDTO.interiorMaterial}}</p>
+      <p class="">Interior color: {{ad.carResponseDTO.interiorColor}}</p>
+      <p class="">Registered until: {{ad.carResponseDTO.registeredUntil | date: 'd/M/yy'}}</p>
+      <p class="">Damage: {{ad.carResponseDTO.damage}}</p>
+      <p class="">Chasis number: {{ad.carResponseDTO.chassisNumber}}</p>
+
+    </div>
+
+    <div>
+      <h3>Safety</h3>
+      <p class="">Car safety: {{ad.carResponseDTO.carSafety}}</p>
+    </div>
+
+    <div>
+      <h3>Additional equipment</h3>
+      <p class="">Additional equipment: {{ad.carResponseDTO.additionalEquipment}}</p>
+    </div>
+
+    <div>
+      <h3>Vehicle condition</h3>
+      <p class="">Vehicle condition: {{ad.carResponseDTO.vehicleCondition}}</p>
+    </div>
+
+    <div>
+      <h3>Description</h3>
+      <p class="">Description: {{ad.description}}</p>
+    </div>
+
+
+  </div>
+</div>
