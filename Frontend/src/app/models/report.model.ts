@@ -5,10 +5,9 @@ export class Report {
   id: number = 0;
   reportReason:string = "";
   isAccepted: boolean = false;
-  ad: Ad = new Ad();
+  ad: Ad = new Ad;
 
-
-  constructor(id: number, reportReason: string, isAccepted: boolean, ad: Ad) {
+  Report(id: number, reportReason: string, isAccepted: boolean, ad: Ad) {
     this.id = id;
     this.reportReason = reportReason;
     this.isAccepted = isAccepted;

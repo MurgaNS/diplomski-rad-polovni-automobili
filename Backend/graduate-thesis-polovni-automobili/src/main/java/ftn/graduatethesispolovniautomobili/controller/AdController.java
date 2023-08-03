@@ -16,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "api/ad")
+@CrossOrigin
 public class AdController {
 
     private final AdService adService;
@@ -25,7 +26,7 @@ public class AdController {
     }
 
     @PostMapping(value = "/create")
-    public ResponseEntity<AdResponseDTO> addNewClient(@Validated @RequestBody AdRequestDTO adRequestDTO,
+    public ResponseEntity<AdResponseDTO> create(@Validated @RequestBody AdRequestDTO adRequestDTO,
                                                       Authentication authentication) {
 
         Ad createdAd = adService.addNewAd(adRequestDTO, authentication);

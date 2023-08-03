@@ -1,8 +1,5 @@
-import {Ad} from "./ad.model";
+export class UserResponseDTO {
 
-export class User {
-
-  id: number = 0;
   firstName: string = "";
   lastName:string = "";
   username:string = "";
@@ -14,13 +11,10 @@ export class User {
   address:string = "";
   phoneNumber:string = "";
   email:string = "";
-  verification:boolean = false;
   role: string = "";
-  ads: Ad[] = [];
-  followedAds: Ad[] = [];
 
-  User(id: number, firstName: string, lastName: string, username: string, password: string, country: string, city: string, district: string, zip: number, address: string, phoneNumber: string, email: string, verification: boolean, role: string, ads: Ad[], followedAds: Ad[]) {
-    this.id = id;
+
+  UserResponseDTO(firstName: string, lastName: string, username: string, password: string, country: string, city: string, district: string, zip: number, address: string, phoneNumber: string, email: string, role: string) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.username = username;
@@ -32,9 +26,6 @@ export class User {
     this.address = address;
     this.phoneNumber = phoneNumber;
     this.email = email;
-    this.verification = verification;
     this.role = role;
-    this.ads = ads;
-    this.followedAds = followedAds;
   }
 }

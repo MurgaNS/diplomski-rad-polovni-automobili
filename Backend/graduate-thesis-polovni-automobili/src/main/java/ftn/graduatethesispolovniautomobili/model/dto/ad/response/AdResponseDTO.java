@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 public class AdResponseDTO {
 
+    private Integer id;
     private Double price;
     private String description;
     private CarResponseDTO carResponseDTO;
