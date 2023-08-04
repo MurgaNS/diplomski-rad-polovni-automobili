@@ -6,3 +6,12 @@
   margin-right: -50%;
   transform: translate(-50%, -50%);
 }
+
+.under-image-div {
+  margin: 1rem;
+}
+
+.btn-primary{
+  width: 8rem;
+;
+}

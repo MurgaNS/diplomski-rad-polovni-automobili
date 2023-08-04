@@ -11,8 +11,12 @@ import { AdAddComponent } from './components/ads/ad-add/ad-add.component';
 import { HeaderComponent } from './components/header/header.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {TokenInterceptorService} from "./security/interceptor/token-interceptor.service";
+import { MyAdsComponent } from './components/ads/my-ads/my-ads.component';
+import { FollowingAdsComponent } from './components/ads/following-ads/following-ads.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -25,12 +29,17 @@ import {TokenInterceptorService} from "./security/interceptor/token-interceptor.
     AdAddComponent,
     HeaderComponent,
     LoginComponent,
+    MyAdsComponent,
+    FollowingAdsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatSelectModule,
+    FormsModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

@@ -15,6 +15,41 @@ export class AdAddComponent {
               private router: Router) {
   }
 
+  submitted: boolean = false;
+
+  additionalEquipment: string[] = ["MULTIMEDIA", "MATRIX_LIGHTS"];
+  selectedEquipment: string = '';
+  selectedEquipments: string[] = [];
+
+  onSelectionChangeEquipment() {
+    if (this.selectedEquipment && !this.selectedEquipments.includes(this.selectedEquipment)) {
+      this.selectedEquipments.push(this.selectedEquipment);
+    }
+    this.selectedEquipment = ''; // Clear the selected item after adding
+  }
+
+  vehicleCondition: string[] = ["GARAGED", "FIRST_OWNER"];
+  selectedCondition: string = '';
+  selectedConditions: string[] = [];
+
+  onSelectionChangeVehicleCondition(){
+    if (this.selectedCondition && !this.selectedConditions.includes(this.selectedCondition)) {
+      this.selectedConditions.push(this.selectedCondition);
+    }
+    this.selectedCondition = ''; // Clear the selected item after adding
+  }
+
+  carSafety: string[] = ["ABS", "ALARM"];
+  selectedCarSafety: string = '';
+  selectedCarSafetys: string[] = [];
+
+  onSelectionChangeCarSafety(){
+    if (this.selectedCarSafety && !this.selectedCarSafetys.includes(this.selectedCarSafety)) {
+      this.selectedCarSafetys.push(this.selectedCarSafety);
+    }
+    this.selectedCarSafety = ''; // Clear the selected item after adding
+  }
+
   adForm: FormGroup = new FormGroup({
     price: new FormControl(''),
     brand: new FormControl(''),
@@ -40,14 +75,12 @@ export class AdAddComponent {
     damage: new FormControl(''),
     chassisNumber: new FormControl(''),
     description: new FormControl(''),
-    carSafety: new FormControl(''),
+    carSafety: new FormControl(this.additionalEquipment),
     vehicleCondition: new FormControl(''),
     additionalEquipment: new FormControl(''),
 
-
   });
 
-  submitted: boolean = false;
 
   onSubmit() {
 
@@ -80,21 +113,33 @@ export class AdAddComponent {
     addAd.carRequestDTO.registeredUntil = this.adForm.get("registeredUntil")?.value;
     addAd.carRequestDTO.damage = this.adForm.get("damage")?.value;
     addAd.carRequestDTO.chassisNumber = this.adForm.get("chassisNumber")?.value;
-    addAd.carRequestDTO.carSafety = this.adForm.get("carSafety")?.value;
-    addAd.carRequestDTO.vehicleCondition = this.adForm.get("vehicleCondition")?.value;
-    addAd.carRequestDTO.additionalEquipment = this.adForm.get("additionalEquipment")?.value;
+
+    addAd.carRequestDTO.additionalEquipment = this.selectedEquipments;
+    addAd.carRequestDTO.vehicleCondition = this.selectedConditions;
+    addAd.carRequestDTO.carSafety = this.selectedCarSafetys;
+
     addAd.description = this.adForm.get("description")?.value;
 
     this.adService.CreateAd(addAd)
       .subscribe({
         next: (data) => {
           this.router.navigate(['/Main']);
+          console.log(this.selectedEquipments)
+          console.log(this.selectedConditions)
+          console.log(this.selectedCarSafetys)
         },
         error: (error) => {
           console.log(error);
+          console.log(this.selectedEquipments)
+          console.log(this.selectedConditions)
+          console.log(this.selectedCarSafetys)
+
         },
         complete: () => {
           this.router.navigate(['/Main'])
+          console.log(this.selectedEquipments)
+          console.log(this.selectedConditions)
+          console.log(this.selectedCarSafetys)
         }
       })
 

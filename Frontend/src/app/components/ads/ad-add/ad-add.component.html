@@ -180,32 +180,30 @@
           <input type="text" class="form-control" formControlName="chassisNumber">
         </div>
 
-        <div class="mb-3">
-          <label>Car safety</label>
-          <select required class="form-control" formControlName="carSafety">
-            <option value="ABS">ABS</option>
-            <!--            add more-->
-          </select>
-        </div>
+        <mat-form-field>
+          <mat-label>Select Car Safety</mat-label>
+          <mat-select multiple [(ngModel)]="selectedCarSafety" (selectionChange)="onSelectionChangeCarSafety()" formControlName="carSafety">
+            <mat-option *ngFor="let item of carSafety" [value]="item">{{ item }} </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-        <div class="mb-3">
-          <label>Vehicle condition</label>
-          <select required class="form-control" formControlName="vehicleCondition">
-            <option value="GARAGED">Garaged</option>
-            <!--            add more-->
-          </select>
-        </div>
+        <br>
 
-        <div class="mb-3">
-          <label>Additional equipment</label>
-          <select required class="form-control" formControlName="additionalEquipment">
-            <option value="BLUETOOTH">Bluetooth</option>
-            <!--            add more-->
-          </select>
-        </div>
+        <mat-form-field >
+          <mat-label>Select Vehicle Condition</mat-label>
+          <mat-select multiple [(ngModel)]="selectedCondition" (selectionChange)="onSelectionChangeVehicleCondition()" formControlName="vehicleCondition">
+            <mat-option *ngFor="let item of vehicleCondition" [value]="item">{{ item }}</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-        <!--        carSafety, additional equipment, vehicle condition - add items to list -->
+        <br>
 
+        <mat-form-field >
+          <mat-label>Select Additional Equipment</mat-label>
+          <mat-select multiple [(ngModel)]="selectedEquipment" (selectionChange)="onSelectionChangeEquipment()" formControlName="additionalEquipment">
+            <mat-option *ngFor="let item of additionalEquipment" [value]="item">{{ item }}</mat-option>
+          </mat-select>
+        </mat-form-field>
 
         <div class="mb-3">
           <label>Description</label>
