@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {AdService} from "../../../services/ad.service";
 import {AdResponseDTO} from "../../../models/dto/Ad/adResponseDTO.model";
+import {AdRequestDTO} from "../../../models/dto/Ad/adRequestDTO.model";
 
 @Component({
   selector: 'app-ad-view',
@@ -11,7 +12,8 @@ import {AdResponseDTO} from "../../../models/dto/Ad/adResponseDTO.model";
 export class AdViewComponent {
 
   constructor(private route:ActivatedRoute,
-              private adService:AdService) {}
+              private adService:AdService,
+              private router: Router) {}
 
   ad_id = Number(this.route.snapshot.paramMap.get("id"))
   ad:AdResponseDTO = new AdResponseDTO();
@@ -25,6 +27,27 @@ export class AdViewComponent {
         }
 
       })
+  }
+
+  follow() {
+    this.route.params.subscribe(params => {
+      const adId = params['id'];
+      this.adService.Follow(adId)
+        .subscribe({
+          next: (data) => {
+            this.router.navigate(['/Main']);
+          },
+          error: (error) => {
+            console.log(error);
+          },
+          complete: () => {
+            alert("Ad has been successfully added to the list of ads you are following")
+            this.router.navigate(['/Main'])
+          }
+        })
+    })
+
+
   }
 
 

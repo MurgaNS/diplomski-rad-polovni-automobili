@@ -8,9 +8,9 @@ export class CarResponseDTO {
   interiorMaterial: string = "";
   damage: string = "";
   exchange: string = "";
-  carSafety: string = "";
-  vehicleCondition: string = "";
-  additionalEquipment: string = "";
+  carSafety: string[] = [];
+  vehicleCondition: string[] = [];
+  additionalEquipment: string[] = [];
   fuelType: string = "";
   engineEmmisionClass: string = "";
   brand: string = "";
@@ -28,7 +28,7 @@ export class CarResponseDTO {
   photos: string[] = [];
 
 
-  CarResponseDTO(carCategory: string, carDrive: string, carGearbox: string, steeringWheelSide: string, climate: string, interiorMaterial: string, damage: string, exchange: string, carSafety: string, vehicleCondition: string, additionalEquipment: string, fuelType: string, engineEmmisionClass: string, brand: string, model: string, doorNumber: number, seatsNumber: number, color: string, interiorColor: string, registeredUntil: Date, chassisNumber: string, engineType: string, engineCubicle: number, power: number, mileage: number, photos: string[]) {
+  CarResponseDTO(carCategory: string, carDrive: string, carGearbox: string, steeringWheelSide: string, climate: string, interiorMaterial: string, damage: string, exchange: string, carSafety: string[], vehicleCondition: string[], additionalEquipment: string[], fuelType: string, engineEmmisionClass: string, brand: string, model: string, doorNumber: number, seatsNumber: number, color: string, interiorColor: string, registeredUntil: Date, chassisNumber: string, engineType: string, engineCubicle: number, power: number, mileage: number, photos: string[]) {
     this.carCategory = carCategory;
     this.carDrive = carDrive;
     this.carGearbox = carGearbox;

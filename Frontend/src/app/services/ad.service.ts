@@ -31,4 +31,16 @@ export class AdService {
     return this.http.post<AdRequestDTO>(`${environment.baseApiUrl}/${this.url}/create`, ad);
   }
 
+  public Follow(ad_id: number):Observable<AdResponseDTO> {
+    return this.http.post<AdResponseDTO>(`${environment.baseApiUrl}/${this.url}` + `/${ad_id}` + "/follow", ad_id);
+  }
+
+  public GetUserAds(): Observable<AdResponseDTO[]> {
+    return this.http.get<AdResponseDTO[]>(`${environment.baseApiUrl}/user/myAds/`);
+  }
+
+  public GetUserFollowedAds(): Observable<AdResponseDTO[]> {
+    return this.http.get<AdResponseDTO[]>(`${environment.baseApiUrl}/user/followedAds/`);
+  }
+
 }
