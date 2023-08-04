@@ -19,9 +19,9 @@ public class CarRequestDTO {
     private EInteriorMaterial interiorMaterial;
     private ECarDamage damage;
     private EExchange exchange;
-    private ECarSafety carSafety;
-    private EVehicleCondition vehicleCondition;
-    private EAdditionalEquipment additionalEquipment;
+    private List<ECarSafety> carSafety;
+    private List<EVehicleCondition> vehicleCondition;
+    private List<EAdditionalEquipment> additionalEquipment;
     private List<String> photos;
     private String brand;
     private String model;
