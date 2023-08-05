@@ -17,7 +17,9 @@ export class AdAddComponent {
 
   submitted: boolean = false;
 
-  additionalEquipment: string[] = ["MULTIMEDIA", "MATRIX_LIGHTS"];
+  additionalEquipment: string[] = ["METALIC_COLOR", "MULTI_FUNCTIONAL_STEERING_WHEEL", "CRUISE_CONTROL", "REMOTE_LOCKING", "BLUETOOTH"
+    , "CD_CHANGER", "CAMERA", "PANORAMIC_ROOF", "ELECTRIC_WINDOWS", "ELECTRIC_MIRRORS", "SEAT_HEATING", "SEAT_COOLING", "SEAT_MEMORY"
+    , "MASSAGE_SEATS", "ISOFIX_SYSTEM", "MATRIX_LIGHTS", "MULTIMEDIA", "SPARE_WHEEL", "HILL_ASSIST"];
   selectedEquipment: string = '';
   selectedEquipments: string[] = [];
 
@@ -25,29 +27,30 @@ export class AdAddComponent {
     if (this.selectedEquipment && !this.selectedEquipments.includes(this.selectedEquipment)) {
       this.selectedEquipments.push(this.selectedEquipment);
     }
-    this.selectedEquipment = ''; // Clear the selected item after adding
+    this.selectedEquipment = '';
   }
 
-  vehicleCondition: string[] = ["GARAGED", "FIRST_OWNER"];
+  vehicleCondition: string[] = ["GARAGED", "FIRST_OWNER", "UNDER_WARRANTY", "TEST_VEHICLE", "SERVICE_BOOK", "TAXI_VEHICLE"];
   selectedCondition: string = '';
   selectedConditions: string[] = [];
 
-  onSelectionChangeVehicleCondition(){
+  onSelectionChangeVehicleCondition() {
     if (this.selectedCondition && !this.selectedConditions.includes(this.selectedCondition)) {
       this.selectedConditions.push(this.selectedCondition);
     }
-    this.selectedCondition = ''; // Clear the selected item after adding
+    this.selectedCondition = '';
   }
 
-  carSafety: string[] = ["ABS", "ALARM"];
+  carSafety: string[] = ["ABS", "ALARM", "ASR", "DRIVER_AIRBAG", "PASSENGER_AIRBAR", "SIDE_AIRBAR", "CHILD_LOCK", "BLIND_SPOT_SENSOR"
+    , "AUTOMATIC_BRAKING", "CAR_PROTECTION"];
   selectedCarSafety: string = '';
   selectedCarSafetys: string[] = [];
 
-  onSelectionChangeCarSafety(){
+  onSelectionChangeCarSafety() {
     if (this.selectedCarSafety && !this.selectedCarSafetys.includes(this.selectedCarSafety)) {
       this.selectedCarSafetys.push(this.selectedCarSafety);
     }
-    this.selectedCarSafety = ''; // Clear the selected item after adding
+    this.selectedCarSafety = '';
   }
 
   adForm: FormGroup = new FormGroup({
@@ -75,7 +78,7 @@ export class AdAddComponent {
     damage: new FormControl(''),
     chassisNumber: new FormControl(''),
     description: new FormControl(''),
-    carSafety: new FormControl(this.additionalEquipment),
+    carSafety: new FormControl(''),
     vehicleCondition: new FormControl(''),
     additionalEquipment: new FormControl(''),
 
@@ -113,33 +116,21 @@ export class AdAddComponent {
     addAd.carRequestDTO.registeredUntil = this.adForm.get("registeredUntil")?.value;
     addAd.carRequestDTO.damage = this.adForm.get("damage")?.value;
     addAd.carRequestDTO.chassisNumber = this.adForm.get("chassisNumber")?.value;
-
-    addAd.carRequestDTO.additionalEquipment = this.selectedEquipments;
-    addAd.carRequestDTO.vehicleCondition = this.selectedConditions;
-    addAd.carRequestDTO.carSafety = this.selectedCarSafetys;
-
+    addAd.carRequestDTO.additionalEquipment = this.adForm.get("additionalEquipment")?.value;
+    addAd.carRequestDTO.vehicleCondition = this.adForm.get("vehicleCondition")?.value;
+    addAd.carRequestDTO.carSafety = this.adForm.get("carSafety")?.value;
     addAd.description = this.adForm.get("description")?.value;
 
     this.adService.CreateAd(addAd)
       .subscribe({
         next: (data) => {
           this.router.navigate(['/Main']);
-          console.log(this.selectedEquipments)
-          console.log(this.selectedConditions)
-          console.log(this.selectedCarSafetys)
         },
         error: (error) => {
           console.log(error);
-          console.log(this.selectedEquipments)
-          console.log(this.selectedConditions)
-          console.log(this.selectedCarSafetys)
-
         },
         complete: () => {
           this.router.navigate(['/Main'])
-          console.log(this.selectedEquipments)
-          console.log(this.selectedConditions)
-          console.log(this.selectedCarSafetys)
         }
       })
 

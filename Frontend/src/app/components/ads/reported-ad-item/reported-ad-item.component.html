@@ -1,0 +1,14 @@
+<div class="card" style="width: 20rem; height: 30rem" [routerLink]="['/Ad-View', reportedAd.adResponseDTO.id]">
+  <img class="card-img-top" src="assets/img.png" alt="Card image cap">
+  <div class="card-body flex-lg-grow-1">
+
+    <h4>Report reason: {{reportedAd.reportReason}}</h4>
+    <p class="">{{reportedAd.adResponseDTO.carResponseDTO.brand}} {{reportedAd.adResponseDTO.carResponseDTO.model}}</p>
+    <p class="">Price: {{reportedAd.adResponseDTO.price}}</p>
+    <p class="">Description: {{reportedAd.adResponseDTO.description}}</p>
+    <p class="">Posted by: {{reportedAd.adResponseDTO.user.username}}</p>
+    <p class="">Contact: {{reportedAd.adResponseDTO.user.phoneNumber}}</p>
+
+  </div>
+</div>
+

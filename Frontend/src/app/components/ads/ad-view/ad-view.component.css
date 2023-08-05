@@ -11,7 +11,12 @@
   margin: 1rem;
 }
 
-.btn-primary{
+.btn{
   width: 8rem;
-;
+  margin: 0.3rem;
 }
+
+.report {
+  width: 6rem;
+}
+
