@@ -180,7 +180,7 @@
           <input type="text" class="form-control" formControlName="chassisNumber">
         </div>
 
-        <mat-form-field>
+        <mat-form-field class="material-form">
           <mat-label>Select Car Safety</mat-label>
           <mat-select multiple [(ngModel)]="selectedCarSafety" (selectionChange)="onSelectionChangeCarSafety()" formControlName="carSafety">
             <mat-option *ngFor="let item of carSafety" [value]="item">{{ item }} </mat-option>
@@ -189,7 +189,7 @@
 
         <br>
 
-        <mat-form-field >
+        <mat-form-field class="material-form">
           <mat-label>Select Vehicle Condition</mat-label>
           <mat-select multiple [(ngModel)]="selectedCondition" (selectionChange)="onSelectionChangeVehicleCondition()" formControlName="vehicleCondition">
             <mat-option *ngFor="let item of vehicleCondition" [value]="item">{{ item }}</mat-option>
@@ -198,7 +198,7 @@
 
         <br>
 
-        <mat-form-field >
+        <mat-form-field class="material-form">
           <mat-label>Select Additional Equipment</mat-label>
           <mat-select multiple [(ngModel)]="selectedEquipment" (selectionChange)="onSelectionChangeEquipment()" formControlName="additionalEquipment">
             <mat-option *ngFor="let item of additionalEquipment" [value]="item">{{ item }}</mat-option>

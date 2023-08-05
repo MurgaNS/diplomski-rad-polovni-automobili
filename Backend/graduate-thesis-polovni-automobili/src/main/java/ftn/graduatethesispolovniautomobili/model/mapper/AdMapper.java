@@ -2,7 +2,6 @@ package ftn.graduatethesispolovniautomobili.model.mapper;
 
 import ftn.graduatethesispolovniautomobili.model.dto.ad.request.AdRequestDTO;
 import ftn.graduatethesispolovniautomobili.model.dto.ad.response.AdResponseDTO;
-import ftn.graduatethesispolovniautomobili.model.dto.ad.response.AdResponseForReportDTO;
 import ftn.graduatethesispolovniautomobili.model.entity.Ad;
 
 import java.util.List;
@@ -48,14 +47,16 @@ public class AdMapper {
 
     }
 
-    public static AdResponseForReportDTO toReportDTO(Ad ad){
+    public static AdResponseDTO toReportDTO(Ad ad){
 
-        AdResponseForReportDTO adResponseForReportDTO = new AdResponseForReportDTO();
+        AdResponseDTO adResponseDTO = new AdResponseDTO();
 
-        adResponseForReportDTO.setId(ad.getId());
-        adResponseForReportDTO.setDescription(ad.getDescription());
-        adResponseForReportDTO.setPrice(ad.getPrice());
+        adResponseDTO.setId(ad.getId());
+        adResponseDTO.setDescription(ad.getDescription());
+        adResponseDTO.setPrice(ad.getPrice());
+        adResponseDTO.setCarResponseDTO(CarMapper.toDTO(ad.getCar()));
+        adResponseDTO.setUser(UserMapper.mapUserDTO(ad.getUser()));
 
-        return adResponseForReportDTO;
+        return adResponseDTO;
     }
 }

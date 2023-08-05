@@ -2,7 +2,28 @@
   <img class="card-img-top" src="assets/img.png" alt="Card image cap">
   <div class="under-image-div">
     <button class="btn btn-primary" (click)="follow()"> Follow</button>
+    <button class="btn btn-danger" (click)="toggleDisplayDivIf()"> Report</button>
+    <button class="btn btn-danger" (click)="deleteAd()"> Delete</button>
+
+
+    <div class="mb-3" *ngIf="isShowDivIf">
+      <form class="p-5" [formGroup]="reportForm">
+        <label>Please select report reason</label>
+        <select required class="form-control" formControlName="reportReason">
+          <option value="DATA_FILLED_IN_INCORRECTLY">Data filled in incorrectly</option>
+          <option value="VEHICLE_SOLD">Vehicle sold</option>
+          <option value="MULTIPLE_VEHICLES_IN_ONE_AD">Multiple vehicles in one ad</option>
+          <option value="SUSPICION_OF_SCAM">Suspicion of scam</option>
+          <option value="ADVERTISING_SERVICES">Advertising services</option>
+          <option value="INSULTING">Insulting</option>
+          <option value="OTHER">Other</option>
+        </select>
+        <button class="report btn btn-primary" (click)="report()">Submit</button>
+        <button class="report btn btn-danger" routerLink="/Main">Cancel</button>
+      </form>
+    </div>
   </div>
+
   <div class="card-body flex-lg-grow-1">
 
     <h2 class="">{{ad.carResponseDTO.brand}} {{ad.carResponseDTO.model}} - {{ad.carResponseDTO.engineType}}</h2>

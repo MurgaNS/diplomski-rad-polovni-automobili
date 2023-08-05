@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "api/report")
+@CrossOrigin
 public class ReportController {
 
     private final ReportService reportService;
