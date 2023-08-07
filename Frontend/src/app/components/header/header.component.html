@@ -17,9 +17,9 @@
           My profile
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#" routerLink="/Login">Login</a>
-          <a class="dropdown-item" href="#">Logout</a>
-          <a class="dropdown-item" href="#">Registration</a>
+          <a class="dropdown-item" href="#" routerLink="/Login" *ngIf="!hasLoggedIn()">Login</a>
+          <a class="dropdown-item" href="#" (click)="logout()" *ngIf="hasLoggedIn()">Logout</a>
+          <a class="dropdown-item" href="#" *ngIf="!hasLoggedIn()">Registration</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#" routerLink="/My-Ads">My Ads</a>
           <a class="dropdown-item" href="#" routerLink="/Following-Ads">Following Ads</a>
