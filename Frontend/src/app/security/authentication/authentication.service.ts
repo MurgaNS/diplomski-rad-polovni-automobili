@@ -66,7 +66,6 @@ export class AuthenticationService {
     return this.getCurrentUser()['role'].indexOf(role) !== -1;
   }
 
-
   isAdmin(): boolean {
     return this.jwtUtilsService.getRole(this.getToken()) === "ROLE_ADMIN";
   }
