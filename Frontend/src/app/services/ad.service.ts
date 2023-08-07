@@ -24,6 +24,10 @@ export class AdService {
     return this.http.get<AdResponseDTO[]>(`${environment.baseApiUrl}/${this.url}/active`);
   }
 
+  public GetAllInactive(): Observable<AdResponseDTO[]>{
+    return this.http.get<AdResponseDTO[]>(`${environment.baseApiUrl}/${this.url}/inactive`);
+  }
+
   public GetById(ad_id: number): Observable<AdResponseDTO> {
     return this.http.get<AdResponseDTO>(`${environment.baseApiUrl}/${this.url}/` + ad_id);
   }

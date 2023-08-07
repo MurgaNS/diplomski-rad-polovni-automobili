@@ -4,7 +4,8 @@
     <button class="btn btn-primary" (click)="follow()"> Follow</button>
     <button class="btn btn-danger" (click)="toggleDisplayDivIf()"> Report</button>
     <button class="btn btn-danger" (click)="deleteAd()"> Delete</button>
-
+    <button class="btn btn-warning" (click)="toggleDisplayDivReject()"> Reject</button>
+    <button class="btn btn-info" (click)="approveAd()"> Approve</button>
 
     <div class="mb-3" *ngIf="isShowDivIf">
       <form class="p-5" [formGroup]="reportForm">
@@ -20,6 +21,15 @@
         </select>
         <button class="report btn btn-primary" (click)="report()">Submit</button>
         <button class="report btn btn-danger" routerLink="/Main">Cancel</button>
+      </form>
+    </div>
+
+    <div class="mb-3" *ngIf="isShowDivReject">
+      <form class="p-5" [formGroup]="rejectForm">
+        <label>Reason for rejecting the ad</label>
+        <input required class="form-control" formControlName="rejectedReason">
+        <button class="report btn btn-primary" (click)="rejectAd()">Submit</button>
+        <button class="report btn btn-danger" routerLink="/Inactive-Ads">Cancel</button>
       </form>
     </div>
   </div>
