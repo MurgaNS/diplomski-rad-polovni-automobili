@@ -17,9 +17,10 @@ import { MyAdsComponent } from './components/ads/my-ads/my-ads.component';
 import { FollowingAdsComponent } from './components/ads/following-ads/following-ads.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
-import { ReportedAdsComponent } from './components/ads/reported-ads/reported-ads.component';
-import { ReportedAdListComponent } from './components/ads/reported-ad-list/reported-ad-list.component';
-import { ReportedAdItemComponent } from './components/ads/reported-ad-item/reported-ad-item.component';
+import { ReportedAdsComponent } from './components/adminPanel/reported-ads/reported-ads.component';
+import { ReportedAdListComponent } from './components/adminPanel/reported-ad-list/reported-ad-list.component';
+import { ReportedAdItemComponent } from './components/adminPanel/reported-ad-item/reported-ad-item.component';
+import { InactiveAdsComponent } from './components/adminPanel/inactive-ads/inactive-ads.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { ReportedAdItemComponent } from './components/ads/reported-ad-item/repor
     ReportedAdsComponent,
     ReportedAdListComponent,
     ReportedAdItemComponent,
+    InactiveAdsComponent,
   ],
   imports: [
     BrowserModule,

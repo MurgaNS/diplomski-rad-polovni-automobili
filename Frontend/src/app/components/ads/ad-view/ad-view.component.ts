@@ -36,6 +36,14 @@ export class AdViewComponent {
       })
   }
 
+  reportForm: FormGroup = new FormGroup({
+    reportReason: new FormControl(''),
+  });
+
+  rejectForm: FormGroup = new FormGroup({
+    rejectedReason: new FormControl(''),
+  });
+
   follow() {
     this.route.params.subscribe(params => {
       const adId = params['id'];
@@ -62,9 +70,12 @@ export class AdViewComponent {
     this.isShowDivIf = !this.isShowDivIf;
   }
 
-  reportForm: FormGroup = new FormGroup({
-    reportReason: new FormControl(''),
-  });
+  isShowDivReject: boolean = false;
+
+  toggleDisplayDivReject(){
+    this.isShowDivReject = !this.isShowDivReject
+
+  }
 
   report() {
 
@@ -104,6 +115,50 @@ export class AdViewComponent {
           complete: () => {
             alert("Ad has been successfully deleted")
             this.router.navigate(['/Reported-Ads'])
+          }
+        })
+    })
+  }
+
+  approveAd() {
+    this.adChangeStatus.status = "ACTIVE";
+    this.route.params.subscribe(params => {
+      const adId = params['id'];
+      this.adService.ChangeStatus(adId, this.adChangeStatus)
+        .subscribe({
+          next: (data) => {
+            this.router.navigate(['/Main']);
+          },
+          error: (error) => {
+            console.log(error);
+          },
+          complete: () => {
+            alert("Ad has been successfully approved.")
+            this.router.navigate(['/Main'])
+          }
+        })
+    })
+  }
+
+  rejectAd(){
+
+    let adChangeStatus: AdChangeStatusDTO = new AdChangeStatusDTO();
+    adChangeStatus.rejectedReason = this.rejectForm.get("rejectedReason")?.value;
+    adChangeStatus.status = "REJECTED"
+
+    this.route.params.subscribe(params => {
+      const adId = params['id'];
+      this.adService.ChangeStatus(adId, adChangeStatus)
+        .subscribe({
+          next: (data) => {
+            this.router.navigate(['/Main']);
+          },
+          error: (error) => {
+            console.log(error);
+          },
+          complete: () => {
+            alert("Ad has been successfully rejected")
+            this.router.navigate(['/Main'])
           }
         })
     })

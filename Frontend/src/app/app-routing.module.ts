@@ -6,7 +6,8 @@ import {AdViewComponent} from "./components/ads/ad-view/ad-view.component";
 import {AdAddComponent} from "./components/ads/ad-add/ad-add.component";
 import {MyAdsComponent} from "./components/ads/my-ads/my-ads.component";
 import {FollowingAdsComponent} from "./components/ads/following-ads/following-ads.component";
-import {ReportedAdsComponent} from "./components/ads/reported-ads/reported-ads.component";
+import {ReportedAdsComponent} from "./components/adminPanel/reported-ads/reported-ads.component";
+import {InactiveAdsComponent} from "./components/adminPanel/inactive-ads/inactive-ads.component";
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: "Reported-Ads",
     component: ReportedAdsComponent
+  },
+  {
+    path: "Inactive-Ads",
+    component: InactiveAdsComponent
   }
 ];
 
