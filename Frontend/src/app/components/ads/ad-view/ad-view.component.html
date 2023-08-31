@@ -6,6 +6,7 @@
     <button class="btn btn-danger" (click)="deleteAd()"> Delete</button>
     <button class="btn btn-warning" (click)="toggleDisplayDivReject()"> Reject</button>
     <button class="btn btn-info" (click)="approveAd()"> Approve</button>
+    <a [routerLink]="['/Ad-Edit', ad_id]"><button class="btn btn-dark">Edit Ad </button></a>
 
     <div class="mb-3" *ngIf="isShowDivIf">
       <form class="p-5" [formGroup]="reportForm">
@@ -77,22 +78,22 @@
 
     <div>
       <h3>Safety</h3>
-      <p class="">Car safety: {{ad.carResponseDTO.carSafety}}</p>
+      <p class=""> {{ad.carResponseDTO.carSafety}}</p>
     </div>
 
     <div>
       <h3>Additional equipment</h3>
-      <p class="">Additional equipment: {{ad.carResponseDTO.additionalEquipment}}</p>
+      <p class=""> {{ad.carResponseDTO.additionalEquipment}}</p>
     </div>
 
     <div>
       <h3>Vehicle condition</h3>
-      <p class="">Vehicle condition: {{ad.carResponseDTO.vehicleCondition}}</p>
+      <p class=""> {{ad.carResponseDTO.vehicleCondition}}</p>
     </div>
 
     <div>
       <h3>Description</h3>
-      <p class="">Description: {{ad.description}}</p>
+      <p class="">{{ad.description}}</p>
     </div>
 
 

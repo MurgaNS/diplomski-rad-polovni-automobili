@@ -21,6 +21,7 @@ import { ReportedAdsComponent } from './components/adminPanel/reported-ads/repor
 import { ReportedAdListComponent } from './components/adminPanel/reported-ad-list/reported-ad-list.component';
 import { ReportedAdItemComponent } from './components/adminPanel/reported-ad-item/reported-ad-item.component';
 import { InactiveAdsComponent } from './components/adminPanel/inactive-ads/inactive-ads.component';
+import { AddEditComponent } from './components/ads/add-edit/add-edit.component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { InactiveAdsComponent } from './components/adminPanel/inactive-ads/inact
     ReportedAdListComponent,
     ReportedAdItemComponent,
     InactiveAdsComponent,
+    AddEditComponent,
   ],
   imports: [
     BrowserModule,
