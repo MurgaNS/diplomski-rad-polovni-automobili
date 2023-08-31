@@ -138,6 +138,7 @@ export class AdAddComponent {
   }
 
   ngOnInit(): void {
+
   }
 
 }

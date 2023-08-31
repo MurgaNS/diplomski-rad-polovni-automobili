@@ -36,6 +36,11 @@ export class AdService {
     return this.http.post<AdResponseDTO>(`${environment.baseApiUrl}/${this.url}/create`, ad);
   }
 
+  public EditAd(ad: AdRequestDTO, ad_id: number):Observable<AdResponseDTO>{
+    return this.http.put<AdResponseDTO>(`${environment.baseApiUrl}/${this.url}` + `/${ad_id}`, ad);
+
+  }
+
   public Follow(ad_id: number):Observable<AdResponseDTO> {
     return this.http.post<AdResponseDTO>(`${environment.baseApiUrl}/${this.url}` + `/${ad_id}` + "/follow", ad_id);
   }
