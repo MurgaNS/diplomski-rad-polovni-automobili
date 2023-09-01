@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {catchError, map, Observable} from "rxjs";
 import {JwtUtilsService} from "./jwt-utils.service";
 import {Router} from "@angular/router";
+import {UserResponseDTO} from "../../models/dto/User/userResponseDTO.model";
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,11 @@ export class AuthenticationService {
         }
       })
     )
+  }
+
+  Register(userResponseDTO: UserResponseDTO) {
+    return this.http.post(`http://localhost:8080/api/auth/signup`, userResponseDTO);
+
   }
 
   logout() {

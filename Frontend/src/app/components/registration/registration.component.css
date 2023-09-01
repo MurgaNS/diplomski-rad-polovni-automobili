@@ -1,8 +1,9 @@
 .div{
   /*margin: 10rem 50rem 75rem 30rem;*/
+  margin: auto;
   width: 50%;
   padding: 10px;
-  margin: 10rem auto auto;
+  margin-top: 10rem;
 
 }
 
