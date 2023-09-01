@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {AdsComponent} from "./components/ads/ads/ads.component";
 import {LoginComponent} from "./components/login/login.component";
 import {AdViewComponent} from "./components/ads/ad-view/ad-view.component";
@@ -11,6 +11,7 @@ import {InactiveAdsComponent} from "./components/adminPanel/inactive-ads/inactiv
 import {AddEditComponent} from "./components/ads/add-edit/add-edit.component";
 import {RegistrationComponent} from "./components/registration/registration.component";
 import {VerificationComponent} from "./components/verification/verification.component";
+import {ChangePasswordComponent} from "./components/change-password/change-password.component";
 
 const routes: Routes = [
   {
@@ -28,6 +29,10 @@ const routes: Routes = [
   {
     path: "Verify-Account",
     component: VerificationComponent
+  },
+  {
+    path: "Change-Password",
+    component: ChangePasswordComponent
   },
   {
     path: "Ad-View/:id",
@@ -63,4 +68,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
