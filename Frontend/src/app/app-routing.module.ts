@@ -9,6 +9,7 @@ import {FollowingAdsComponent} from "./components/ads/following-ads/following-ad
 import {ReportedAdsComponent} from "./components/adminPanel/reported-ads/reported-ads.component";
 import {InactiveAdsComponent} from "./components/adminPanel/inactive-ads/inactive-ads.component";
 import {AddEditComponent} from "./components/ads/add-edit/add-edit.component";
+import {RegistrationComponent} from "./components/registration/registration.component";
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: "Login",
     component: LoginComponent
+  },
+  {
+    path: "Registration",
+    component: RegistrationComponent
   },
   {
     path: "Ad-View/:id",
