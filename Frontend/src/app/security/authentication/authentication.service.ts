@@ -4,6 +4,7 @@ import {catchError, map, Observable} from "rxjs";
 import {JwtUtilsService} from "./jwt-utils.service";
 import {Router} from "@angular/router";
 import {UserResponseDTO} from "../../models/dto/User/userResponseDTO.model";
+import {SignUpVerificationDTO} from "../../models/dto/User/signUpVerificationDTO.model";
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,10 @@ export class AuthenticationService {
   Register(userResponseDTO: UserResponseDTO) {
     return this.http.post(`http://localhost:8080/api/auth/signup`, userResponseDTO);
 
+  }
+
+  VerifyAccount(signUpVerificationDTO: SignUpVerificationDTO){
+    return this.http.post(`http://localhost:8080/api/auth/verify-account`, signUpVerificationDTO);
   }
 
   logout() {
