@@ -23,6 +23,7 @@ import { ReportedAdItemComponent } from './components/adminPanel/reported-ad-ite
 import { InactiveAdsComponent } from './components/adminPanel/inactive-ads/inactive-ads.component';
 import { AddEditComponent } from './components/ads/add-edit/add-edit.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { VerificationComponent } from './components/verification/verification.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { RegistrationComponent } from './components/registration/registration.co
     InactiveAdsComponent,
     AddEditComponent,
     RegistrationComponent,
+    VerificationComponent,
   ],
   imports: [
     BrowserModule,
