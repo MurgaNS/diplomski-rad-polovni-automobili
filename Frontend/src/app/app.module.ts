@@ -24,6 +24,7 @@ import { InactiveAdsComponent } from './components/adminPanel/inactive-ads/inact
 import { AddEditComponent } from './components/ads/add-edit/add-edit.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { VerificationComponent } from './components/verification/verification.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { VerificationComponent } from './components/verification/verification.co
     AddEditComponent,
     RegistrationComponent,
     VerificationComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,

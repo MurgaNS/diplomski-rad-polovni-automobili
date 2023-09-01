@@ -20,6 +20,7 @@
           <a class="dropdown-item" href="#" routerLink="/Login" *ngIf="!hasLoggedIn()">Login</a>
           <a class="dropdown-item" href="#" (click)="logout()" *ngIf="hasLoggedIn()">Logout</a>
           <a class="dropdown-item" href="#" routerLink="/Registration" *ngIf="!hasLoggedIn()">Registration</a>
+          <a class="dropdown-item" href="#" routerLink="/Change-Password" *ngIf="hasLoggedIn()">Change password</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#" routerLink="/My-Ads">My Ads</a>
           <a class="dropdown-item" href="#" routerLink="/Following-Ads">Following Ads</a>
