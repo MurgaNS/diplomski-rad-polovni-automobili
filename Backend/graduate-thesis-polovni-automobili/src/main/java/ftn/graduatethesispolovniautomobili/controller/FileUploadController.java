@@ -27,7 +27,7 @@ public class FileUploadController {
     public ResponseEntity<List<String>> uploadPhotos(@RequestParam("photos") MultipartFile[] photos) {
 
         try {
-            String uploadDir = "src/main/resources/images";
+            String uploadDir = "../../Frontend/src/assets/images";
             List<String> filesNames = fileUploadService.saveFile(uploadDir, photos);
             return  new ResponseEntity<>(filesNames, HttpStatus.OK);
 
