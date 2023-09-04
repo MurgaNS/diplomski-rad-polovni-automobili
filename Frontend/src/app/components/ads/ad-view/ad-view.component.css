@@ -1,10 +1,10 @@
 .card {
   position: absolute;
-  margin-top: 5rem;
-  top: 100%;
-  left: 50%;
+  margin-top: 3rem;
+  top: 10%;
+  left: 10%;
   margin-right: -50%;
-  transform: translate(-50%, -50%);
+  /*transform: translate(-50%, -50%);*/
 }
 
 .under-image-div {
@@ -20,3 +20,8 @@
   width: 6rem;
 }
 
+.rightDiv{
+  /*display: inline-block;*/
+  position: absolute;
+
+}

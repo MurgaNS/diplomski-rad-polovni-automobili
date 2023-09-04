@@ -10,5 +10,8 @@ export class AdItemComponent {
 
   @Input() ad: AdResponseDTO = new AdResponseDTO();
 
+  // let slika = '132';
+
+    protected readonly Number = Number;
 
 }

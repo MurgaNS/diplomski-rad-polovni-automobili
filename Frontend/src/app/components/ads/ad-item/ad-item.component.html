@@ -1,14 +1,17 @@
 <div class="card" style="width: 20rem; height: 30rem" [routerLink]="['/Ad-View', ad.id]">
-  <img class="card-img-top" src="assets/img.png" alt="Card image cap">
+  <div *ngFor="let photo of ad.carResponseDTO.photos; let firstItem = first">
+    <div *ngIf="firstItem">
+      <img class="card-img-top" src="assets/images/{{photo}}" alt="Card image cap">
+    </div>
+  </div>
   <div class="card-body flex-lg-grow-1">
 
     <p class="">{{ad.carResponseDTO.brand}} {{ad.carResponseDTO.model}}</p>
     <p class="">Price: {{ad.price}}</p>
-    <p class="">Description: {{ad.description}}</p>
-    <p class="">Posted by: {{ad.user.username}}</p>
+     <p class="">Posted by: {{ad.user.username}}</p>
     <p class="">Contact: {{ad.user.phoneNumber}}</p>
 
   </div>
-  <button type="button" class="btn btn-primary">Primary</button>
+  <!--  <button type="button" class="btn btn-primary">Primary</button>-->
 </div>
 

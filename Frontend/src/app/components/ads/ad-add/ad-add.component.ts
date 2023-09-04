@@ -3,6 +3,7 @@ import {AdService} from "../../../services/ad.service";
 import {Router} from "@angular/router";
 import {FormControl, FormGroup} from "@angular/forms";
 import {AdRequestDTO} from "../../../models/dto/Ad/adRequestDTO.model";
+import {FileUploadService} from "../../../services/file-upload.service";
 
 @Component({
   selector: 'app-ad-add',
@@ -12,8 +13,11 @@ import {AdRequestDTO} from "../../../models/dto/Ad/adRequestDTO.model";
 export class AdAddComponent {
 
   constructor(private adService: AdService,
+              private fileUploadService: FileUploadService,
               private router: Router) {
   }
+
+  myFiles:string [] = [];
 
   submitted: boolean = false;
 
@@ -81,6 +85,7 @@ export class AdAddComponent {
     carSafety: new FormControl(''),
     vehicleCondition: new FormControl(''),
     additionalEquipment: new FormControl(''),
+    file: new FormControl(''),
 
   });
 
@@ -121,20 +126,43 @@ export class AdAddComponent {
     addAd.carRequestDTO.carSafety = this.adForm.get("carSafety")?.value;
     addAd.description = this.adForm.get("description")?.value;
 
-    this.adService.CreateAd(addAd)
-      .subscribe({
-        next: (data) => {
-          this.router.navigate(['/Main']);
-        },
-        error: (error) => {
-          console.log(error);
-        },
-        complete: () => {
-          this.router.navigate(['/Main'])
-        }
-      })
+    const formData = new FormData();
 
+    for(var i=0; i <this.myFiles.length; i++){
+      formData.append("photos", this.myFiles[i]);
+    }
+    this.fileUploadService.UploadImage(formData).subscribe( res => {
+      console.log(res)
+      console.log("Files uploaded!!!")
+      console.log(this.myFiles)
+      addAd.carRequestDTO.photos = res
 
+      this.adService.CreateAd(addAd)
+        .subscribe({
+          next: (data) => {
+            this.router.navigate(['/Main']);
+          },
+          error: (error) => {
+            console.log(error);
+          },
+          complete: () => {
+            this.router.navigate(['/Main'])
+          }
+        })
+    })
+
+    console.log(addAd)
+
+  }
+  onFileChange(event:any) {
+
+    for (var i = 0; i < event.target.files.length; i++) {
+      this.myFiles.push(event.target.files[i]);
+    }
+  }
+
+  get f(){
+    return this.adForm.controls;
   }
 
   ngOnInit(): void {

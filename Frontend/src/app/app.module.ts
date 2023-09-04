@@ -25,6 +25,7 @@ import { AddEditComponent } from './components/ads/add-edit/add-edit.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { VerificationComponent } from './components/verification/verification.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import {NgImageSliderModule} from "ng-image-slider";
 
 
 @NgModule({
@@ -48,15 +49,16 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
     VerificationComponent,
     ChangePasswordComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    MatSelectModule,
-    FormsModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        MatSelectModule,
+        FormsModule,
+        NgImageSliderModule
+    ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,

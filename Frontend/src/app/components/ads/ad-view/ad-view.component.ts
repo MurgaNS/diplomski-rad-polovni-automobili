@@ -23,7 +23,7 @@ export class AdViewComponent {
   ad_id = Number(this.route.snapshot.paramMap.get("id"))
   ad: AdResponseDTO = new AdResponseDTO();
   adChangeStatus : AdChangeStatusDTO =new AdChangeStatusDTO();
-
+  images: Array<object> = [];
 
   ngOnInit(): void {
     console.log(this.ad_id)
@@ -31,8 +31,11 @@ export class AdViewComponent {
       .subscribe({
         next: (data) => {
           this.ad = data
-        }
+          for (let photo of data.carResponseDTO.photos) {
+            this.images.push({image:'assets/images/' + photo, thumbImage: "assets/images/" + photo })
+          }
 
+        }
       })
   }
 
