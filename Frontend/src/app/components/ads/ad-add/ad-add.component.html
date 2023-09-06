@@ -4,7 +4,7 @@
       <h2>Create Ad</h2>
 
       <div class="form-group">
-        <label for="file">File</label>
+        <mat-label for="file">File</mat-label>
         <input
           formControlName="file"
           id="file"
@@ -12,15 +12,15 @@
           multiple
           class="form-control"
           (change)="onFileChange($event)">
-<!--        <div *ngIf="f.file.touched && f.file.invalid" class="alert alert-danger">-->
-<!--          <div *ngIf="f.file.errors && f.file.errors.required">File is required.</div>-->
-<!--        </div>-->
+        <!--        <div *ngIf="f.file.touched && f.file.invalid" class="alert alert-danger">-->
+        <!--          <div *ngIf="f.file.errors && f.file.errors.required">File is required.</div>-->
+        <!--        </div>-->
       </div>
 
       <br>
 
       <div class="mb-3">
-        <label class="form-label">Price(€)</label>
+        <mat-label class="form-mat-label">Price(€)</mat-label>
         <input type="number" class="form-control" formControlName="price">
       </div>
 
@@ -28,72 +28,72 @@
         <h3>General informations</h3>
 
         <div class="mb-3">
-          <label>Brand</label>
+          <mat-label>Brand</mat-label>
           <input type="text" class="form-control" formControlName="brand">
         </div>
 
         <div class="mb-3">
-          <label>Model</label>
+          <mat-label>Model</mat-label>
           <input type="text" class="form-control" formControlName="model">
         </div>
 
         <div class="mb-3">
-          <label>Mileage</label>
+          <mat-label>Mileage</mat-label>
           <input type="number" class="form-control" formControlName="mileage">
         </div>
 
         <div class="mb-3">
-          <label>Category</label>
-          <select required class="form-control" formControlName="carCategory">
-            <option value="CABRIOLET">Cabriolet</option>
-            <option value="ESTATE">Estate</option>
-            <option value="SALOON">Saloon</option>
-            <option value="COUPE">Coupe</option>
-            <option value="SUV">SUV</option>
-            <option value="MINIVAN">Minivan</option>
-            <option value="SMALL_CAR">Small car</option>
-            <option value="OFFROAD">Offroad</option>
-          </select>
+          <mat-label>Category</mat-label>
+          <mat-select required class="form-control" formControlName="carCategory">
+            <mat-option value="CABRIOLET">Cabriolet</mat-option>
+            <mat-option value="ESTATE">Estate</mat-option>
+            <mat-option value="SALOON">Saloon</mat-option>
+            <mat-option value="COUPE">Coupe</mat-option>
+            <mat-option value="SUV">SUV</mat-option>
+            <mat-option value="MINIVAN">Minivan</mat-option>
+            <mat-option value="SMALL_CAR">Small car</mat-option>
+            <mat-option value="OFFROAD">Offroad</mat-option>
+          </mat-select>
         </div>
 
         <div class="mb-3">
-          <label>Engine type</label>
+          <mat-label>Engine type</mat-label>
           <input type="text" class="form-control" formControlName="engineType">
         </div>
 
         <div class="mb-3">
-          <label>Fuel type</label>
-          <select required class="form-control" formControlName="fuelType">
-            <option value="DIESEL">Diesel</option>
-            <option value="PETROL">Petrol</option>
-            <option value="ElECTRIC">Electric</option>
-            <option value="HYBRID">Hybrid</option>
-            <option value="LPG">LPG</option>
-            <option value="NATURAL_GAS">Natural gas</option>
-            <option value="ETHANOL">Ethanol</option>
-            <option value="OTHER">Other</option>
-          </select>
+          <mat-label>Fuel type</mat-label>
+          <mat-select required class="form-control" formControlName="fuelType">
+            <mat-option value="DIESEL">Diesel</mat-option>
+            <mat-option value="PETROL">Petrol</mat-option>
+            <mat-option value="ElECTRIC">Electric</mat-option>
+            <mat-option value="HYBRID">Hybrid</mat-option>
+            <mat-option value="LPG">LPG</mat-option>
+            <mat-option value="NATURAL_GAS">Natural gas</mat-option>
+            <mat-option value="ETHANOL">Ethanol</mat-option>
+            <mat-option value="OTHER">Other</mat-option>
+          </mat-select>
         </div>
 
         <div class="mb-3">
-          <label>Engine cubicle</label>
+          <mat-label>Engine cubicle</mat-label>
           <input type="number" class="form-control" formControlName="engineCubicle">
         </div>
 
         <div class="mb-3">
-          <label>Power(hp)</label>
+          <mat-label>Power(hp)</mat-label>
           <input type="number" class="form-control" formControlName="power">
         </div>
 
         <div class="mb-3">
-          <label>Exchange</label>
-          <select required class="form-control" formControlName="exchange">
-            <option value="EXCHANGE_FOR_CHEAPER">Exchange for cheaper</option>
-            <option value="EXCHANGE_FOR_MORE_EXPENSIVE">Exchange for more expensive</option>
-            <option value="EXCHANGE_IN_THE_SAME_PRICE_RANG">Exchange in the same price rang</option>
-            <option value="ANY">Any</option>
-            <option value="NO">No</option>
-          </select>
+          <mat-label>Exchange</mat-label>
+          <mat-select required class="form-control" formControlName="exchange">
+            <mat-option value="EXCHANGE_FOR_CHEAPER">Exchange for cheaper</mat-option>
+            <mat-option value="EXCHANGE_FOR_MORE_EXPENSIVE">Exchange for more expensive</mat-option>
+            <mat-option value="EXCHANGE_IN_THE_SAME_PRICE_RANG">Exchange in the same price rang</mat-option>
+            <mat-option value="ANY">Any</mat-option>
+            <mat-option value="NO">No</mat-option>
+          </mat-select>
         </div>
       </div>
 
@@ -101,104 +101,128 @@
         <h3>Additional informations</h3>
 
         <div class="mb-3">
-          <label>Engine emmision class</label>
-          <select required class="form-control" formControlName="engineEmmisionClass">
-            <option value="EURO1">Euro 1</option>
-            <option value="EURO2">Euro 2</option>
-            <option value="EURO3">Euro 3</option>
-            <option value="EURO4">Euro 4</option>
-            <option value="EURO5">Euro 5</option>
-            <option value="EURO6">Euro 6</option>
-          </select>
+          <mat-label>Engine emmision class</mat-label>
+          <mat-select required class="form-control" formControlName="engineEmmisionClass">
+            <mat-option value="EURO1">Euro 1</mat-option>
+            <mat-option value="EURO2">Euro 2</mat-option>
+            <mat-option value="EURO3">Euro 3</mat-option>
+            <mat-option value="EURO4">Euro 4</mat-option>
+            <mat-option value="EURO5">Euro 5</mat-option>
+            <mat-option value="EURO6">Euro 6</mat-option>
+          </mat-select>
         </div>
 
         <div class="mb-3">
-          <label>Drive</label>
-          <select required class="form-control" formControlName="carDrive">
-            <option value="FRONT">Front</option>
-            <option value="REAR">Rear</option>
-            <option value="ALL_WHEEL">All wheel</option>
-          </select>
+          <mat-label>Drive</mat-label>
+          <mat-select required class="form-control" formControlName="carDrive">
+            <mat-option value="FRONT">Front</mat-option>
+            <mat-option value="REAR">Rear</mat-option>
+            <mat-option value="ALL_WHEEL">All wheel</mat-option>
+          </mat-select>
         </div>
 
         <div class="mb-3">
-          <label>Gearbox</label>
-          <select required class="form-control" formControlName="carGearbox">
-            <option value="AUTOMATIC">Automatic</option>
-            <option value="SEMI_AUTOMATIC">Semi-automatic</option>
-            <option value="MANUAL">Manual</option>
-          </select>
+          <mat-label>Gearbox</mat-label>
+          <mat-select required class="form-control" formControlName="carGearbox">
+            <mat-option value="AUTOMATIC">Automatic</mat-option>
+            <mat-option value="SEMI_AUTOMATIC">Semi-automatic</mat-option>
+            <mat-option value="MANUAL">Manual</mat-option>
+          </mat-select>
         </div>
 
         <div class="mb-3">
-          <label>Door number</label>
+          <mat-label>Door number</mat-label>
           <input type="number" class="form-control" formControlName="doorNumber">
         </div>
 
         <div class="mb-3">
-          <label>Seats number</label>
+          <mat-label>Seats number</mat-label>
           <input type="number" class="form-control" formControlName="seatsNumber">
         </div>
 
         <div class="mb-3">
-          <label>Steering wheel side</label>
-          <select required class="form-control" formControlName="steeringWheelSide">
-            <option value="LEFT">Left</option>
-            <option value="RIGHT">Right</option>
-          </select>
+          <mat-label>Steering wheel side</mat-label>
+          <mat-select required class="form-control" formControlName="steeringWheelSide">
+            <mat-option value="LEFT">Left</mat-option>
+            <mat-option value="RIGHT">Right</mat-option>
+          </mat-select>
         </div>
 
         <div class="mb-3">
-          <label>Climate</label>
-          <select required class="form-control" formControlName="climate">
-            <option value="YES">Yes</option>
-            <option value="NO">No</option>
-          </select>
+          <mat-label>Climate</mat-label>
+          <mat-select required class="form-control" formControlName="climate">
+            <mat-option value="YES">Yes</mat-option>
+            <mat-option value="NO">No</mat-option>
+          </mat-select>
         </div>
 
         <div class="mb-3">
-          <label>Color</label>
-          <input type="text" class="form-control" formControlName="color">
+          <mat-label>Color</mat-label>
+          <mat-select required class="form-control" formControlName="color">
+            <mat-option value="Black">Black</mat-option>
+            <mat-option value="Blue">Blue</mat-option>
+            <mat-option value="Beige">Beige</mat-option>
+            <mat-option value="Brown">Brown</mat-option>
+            <mat-option value="Yellow">Yellow</mat-option>
+            <mat-option value="Gold">Gold</mat-option>
+            <mat-option value="Grey">Grey</mat-option>
+            <mat-option value="Green">Green</mat-option>
+            <mat-option value="Orange">Orange</mat-option>
+            <mat-option value="Red">Red</mat-option>
+            <mat-option value="Silver">Silver</mat-option>
+            <mat-option value="Purple">Purple</mat-option>
+            <mat-option value="White">White</mat-option>
+            <mat-option value="Other">Other</mat-option>
+          </mat-select>
         </div>
 
         <div class="mb-3">
-          <label>Interior material</label>
-          <select required class="form-control" formControlName="interiorMaterial">
-            <option value="CLOTH">Cloth</option>
-            <option value="NATURAL_LEATHER">Natural leather</option>
-            <option value="COMBINED_LEATHER">Combined leather</option>
-            <option value="VELOURS">Velours</option>
-            <option value="OTHER">Other</option>
-          </select>
+          <mat-label>Interior material</mat-label>
+          <mat-select required class="form-control" formControlName="interiorMaterial">
+            <mat-option value="CLOTH">Cloth</mat-option>
+            <mat-option value="NATURAL_LEATHER">Natural leather</mat-option>
+            <mat-option value="COMBINED_LEATHER">Combined leather</mat-option>
+            <mat-option value="VELOURS">Velours</mat-option>
+            <mat-option value="OTHER">Other</mat-option>
+          </mat-select>
         </div>
 
         <div class="mb-3">
-          <label>Interior color</label>
-          <input type="text" class="form-control" formControlName="interiorColor">
+          <mat-label>Interior color</mat-label>
+          <mat-select required class="form-control" formControlName="interiorColor">
+            <mat-option value="Black">Black</mat-option>
+            <mat-option value="Beige">Beige</mat-option>
+            <mat-option value="Brown">Brown</mat-option>
+            <mat-option value="Grey">Grey</mat-option>
+            <mat-option value="Red">Red</mat-option>
+            <mat-option value="White">White</mat-option>
+            <mat-option value="Other">Other</mat-option>
+          </mat-select>
         </div>
 
         <div class="mb-3">
-          <label>Registered until</label>
+          <mat-label>Registered until</mat-label>
           <input type="date" class="form-control" formControlName="registeredUntil">
         </div>
 
         <div class="mb-3">
-          <label>Damage</label>
-          <select required class="form-control" formControlName="damage">
-            <option value="NO_DAMAGE">No damage</option>
-            <option value="DAMAGED_IN_DRIVING_CONDITION">Damaged - in driving condition</option>
-            <option value="DAMAGED_NOT_IN_DRIVING_CONDITION">Damaged - not in driving condition</option>
-          </select>
+          <mat-label>Damage</mat-label>
+          <mat-select required class="form-control" formControlName="damage">
+            <mat-option value="NO_DAMAGE">No damage</mat-option>
+            <mat-option value="DAMAGED_IN_DRIVING_CONDITION">Damaged - in driving condition</mat-option>
+            <mat-option value="DAMAGED_NOT_IN_DRIVING_CONDITION">Damaged - not in driving condition</mat-option>
+          </mat-select>
         </div>
 
         <div class="mb-3">
-          <label>Chassis number</label>
-          <input type="text" class="form-control" formControlName="chassisNumber">
+          <mat-label>Chassis number</mat-label>
+          <input placeholder="E.g. EXCLKSGXWD9IFVNMU68" type="text" class="form-control" formControlName="chassisNumber">
         </div>
 
         <mat-form-field class="material-form">
           <mat-label>Select Car Safety</mat-label>
-          <mat-select multiple [(ngModel)]="selectedCarSafety" (selectionChange)="onSelectionChangeCarSafety()" formControlName="carSafety">
+          <mat-select multiple [(ngModel)]="selectedCarSafety" (selectionChange)="onSelectionChangeCarSafety()"
+                      formControlName="carSafety">
             <mat-option *ngFor="let item of carSafety" [value]="item">{{ item }} </mat-option>
           </mat-select>
         </mat-form-field>
@@ -207,7 +231,8 @@
 
         <mat-form-field class="material-form">
           <mat-label>Select Vehicle Condition</mat-label>
-          <mat-select multiple [(ngModel)]="selectedCondition" (selectionChange)="onSelectionChangeVehicleCondition()" formControlName="vehicleCondition">
+          <mat-select multiple [(ngModel)]="selectedCondition" (selectionChange)="onSelectionChangeVehicleCondition()"
+                      formControlName="vehicleCondition">
             <mat-option *ngFor="let item of vehicleCondition" [value]="item">{{ item }}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -216,22 +241,23 @@
 
         <mat-form-field class="material-form">
           <mat-label>Select Additional Equipment</mat-label>
-          <mat-select multiple [(ngModel)]="selectedEquipment" (selectionChange)="onSelectionChangeEquipment()" formControlName="additionalEquipment">
+          <mat-select multiple [(ngModel)]="selectedEquipment" (selectionChange)="onSelectionChangeEquipment()"
+                      formControlName="additionalEquipment">
             <mat-option *ngFor="let item of additionalEquipment" [value]="item">{{ item }}</mat-option>
           </mat-select>
         </mat-form-field>
 
         <div class="mb-3">
-          <label>Description</label>
+          <mat-label>Description</mat-label>
           <input type="text" class="form-control" formControlName="description">
         </div>
 
       </div>
 
       <div class="button-box col-lg-12">
-        <button type="submit" class="btn btn-primary me-2" (click)="onSubmit()">Submit data</button>
+        <button type="submit" class="mat-btn" mat-raised-button color="primary"  (click)="onSubmit()">Submit data</button>
         <a routerLink="/Main">
-          <button class="btn btn-danger">Back to the main page</button>
+          <button class="mat-btn" mat-raised-button color="warn" >Back to the main page</button>
         </a>
       </div>
 

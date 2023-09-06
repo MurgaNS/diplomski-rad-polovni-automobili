@@ -42,7 +42,6 @@ public interface AdRepository extends JpaRepository<Ad, Integer> {
             "AND (:#{#searchParameters.carRequestDTO.brand} IS NULL OR ad.car.brand = :#{#searchParameters.carRequestDTO.brand})" +
             "AND (:#{#searchParameters.carRequestDTO.model} IS NULL OR ad.car.model = :#{#searchParameters.carRequestDTO.model})" +
             "AND (:#{#searchParameters.carRequestDTO.doorNumber} IS NULL OR ad.car.doorNumber = :#{#searchParameters.carRequestDTO.doorNumber})" +
-            "AND (:#{#searchParameters.carRequestDTO.seatsNumber} IS NULL OR ad.car.seatsNumber = :#{#searchParameters.carRequestDTO.seatsNumber})" +
             "AND (:#{#searchParameters.carRequestDTO.color} IS NULL OR ad.car.color = :#{#searchParameters.carRequestDTO.color})"+
             "AND (:#{#searchParameters.carRequestDTO.interiorColor} IS NULL OR ad.car.interiorColor = :#{#searchParameters.carRequestDTO.interiorColor})"+
             "AND (:#{#searchParameters.carRequestDTO.registeredUntil} IS NULL OR ad.car.registeredUntil = :#{#searchParameters.carRequestDTO.registeredUntil})" +
