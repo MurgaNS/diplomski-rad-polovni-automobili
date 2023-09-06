@@ -110,14 +110,14 @@ export class AdViewComponent {
       this.adService.ChangeStatus(adId, this.adChangeStatus)
         .subscribe({
           next: (data) => {
-            this.router.navigate(['/Reported-Ads']);
+            this.router.navigate(['/Main']);
           },
           error: (error) => {
             console.log(error);
           },
           complete: () => {
             alert("Ad has been successfully deleted")
-            this.router.navigate(['/Reported-Ads'])
+            this.router.navigate(['/Main'])
           }
         })
     })
