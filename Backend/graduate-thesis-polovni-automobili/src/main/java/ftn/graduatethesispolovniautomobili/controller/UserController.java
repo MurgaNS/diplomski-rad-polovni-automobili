@@ -1,5 +1,6 @@
 package ftn.graduatethesispolovniautomobili.controller;
 
+import ftn.graduatethesispolovniautomobili.exception.BadRequestException;
 import ftn.graduatethesispolovniautomobili.model.dto.ad.response.AdResponseDTO;
 import ftn.graduatethesispolovniautomobili.model.entity.Ad;
 import ftn.graduatethesispolovniautomobili.model.mapper.AdMapper;
@@ -24,23 +25,37 @@ public class UserController {
     }
 
     @GetMapping(value = "/myAds")
-    private ResponseEntity<AdResponseDTO> getUserAds (Authentication authentication){
+    private ResponseEntity<AdResponseDTO> getUserAds(Authentication authentication) {
 
-        List<Ad> ad =adService.getUserAds(authentication);
+        try {
 
-        List<AdResponseDTO> adResponseDTO = AdMapper.toDTOs(ad);
+            List<Ad> ad = adService.getUserAds(authentication);
 
-        return new ResponseEntity(adResponseDTO, HttpStatus.OK);
+            List<AdResponseDTO> adResponseDTO = AdMapper.toDTOs(ad);
+
+            return new ResponseEntity(adResponseDTO, HttpStatus.OK);
+
+        } catch (BadRequestException exception) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        }
 
     }
 
     @GetMapping(value = "/followedAds")
     private ResponseEntity<AdResponseDTO> getFollowedAds(Authentication authentication) {
 
-        List<Ad> ad = adService.getFollowedAds(authentication);
+        try {
 
-        List<AdResponseDTO> adResponseDTO = AdMapper.toDTOs(ad);
+            List<Ad> ad = adService.getFollowedAds(authentication);
 
-        return new ResponseEntity(adResponseDTO, HttpStatus.OK);
+            List<AdResponseDTO> adResponseDTO = AdMapper.toDTOs(ad);
+
+            return new ResponseEntity(adResponseDTO, HttpStatus.OK);
+
+        } catch (BadRequestException exception) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        }
     }
 }

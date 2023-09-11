@@ -27,13 +27,16 @@ public class FileUploadController {
     public ResponseEntity<List<String>> uploadPhotos(@RequestParam("photos") MultipartFile[] photos) {
 
         try {
+
             String uploadDir = "../../Frontend/src/assets/images";
+
             List<String> filesNames = fileUploadService.saveFile(uploadDir, photos);
-            return  new ResponseEntity<>(filesNames, HttpStatus.OK);
 
-        }catch (Exception ex) {
+            return new ResponseEntity<>(filesNames, HttpStatus.OK);
 
-            return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } catch (Exception ex) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
         }
     }
 

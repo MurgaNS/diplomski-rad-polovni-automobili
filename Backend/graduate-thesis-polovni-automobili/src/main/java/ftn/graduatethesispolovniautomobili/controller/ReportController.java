@@ -1,5 +1,6 @@
 package ftn.graduatethesispolovniautomobili.controller;
 
+import ftn.graduatethesispolovniautomobili.exception.BadRequestException;
 import ftn.graduatethesispolovniautomobili.model.dto.report.request.ReportRequestDTO;
 import ftn.graduatethesispolovniautomobili.model.dto.report.response.ReportResponseDTO;
 import ftn.graduatethesispolovniautomobili.model.entity.Report;
@@ -23,22 +24,36 @@ public class ReportController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<ReportResponseDTO> getAll(){
+    public ResponseEntity<ReportResponseDTO> getAll() {
 
-        List<Report> reports = reportService.getAll();
+        try {
 
-        List<ReportResponseDTO> reportResponseDTO = ReportMapper.toDTOs(reports);
+            List<Report> reports = reportService.getAll();
 
-        return new ResponseEntity(reportResponseDTO, HttpStatus.OK);
+            List<ReportResponseDTO> reportResponseDTO = ReportMapper.toDTOs(reports);
+
+            return new ResponseEntity(reportResponseDTO, HttpStatus.OK);
+
+        } catch (BadRequestException exception) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        }
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity<ReportResponseDTO> createReport(@PathVariable Integer id, @RequestBody ReportRequestDTO reportRequestDTO){
+    public ResponseEntity<ReportResponseDTO> createReport(@PathVariable Integer id, @RequestBody ReportRequestDTO reportRequestDTO) {
 
-        Report createdReport = reportService.addNewReport(id, reportRequestDTO);
+        try {
 
-        ReportResponseDTO reportResponseDTO = ReportMapper.toReportResponseDTO(createdReport);
+            Report createdReport = reportService.addNewReport(id, reportRequestDTO);
 
-        return new ResponseEntity(reportResponseDTO, HttpStatus.OK);
+            ReportResponseDTO reportResponseDTO = ReportMapper.toReportResponseDTO(createdReport);
+
+            return new ResponseEntity(reportResponseDTO, HttpStatus.OK);
+
+        } catch (BadRequestException exception) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        }
     }
 }
