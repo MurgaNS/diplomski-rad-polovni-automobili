@@ -29,6 +29,7 @@ import {NgImageSliderModule} from "ng-image-slider";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import {MatIconModule} from "@angular/material/icon";
     RegistrationComponent,
     VerificationComponent,
     ChangePasswordComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,

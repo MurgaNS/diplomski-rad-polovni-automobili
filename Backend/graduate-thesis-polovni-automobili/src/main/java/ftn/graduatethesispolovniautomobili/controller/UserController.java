@@ -2,9 +2,13 @@ package ftn.graduatethesispolovniautomobili.controller;
 
 import ftn.graduatethesispolovniautomobili.exception.BadRequestException;
 import ftn.graduatethesispolovniautomobili.model.dto.ad.response.AdResponseDTO;
+import ftn.graduatethesispolovniautomobili.model.dto.user.response.UserDTO;
 import ftn.graduatethesispolovniautomobili.model.entity.Ad;
+import ftn.graduatethesispolovniautomobili.model.entity.User;
 import ftn.graduatethesispolovniautomobili.model.mapper.AdMapper;
+import ftn.graduatethesispolovniautomobili.model.mapper.UserMapper;
 import ftn.graduatethesispolovniautomobili.service.AdService;
+import ftn.graduatethesispolovniautomobili.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -20,8 +24,11 @@ public class UserController {
 
     private final AdService adService;
 
-    public UserController(AdService adService) {
+    private final UserService userService;
+
+    public UserController(AdService adService, UserService userService) {
         this.adService = adService;
+        this.userService = userService;
     }
 
     @GetMapping(value = "/myAds")
@@ -58,4 +65,22 @@ public class UserController {
 
         }
     }
+
+    @GetMapping(value = "/myProfile")
+    private ResponseEntity<UserDTO> getProfileInfo(Authentication authentication) {
+
+        try {
+
+            User user = userService.findCurrentLoggedUser(authentication);
+
+            UserDTO userDTO = UserMapper.mapUserDTO(user);
+
+            return new ResponseEntity(userDTO, HttpStatus.OK);
+
+        } catch (BadRequestException exception) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        }
+    }
+
 }
