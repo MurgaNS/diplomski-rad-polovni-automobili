@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 public class AdRequestDTO {
 
-    @NotEmpty(message = "Price can not be empty")
+    @NotNull(message = "Please enter price")
     private Double price;
     @NotEmpty(message = "Description can not be empty")
     private String description;

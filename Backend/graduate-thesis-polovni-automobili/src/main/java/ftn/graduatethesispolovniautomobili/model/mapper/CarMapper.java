@@ -36,6 +36,7 @@ public class CarMapper {
         carResponseDTO.setMileage(car.getMileage());
         carResponseDTO.setEngineEmmisionClass(car.getEngineEmmisionClass());
         carResponseDTO.setFuelType(car.getFuelType());
+        carResponseDTO.setRegistered(car.isRegistered());
 
         return carResponseDTO;
 
@@ -70,6 +71,7 @@ public class CarMapper {
         car.setMileage(carRequestDTO.getMileage());
         car.setEngineEmmisionClass(carRequestDTO.getEngineEmmisionClass());
         car.setFuelType(carRequestDTO.getFuelType());
+        car.setRegistered(carRequestDTO.getIsRegistered());
 
         return car;
     }
@@ -102,6 +104,7 @@ public class CarMapper {
         car.setMileage(carRequestDTO.getMileage());
         car.setEngineEmmisionClass(carRequestDTO.getEngineEmmisionClass());
         car.setFuelType(carRequestDTO.getFuelType());
+        car.setRegistered(carRequestDTO.getIsRegistered());
 
         return car;
     }

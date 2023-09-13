@@ -30,9 +30,10 @@ export class Car {
   mileage: number = 0;
   photos: string[] = [];
   ad: Ad = new Ad;
+  isRegistered: boolean = false;
 
 
-  Car(id: number, carCategory: string, carDrive: string, carGearbox: string, steeringWheelSide: string, climate: string, interiorMaterial: string, damage: string, exchange: string, carSafety: string[], vehicleCondition: string[], additionalEquipment: string[], fuelType: string, engineEmmisionClass: string, brand: string, model: string, doorNumber: number, seatsNumber: number, color: string, interiorColor: string, registeredUntil: Date, chassisNumber: string, engineType: string, engineCubicle: number, power: number, mileage: number, photos: string[], ad: Ad) {
+  Car(id: number, carCategory: string, carDrive: string, carGearbox: string, steeringWheelSide: string, climate: string, interiorMaterial: string, damage: string, exchange: string, carSafety: string[], vehicleCondition: string[], additionalEquipment: string[], fuelType: string, engineEmmisionClass: string, brand: string, model: string, doorNumber: number, seatsNumber: number, color: string, interiorColor: string, registeredUntil: Date, chassisNumber: string, engineType: string, engineCubicle: number, power: number, mileage: number, photos: string[], ad: Ad, isRegistered: boolean) {
     this.id = id;
     this.carCategory = carCategory;
     this.carDrive = carDrive;
@@ -61,5 +62,6 @@ export class Car {
     this.mileage = mileage;
     this.photos = photos;
     this.ad = ad;
+    this.isRegistered = isRegistered;
   }
 }

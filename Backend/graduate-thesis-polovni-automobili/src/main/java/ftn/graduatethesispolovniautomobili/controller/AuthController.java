@@ -14,6 +14,7 @@ import ftn.graduatethesispolovniautomobili.service.AuthService;
 import ftn.graduatethesispolovniautomobili.service.impl.UserServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -86,6 +87,7 @@ public class AuthController {
     }
 
     @PutMapping(value = "/change-password")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_REGULAR')")
     public ResponseEntity<String> changePassword(@RequestBody @Validated ChangePasswordRequestDTO changePasswordDTO, Authentication authentication) {
 
         try {

@@ -92,9 +92,11 @@
       <p class="">Color: <b>{{ad.carResponseDTO.color}}</b></p>
       <p class="">Interior material: <b>{{ad.carResponseDTO.interiorMaterial}}</b></p>
       <p class="">Interior color: <b>{{ad.carResponseDTO.interiorColor}}</b></p>
-      <p class="">Registered until: <b>{{ad.carResponseDTO.registeredUntil | date: 'd/M/yy'}}</b></p>
       <p class="">Damage: <b>{{ad.carResponseDTO.damage}}</b></p>
       <p class="">Chasis number: <b>{{ad.carResponseDTO.chassisNumber}}</b></p>
+      <p class="" *ngIf="ad.carResponseDTO.registeredUntil then showData else hideData "></p>
+      <ng-template #showData>Registered until: <b>{{ad.carResponseDTO.registeredUntil | date: 'd/M/yy'}}</b></ng-template>
+      <ng-template #hideData>Registration: <b>Car is not registered</b></ng-template>
 
     </div>
 

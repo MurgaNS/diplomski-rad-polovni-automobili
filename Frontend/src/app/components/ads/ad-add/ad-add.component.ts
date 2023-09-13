@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {FormControl, FormGroup} from "@angular/forms";
 import {AdRequestDTO} from "../../../models/dto/Ad/adRequestDTO.model";
 import {FileUploadService} from "../../../services/file-upload.service";
+import {MatCheckboxChange} from "@angular/material/checkbox";
 
 @Component({
   selector: 'app-ad-add',
@@ -17,7 +18,7 @@ export class AdAddComponent {
               private router: Router) {
   }
 
-  myFiles:string [] = [];
+  myFiles: string [] = [];
 
   submitted: boolean = false;
 
@@ -49,6 +50,7 @@ export class AdAddComponent {
     , "AUTOMATIC_BRAKING", "CAR_PROTECTION"];
   selectedCarSafety: string = '';
   selectedCarSafetys: string[] = [];
+  isRegistered: boolean = false;
 
   onSelectionChangeCarSafety() {
     if (this.selectedCarSafety && !this.selectedCarSafetys.includes(this.selectedCarSafety)) {
@@ -86,7 +88,7 @@ export class AdAddComponent {
     vehicleCondition: new FormControl(''),
     additionalEquipment: new FormControl(''),
     file: new FormControl(''),
-
+    isRegistered: new FormControl(false),
   });
 
 
@@ -118,25 +120,29 @@ export class AdAddComponent {
     addAd.carRequestDTO.color = this.adForm.get("color")?.value;
     addAd.carRequestDTO.interiorMaterial = this.adForm.get("interiorMaterial")?.value;
     addAd.carRequestDTO.interiorColor = this.adForm.get("interiorColor")?.value;
-    addAd.carRequestDTO.registeredUntil = this.adForm.get("registeredUntil")?.value;
     addAd.carRequestDTO.damage = this.adForm.get("damage")?.value;
     addAd.carRequestDTO.chassisNumber = this.adForm.get("chassisNumber")?.value;
     addAd.carRequestDTO.additionalEquipment = this.adForm.get("additionalEquipment")?.value;
     addAd.carRequestDTO.vehicleCondition = this.adForm.get("vehicleCondition")?.value;
     addAd.carRequestDTO.carSafety = this.adForm.get("carSafety")?.value;
+    addAd.carRequestDTO.isRegistered = this.isRegistered;
     addAd.description = this.adForm.get("description")?.value;
+    if (this.isRegistered) {
+      addAd.carRequestDTO.registeredUntil = this.adForm.get("registeredUntil")?.value;
+    }
+
 
     const formData = new FormData();
 
-    for(var i=0; i <this.myFiles.length; i++){
+    for (var i = 0; i < this.myFiles.length; i++) {
       formData.append("photos", this.myFiles[i]);
     }
-    this.fileUploadService.UploadImage(formData).subscribe( res => {
+    this.fileUploadService.UploadImage(formData).subscribe(res => {
       console.log(res)
       console.log("Files uploaded!!!")
       console.log(this.myFiles)
       addAd.carRequestDTO.photos = res
-
+      console.log(JSON.stringify(addAd))
       this.adService.CreateAd(addAd)
         .subscribe({
           next: (data) => {
@@ -154,15 +160,23 @@ export class AdAddComponent {
     console.log(addAd)
 
   }
-  onFileChange(event:any) {
+
+  onFileChange(event: any) {
 
     for (var i = 0; i < event.target.files.length; i++) {
       this.myFiles.push(event.target.files[i]);
     }
   }
 
-  get f(){
+  get f() {
     return this.adForm.controls;
+  }
+
+  isShowDivRegistration: boolean = false;
+
+  toggleDisplayRegistered(event: any) {
+    this.isShowDivRegistration = !this.isShowDivRegistration
+    this.isRegistered = event.target.checked;
   }
 
   ngOnInit(): void {

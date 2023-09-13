@@ -8,6 +8,7 @@ import ftn.graduatethesispolovniautomobili.model.mapper.ReportMapper;
 import ftn.graduatethesispolovniautomobili.service.ReportService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class ReportController {
     }
 
     @GetMapping("/all")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<ReportResponseDTO> getAll() {
 
         try {
@@ -41,6 +43,7 @@ public class ReportController {
     }
 
     @PostMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_REGULAR')")
     public ResponseEntity<ReportResponseDTO> createReport(@PathVariable Integer id, @RequestBody ReportRequestDTO reportRequestDTO) {
 
         try {

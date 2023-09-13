@@ -200,7 +200,12 @@
           </mat-select>
         </div>
 
-        <div class="mb-3">
+        <section class="example-section">
+          <mat-label>Is the car registered?</mat-label>
+          <mat-checkbox class="example-margin"  (click)="toggleDisplayRegistered($event)" formControlName="isRegistered"></mat-checkbox>
+        </section>
+
+        <div class="mb-3" *ngIf="isShowDivRegistration">
           <mat-label>Registered until</mat-label>
           <input type="date" class="form-control" formControlName="registeredUntil">
         </div>
