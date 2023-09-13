@@ -37,5 +37,7 @@ public class CarResponseDTO {
     private Integer mileage;
     private EEngineEmmisionClass engineEmmisionClass;
     private EFuelType fuelType;
+    private boolean isRegistered;
+
 
 }

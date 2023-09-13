@@ -86,4 +86,7 @@ public class CarRequestDTO {
 
     @NotEmpty(message = "Fuel type can not be empty")
     private EFuelType fuelType;
+
+    private Boolean isRegistered;
+
 }

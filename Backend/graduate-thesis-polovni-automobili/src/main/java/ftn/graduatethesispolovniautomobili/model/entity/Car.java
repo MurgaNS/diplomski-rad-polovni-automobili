@@ -99,6 +99,7 @@ public class Car {
     private Integer engineCubicle;
     private Integer power;
     private Integer mileage;
+    private boolean isRegistered;
 
 
     @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)

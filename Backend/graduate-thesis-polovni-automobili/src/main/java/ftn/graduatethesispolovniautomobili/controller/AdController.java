@@ -9,6 +9,7 @@ import ftn.graduatethesispolovniautomobili.model.mapper.AdMapper;
 import ftn.graduatethesispolovniautomobili.service.AdService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,7 @@ public class AdController {
     }
 
     @PostMapping(value = "/create")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_REGULAR')")
     public ResponseEntity<AdResponseDTO> create(@Validated @RequestBody AdRequestDTO adRequestDTO,
                                                 Authentication authentication) {
 
@@ -45,6 +47,7 @@ public class AdController {
     }
 
     @GetMapping(value = "/all")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<AdResponseDTO> getAll() {
 
         try {
@@ -96,6 +99,7 @@ public class AdController {
     }
 
     @GetMapping(value = "/inactive")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<AdResponseDTO> getAllInactive() {
 
         try {
@@ -113,6 +117,7 @@ public class AdController {
     }
 
     @PatchMapping(value = "/{id}/change-status")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_REGULAR')")
     public ResponseEntity<AdResponseDTO> changeStatus(@RequestBody AdChangeStatusDTO adChangeStatusDTO, @PathVariable Integer id) {
 
         try {
@@ -130,6 +135,7 @@ public class AdController {
     }
 
     @PutMapping(value = "/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_REGULAR')")
     public ResponseEntity<AdResponseDTO> updateAd(@RequestBody AdRequestDTO adRequestDTO, @PathVariable Integer id, Authentication authentication) {
 
         try {
@@ -147,6 +153,7 @@ public class AdController {
     }
 
     @PostMapping(value = "/{id}/follow")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_REGULAR')")
     public ResponseEntity<AdResponseDTO> followAd(@PathVariable Integer id, Authentication authentication) {
 
         try {

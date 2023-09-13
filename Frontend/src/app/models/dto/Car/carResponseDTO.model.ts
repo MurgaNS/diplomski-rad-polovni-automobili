@@ -26,9 +26,11 @@ export class CarResponseDTO {
   power: number = 0;
   mileage: number = 0;
   photos: string[] = [];
+  isRegistered: boolean = false;
 
 
-  CarResponseDTO(carCategory: string, carDrive: string, carGearbox: string, steeringWheelSide: string, climate: string, interiorMaterial: string, damage: string, exchange: string, carSafety: string[], vehicleCondition: string[], additionalEquipment: string[], fuelType: string, engineEmmisionClass: string, brand: string, model: string, doorNumber: number, seatsNumber: number, color: string, interiorColor: string, registeredUntil: Date, chassisNumber: string, engineType: string, engineCubicle: number, power: number, mileage: number, photos: string[]) {
+
+  CarResponseDTO(carCategory: string, carDrive: string, carGearbox: string, steeringWheelSide: string, climate: string, interiorMaterial: string, damage: string, exchange: string, carSafety: string[], vehicleCondition: string[], additionalEquipment: string[], fuelType: string, engineEmmisionClass: string, brand: string, model: string, doorNumber: number, seatsNumber: number, color: string, interiorColor: string, registeredUntil: Date, chassisNumber: string, engineType: string, engineCubicle: number, power: number, mileage: number, photos: string[], isRegistered: boolean) {
     this.carCategory = carCategory;
     this.carDrive = carDrive;
     this.carGearbox = carGearbox;
@@ -55,5 +57,6 @@ export class CarResponseDTO {
     this.power = power;
     this.mileage = mileage;
     this.photos = photos;
+    this.isRegistered = isRegistered;
   }
 }
