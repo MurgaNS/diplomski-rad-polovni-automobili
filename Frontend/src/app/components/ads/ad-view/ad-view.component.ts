@@ -6,6 +6,8 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {ReportRequestDTO} from "../../../models/dto/Report/reportRequestDTO.model";
 import {ReportService} from "../../../services/report.service";
 import {AdChangeStatusDTO} from "../../../models/dto/Ad/adChangeStatusDTO.model";
+import {AuthenticationService} from "../../../security/authentication/authentication.service";
+import {JwtUtilsService} from "../../../security/authentication/jwt-utils.service";
 
 @Component({
   selector: 'app-ad-view',
@@ -17,12 +19,15 @@ export class AdViewComponent {
   constructor(private route: ActivatedRoute,
               private adService: AdService,
               private reportService: ReportService,
-              private router: Router) {
+              private authService: AuthenticationService,
+              private router: Router,
+              private jwtUtilsService: JwtUtilsService,
+  ) {
   }
 
   ad_id = Number(this.route.snapshot.paramMap.get("id"))
   ad: AdResponseDTO = new AdResponseDTO();
-  adChangeStatus : AdChangeStatusDTO =new AdChangeStatusDTO();
+  adChangeStatus: AdChangeStatusDTO = new AdChangeStatusDTO();
   images: Array<object> = [];
 
   ngOnInit(): void {
@@ -32,14 +37,14 @@ export class AdViewComponent {
         next: (data) => {
           this.ad = data
           for (let photo of data.carResponseDTO.photos) {
-            this.images.push({image:'assets/images/' + photo, thumbImage: "assets/images/" + photo })
+            this.images.push({image: 'assets/images/' + photo, thumbImage: "assets/images/" + photo})
           }
 
         }
       })
   }
 
-  reportForm: FormGroup = new FormGroup({
+    reportForm: FormGroup = new FormGroup({
     reportReason: new FormControl(''),
   });
 
@@ -75,7 +80,7 @@ export class AdViewComponent {
 
   isShowDivReject: boolean = false;
 
-  toggleDisplayDivReject(){
+  toggleDisplayDivReject() {
     this.isShowDivReject = !this.isShowDivReject
 
   }
@@ -103,7 +108,8 @@ export class AdViewComponent {
     })
 
   }
-  deleteAd(){
+
+  deleteAd() {
     this.adChangeStatus.status = "DELETED";
     this.route.params.subscribe(params => {
       const adId = params['id'];
@@ -143,7 +149,7 @@ export class AdViewComponent {
     })
   }
 
-  rejectAd(){
+  rejectAd() {
 
     let adChangeStatus: AdChangeStatusDTO = new AdChangeStatusDTO();
     adChangeStatus.rejectedReason = this.rejectForm.get("rejectedReason")?.value;
@@ -167,5 +173,20 @@ export class AdViewComponent {
     })
   }
 
+  hasLoggedIn() {
+    return this.authService.hasLoggedIn();
+  }
+
+  isAdmin(): boolean {
+    return this.jwtUtilsService.getRole(this.authService.getToken()) === "ROLE_ADMIN";
+  }
+
+  isRegular(): boolean {
+    return this.jwtUtilsService.getRole(this.authService.getToken()) === "ROLE_REGULAR";
+  }
+
+  isAdCreator() {
+    return this.jwtUtilsService.getUsername(this.authService.getToken()) == this.ad.user.email;
+  }
 
 }

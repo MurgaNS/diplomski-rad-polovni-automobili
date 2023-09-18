@@ -20,6 +20,10 @@ export class AdService {
   private url = "ad"
   constructor(private http: HttpClient) { }
 
+  public Search(adRequestDTO: AdRequestDTO): Observable<AdResponseDTO[]>{
+    return this.http.post<AdResponseDTO[]>(`${environment.baseApiUrl}/${this.url}/search`, adRequestDTO);
+  }
+
   public GetAllActive(): Observable<AdResponseDTO[]>{
     return this.http.get<AdResponseDTO[]>(`${environment.baseApiUrl}/${this.url}/active`);
   }
