@@ -31,6 +31,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import { SearchComponent } from './components/search/search.component';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     VerificationComponent,
     ChangePasswordComponent,
     UserProfileComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,

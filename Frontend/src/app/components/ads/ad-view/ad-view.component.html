@@ -4,28 +4,28 @@
                    #nav></ng-image-slider>
 
   <div class="under-image-div">
-    <button class="mat-btn" mat-raised-button color="accent" (click)="follow()">
+    <button class="mat-btn" mat-raised-button color="accent" (click)="follow()" *ngIf="hasLoggedIn() && !isAdCreator()">
       <mat-icon>favorite</mat-icon>
       Follow
     </button>
-    <button class="mat-btn" mat-raised-button color="warn" (click)="toggleDisplayDivIf()">
+    <button class="mat-btn" mat-raised-button color="warn" (click)="toggleDisplayDivIf()" *ngIf="hasLoggedIn() && !isAdCreator()">
       <mat-icon>report_problem</mat-icon>
       Report
     </button>
-    <button class="mat-btn" mat-raised-button color="warn" (click)="deleteAd()">
+    <button class="mat-btn" mat-raised-button color="warn" (click)="deleteAd()" *ngIf="isAdCreator()">
       <mat-icon>delete_forever</mat-icon>
       Delete
     </button>
-    <button class="mat-btn" mat-raised-button color="warn" (click)="toggleDisplayDivReject()">
+    <button class="mat-btn" mat-raised-button color="warn" (click)="toggleDisplayDivReject()" *ngIf="isAdmin()">
       <mat-icon>remove_circle_outline</mat-icon>
       Reject
     </button>
-    <button class="mat-btn" mat-raised-button color="primary" (click)="approveAd()">
+    <button class="mat-btn" mat-raised-button color="primary" (click)="approveAd()" *ngIf="isAdmin()">
       <mat-icon>done_outline</mat-icon>
       Approve
     </button>
     <a [routerLink]="['/Ad-Edit', ad_id]">
-      <button class="mat-btn" mat-raised-button color="basic">
+      <button class="mat-btn" mat-raised-button color="basic" *ngIf="isAdCreator()">
         <mat-icon>edit</mat-icon>
         Edit Ad
       </button>
@@ -63,6 +63,7 @@
     <h2 class="">{{ad.carResponseDTO.brand}} {{ad.carResponseDTO.model}} - {{ad.carResponseDTO.engineType}}</h2>
     <p class="">Price: <b>{{ad.price}}€</b></p>
     <p class="">Posted by: <b>{{ad.user.username}}</b></p>
+    <p class="">Contact: <b>{{ad.user.phoneNumber}}</b></p>
     <hr style="border: 1px solid">
 
     <div>
@@ -95,7 +96,8 @@
       <p class="">Damage: <b>{{ad.carResponseDTO.damage}}</b></p>
       <p class="">Chasis number: <b>{{ad.carResponseDTO.chassisNumber}}</b></p>
       <p class="" *ngIf="ad.carResponseDTO.registeredUntil then showData else hideData "></p>
-      <ng-template #showData>Registered until: <b>{{ad.carResponseDTO.registeredUntil | date: 'd/M/yy'}}</b></ng-template>
+      <ng-template #showData>Registered until: <b>{{ad.carResponseDTO.registeredUntil | date: 'd/M/yy'}}</b>
+      </ng-template>
       <ng-template #hideData>Registration: <b>Car is not registered</b></ng-template>
 
     </div>

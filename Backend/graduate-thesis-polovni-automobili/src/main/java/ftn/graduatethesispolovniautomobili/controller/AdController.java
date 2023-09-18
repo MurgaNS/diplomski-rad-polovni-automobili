@@ -170,7 +170,7 @@ public class AdController {
         }
     }
 
-    @GetMapping(value = "/search")
+    @PostMapping(value = "/search")
     public ResponseEntity<List<AdResponseDTO>> search(@RequestBody(required = false) AdRequestDTO adRequestDTO) {
         try {
 
