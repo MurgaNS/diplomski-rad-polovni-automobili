@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {AdService} from "../../../services/ad.service";
 import {Router} from "@angular/router";
-import {FormControl, FormGroup} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AdRequestDTO} from "../../../models/dto/Ad/adRequestDTO.model";
 import {FileUploadService} from "../../../services/file-upload.service";
 import {MatCheckboxChange} from "@angular/material/checkbox";
@@ -15,7 +15,8 @@ export class AdAddComponent {
 
   constructor(private adService: AdService,
               private fileUploadService: FileUploadService,
-              private router: Router) {
+              private router: Router,
+              private fb: FormBuilder) {
   }
 
   myFiles: string [] = [];
@@ -168,10 +169,6 @@ export class AdAddComponent {
     }
   }
 
-  get f() {
-    return this.adForm.controls;
-  }
-
   isShowDivRegistration: boolean = false;
 
   toggleDisplayRegistered(event: any) {
@@ -181,6 +178,42 @@ export class AdAddComponent {
 
   ngOnInit(): void {
 
+    this.adForm = this.fb.group(
+      {
+        price: ['', [Validators.required,]],
+        brand: ['', [Validators.required,]],
+        model: ['', [Validators.required,]],
+        mileage: ['', [Validators.required,]],
+        carCategory: ['', [Validators.required,]],
+        engineType: ['', [Validators.required,]],
+        fuelType: ['', [Validators.required,]],
+        engineCubicle: ['', [Validators.required,]],
+        power: ['', [Validators.required,]],
+        exchange: ['', [Validators.required,]],
+        engineEmmisionClass: ['', [Validators.required,]],
+        carDrive: ['', [Validators.required,]],
+        carGearbox: ['', [Validators.required,]],
+        doorNumber: ['', [Validators.required,]],
+        seatsNumber: ['', [Validators.required,]],
+        steeringWheelSide: ['', [Validators.required,]],
+        climate: ['', [Validators.required,]],
+        color: ['', [Validators.required,]],
+        interiorMaterial: ['', [Validators.required,]],
+        interiorColor: ['', [Validators.required,]],
+        damage: ['', [Validators.required,]],
+        chassisNumber: ['', [Validators.required,]],
+        additionalEquipment: ['', [Validators.required,]],
+        vehicleCondition: ['', [Validators.required,]],
+        carSafety: ['', [Validators.required,]],
+        isRegistered: [''],
+        description: ['', [Validators.required,]],
+        registeredUntil: [''],
+        file: ['', [Validators.required,]],
+      })
+  }
+
+  get f(): { [key: string]: AbstractControl } {
+    return this.adForm.controls;
   }
 
 }
