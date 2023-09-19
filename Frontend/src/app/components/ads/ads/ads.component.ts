@@ -25,4 +25,8 @@ export class AdsComponent {
       })
   }
 
+  searchAds(ads: AdResponseDTO[]) {
+    this.ads = ads;
+  }
+
 }
