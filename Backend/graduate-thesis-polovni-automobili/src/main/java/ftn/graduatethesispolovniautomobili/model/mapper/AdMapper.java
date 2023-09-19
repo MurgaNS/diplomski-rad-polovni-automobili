@@ -14,6 +14,7 @@ public class AdMapper {
         adResponseDTO.setId(ad.getId());
         adResponseDTO.setPrice(ad.getPrice());
         adResponseDTO.setDescription(ad.getDescription());
+        adResponseDTO.setStatus(ad.getStatus());
         adResponseDTO.setCarResponseDTO(CarMapper.toDTO(ad.getCar()));
         adResponseDTO.setUser(UserMapper.mapUserDTO(ad.getUser()));
 

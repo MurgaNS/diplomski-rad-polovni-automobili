@@ -44,7 +44,7 @@ export class AdViewComponent {
       })
   }
 
-    reportForm: FormGroup = new FormGroup({
+  reportForm: FormGroup = new FormGroup({
     reportReason: new FormControl(''),
   });
 
@@ -179,6 +179,10 @@ export class AdViewComponent {
 
   isAdmin(): boolean {
     return this.jwtUtilsService.getRole(this.authService.getToken()) === "ROLE_ADMIN";
+  }
+
+  isRejectedOrApproved(): boolean {
+    return this.ad.status !== 'ACTIVE';
   }
 
   isRegular(): boolean {
