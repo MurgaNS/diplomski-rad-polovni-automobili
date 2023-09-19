@@ -47,9 +47,12 @@ public interface AdRepository extends JpaRepository<Ad, Integer> {
             "AND (:#{#searchParameters.carRequestDTO.seatsNumber} IS NULL OR ad.car.seatsNumber = :#{#searchParameters.carRequestDTO.seatsNumber}) " +
             "AND (:#{#searchParameters.carRequestDTO.fuelType} IS NULL OR ad.car.fuelType = :#{#searchParameters.carRequestDTO.fuelType}) " +
             "AND (:#{#searchParameters.carRequestDTO.engineEmmisionClass} IS NULL OR ad.car.engineEmmisionClass = :#{#searchParameters.carRequestDTO.engineEmmisionClass}) " +
-            "AND (:#{#searchParameters.carRequestDTO.engineCubicle} IS NULL OR ad.car.engineCubicle = :#{#searchParameters.carRequestDTO.engineCubicle}) " +
-            "AND (:#{#searchParameters.carRequestDTO.power} IS NULL OR ad.car.power = :#{#searchParameters.carRequestDTO.power}) " +
-            "AND (:#{#searchParameters.carRequestDTO.mileage} IS NULL OR ad.car.mileage = :#{#searchParameters.carRequestDTO.mileage}) ")
+            "AND (:#{#searchParameters.carRequestDTO.engineCubicleFrom} IS NULL OR ad.car.engineCubicle >= :#{#searchParameters.carRequestDTO.engineCubicleFrom}) " +
+            "AND (:#{#searchParameters.carRequestDTO.engineCubicleTo} IS NULL OR ad.car.engineCubicle <= :#{#searchParameters.carRequestDTO.engineCubicleTo}) " +
+            "AND (:#{#searchParameters.carRequestDTO.powerFrom} IS NULL OR ad.car.power >= :#{#searchParameters.carRequestDTO.powerFrom}) " +
+            "AND (:#{#searchParameters.carRequestDTO.powerTo} IS NULL OR ad.car.power <= :#{#searchParameters.carRequestDTO.powerTo}) " +
+            "AND (:#{#searchParameters.carRequestDTO.mileageFrom} IS NULL OR ad.car.mileage >= :#{#searchParameters.carRequestDTO.mileageFrom}) "+
+            "AND (:#{#searchParameters.carRequestDTO.mileageTo} IS NULL OR ad.car.mileage <= :#{#searchParameters.carRequestDTO.mileageTo}) ")
     List<Ad> search(@Param("searchParameters") AdSearchRequestDTO searchParameters);
 
     @Query(value = "SELECT * " +

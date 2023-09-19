@@ -26,12 +26,15 @@ export class SearchComponent {
     priceTo: new FormControl(null),
     brand: new FormControl(null),
     model: new FormControl(null),
-    mileage: new FormControl(null),
+    mileageFrom: new FormControl(null),
+    mileageTo: new FormControl(null),
     carCategory: new FormControl(null),
     engineType: new FormControl(null),
     fuelType: new FormControl(null),
-    engineCubicle: new FormControl(null),
-    power: new FormControl(null),
+    engineCubicleFrom: new FormControl(null),
+    engineCubicleTo: new FormControl(null),
+    powerFrom: new FormControl(null),
+    powerTo: new FormControl(null),
     exchange: new FormControl(null),
     engineEmmisionClass: new FormControl(null),
     carDrive: new FormControl(null),
@@ -56,12 +59,15 @@ export class SearchComponent {
     searchAd.priceTo = this.adSearchForm.get("priceTo")?.value;
     searchAd.carRequestDTO.brand = this.adSearchForm.get("brand")?.value;
     searchAd.carRequestDTO.model = this.adSearchForm.get("model")?.value;
-    searchAd.carRequestDTO.mileage = this.adSearchForm.get("mileage")?.value;
+    searchAd.carRequestDTO.mileageFrom = this.adSearchForm.get("mileageFrom")?.value;
+    searchAd.carRequestDTO.mileageTo = this.adSearchForm.get("mileageTo")?.value;
     searchAd.carRequestDTO.carCategory = this.adSearchForm.get("carCategory")?.value;
     searchAd.carRequestDTO.engineType = this.adSearchForm.get("engineType")?.value;
     searchAd.carRequestDTO.fuelType = this.adSearchForm.get("fuelType")?.value;
-    searchAd.carRequestDTO.engineCubicle = this.adSearchForm.get("engineCubicle")?.value;
-    searchAd.carRequestDTO.power = this.adSearchForm.get("power")?.value;
+    searchAd.carRequestDTO.engineCubicleFrom = this.adSearchForm.get("engineCubicleFrom")?.value;
+    searchAd.carRequestDTO.engineCubicleTo = this.adSearchForm.get("engineCubicleTo")?.value;
+    searchAd.carRequestDTO.powerFrom = this.adSearchForm.get("powerFrom")?.value;
+    searchAd.carRequestDTO.powerTo = this.adSearchForm.get("powerTo")?.value;
     searchAd.carRequestDTO.exchange = this.adSearchForm.get("exchange")?.value;
     searchAd.carRequestDTO.engineEmmisionClass = this.adSearchForm.get("engineEmmisionClass")?.value;
     searchAd.carRequestDTO.carDrive = this.adSearchForm.get("carDrive")?.value;

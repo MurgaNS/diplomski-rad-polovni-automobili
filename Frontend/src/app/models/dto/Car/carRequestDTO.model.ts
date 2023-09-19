@@ -23,8 +23,14 @@ export class CarRequestDTO {
   chassisNumber: string = "";
   engineType: string = "";
   engineCubicle: number = 0;
+  engineCubicleFrom: number = 0;
+  engineCubicleTo: number = 0;
   power: number = 0;
+  powerFrom: number = 0;
+  powerTo: number = 0;
   mileage: number = 0;
+  mileageFrom: number = 0;
+  mileageTo: number = 0;
   photos: string[] = [];
   isRegistered: boolean = true;
 

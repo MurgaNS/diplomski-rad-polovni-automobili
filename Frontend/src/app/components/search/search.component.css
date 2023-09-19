@@ -4,19 +4,54 @@
 
 .flex-child1 {
   float: left;
-  width: 30%;
-
+  width: 23.5%;
 }
 
 .flex-child2{
   float: left;
-  width: 30%;
-  margin-top: 2.9rem;
+  width: 23.5%;
   margin-left: 1rem;
-;
 }
 
-flex-child3{
+.flex-child3{
   float: left;
-  width: 30rem;
+  width: 23.5%;
+  margin-bottom: 3rem;
+  margin-left: 1rem;
+}
+
+.flex-child4{
+  float: left;
+  width: 23.5%;
+  margin-left: 1rem;
+}
+
+/*additional*/
+.flex-child5{
+  float: left;
+  width: 28%;
+}
+
+.flex-child6{
+  float: left;
+  width: 28%;
+  margin-left: 1rem;
+}
+
+.flex-child7{
+  float: left;
+  width: 28%;
+  margin-left: 1rem ;
+}
+
+.flex-buttons{
+  margin-top: 20%;
+  margin-left: 15rem;
+  margin-right: 20rem;
+  position: relative;
+}
+
+.search{
+  float: initial;
+  margin-left: 0.3rem;
 }

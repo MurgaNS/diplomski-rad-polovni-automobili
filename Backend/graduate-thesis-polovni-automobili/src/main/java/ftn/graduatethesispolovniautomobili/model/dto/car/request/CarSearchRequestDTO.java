@@ -1,5 +1,6 @@
 package ftn.graduatethesispolovniautomobili.model.dto.car.request;
 
+import ftn.graduatethesispolovniautomobili.model.enumeration.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,21 +11,21 @@ import java.util.Date;
 public class CarSearchRequestDTO {
 
 
-    private String carCategory;
+    private ECarCategory carCategory;
 
-    private String carDrive;
+    private ECarDrive carDrive;
 
-    private String carGearbox;
+    private ECarGearbox carGearbox;
 
-    private String steeringWheelSide;
+    private ESteeringWheelSide steeringWheelSide;
 
-    private String climate;
+    private EClimate climate;
 
-    private String interiorMaterial;
+    private EInteriorMaterial interiorMaterial;
 
-    private String damage;
+    private ECarDamage damage;
 
-    private String exchange;
+    private EExchange exchange;
 
     private String brand;
 
@@ -42,14 +43,17 @@ public class CarSearchRequestDTO {
 
     private String engineType;
 
-    private Integer engineCubicle;
+    private Integer engineCubicleFrom;
+    private Integer engineCubicleTo;
 
-    private Integer power;
+    private Integer powerFrom;
+    private Integer powerTo;
 
-    private Integer mileage;
+    private Integer mileageFrom;
+    private Integer mileageTo;
 
-    private String engineEmmisionClass;
+    private EEngineEmmisionClass engineEmmisionClass;
 
-    private String fuelType;
+    private EFuelType fuelType;
 
 }

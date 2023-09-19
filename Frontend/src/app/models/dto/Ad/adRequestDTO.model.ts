@@ -7,10 +7,4 @@ export class AdRequestDTO {
   description: string = "";
   carRequestDTO: CarRequestDTO = new CarRequestDTO();
 
-
-  // AdRequestDTO(price: number, description: string, carRequestDTO: CarRequestDTO) {
-  //   this.price = price;
-  //   this.description = description;
-  //   this.carRequestDTO = carRequestDTO;
-  // }
 }
