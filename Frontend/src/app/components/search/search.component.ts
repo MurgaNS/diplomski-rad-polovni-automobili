@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {AdRequestDTO} from "../../models/dto/Ad/adRequestDTO.model";
 import {FormControl, FormGroup} from "@angular/forms";
 import {AdService} from "../../services/ad.service";
 import {Router} from "@angular/router";
+import {AdResponseDTO} from "../../models/dto/Ad/adResponseDTO.model";
 
 @Component({
   selector: 'app-search',
@@ -11,6 +12,9 @@ import {Router} from "@angular/router";
 })
 export class SearchComponent {
 
+  @Output()
+  newAdsEvent = new EventEmitter<AdResponseDTO[]>();
+
   constructor(private adService: AdService,
               private router: Router) {
   }
@@ -18,39 +22,38 @@ export class SearchComponent {
   submitted: boolean = false;
 
   adSearchForm: FormGroup = new FormGroup({
-    price: new FormControl(''),
-    brand: new FormControl(''),
-    model: new FormControl(''),
-    mileage: new FormControl(''),
-    carCategory: new FormControl(''),
-    engineType: new FormControl(''),
-    fuelType: new FormControl(''),
-    engineCubicle: new FormControl(''),
-    power: new FormControl(''),
-    exchange: new FormControl(''),
-    engineEmmisionClass: new FormControl(''),
-    carDrive: new FormControl(''),
-    carGearbox: new FormControl(''),
-    doorNumber: new FormControl(''),
-    seatsNumber: new FormControl(''),
-    steeringWheelSide: new FormControl(''),
-    climate: new FormControl(''),
-    color: new FormControl(''),
-    interiorMaterial: new FormControl(''),
-    interiorColor: new FormControl(''),
-    registeredUntil: new FormControl(''),
-    damage: new FormControl(''),
+    priceFrom: new FormControl(null),
+    priceTo: new FormControl(null),
+    brand: new FormControl(null),
+    model: new FormControl(null),
+    mileage: new FormControl(null),
+    carCategory: new FormControl(null),
+    engineType: new FormControl(null),
+    fuelType: new FormControl(null),
+    engineCubicle: new FormControl(null),
+    power: new FormControl(null),
+    exchange: new FormControl(null),
+    engineEmmisionClass: new FormControl(null),
+    carDrive: new FormControl(null),
+    carGearbox: new FormControl(null),
+    doorNumber: new FormControl(null),
+    seatsNumber: new FormControl(null),
+    steeringWheelSide: new FormControl(null),
+    climate: new FormControl(null),
+    color: new FormControl(null),
+    interiorMaterial: new FormControl(null),
+    interiorColor: new FormControl(null),
+    registeredUntil: new FormControl(null),
+    damage: new FormControl(null),
   });
 
   onSubmit() {
 
     this.submitted = true;
-    if (this.adSearchForm.invalid) {
-      return;
-    }
 
     let searchAd: AdRequestDTO = new AdRequestDTO();
-    searchAd.price = this.adSearchForm.get("price")?.value;
+    searchAd.priceFrom = this.adSearchForm.get("priceFrom")?.value;
+    searchAd.priceTo = this.adSearchForm.get("priceTo")?.value;
     searchAd.carRequestDTO.brand = this.adSearchForm.get("brand")?.value;
     searchAd.carRequestDTO.model = this.adSearchForm.get("model")?.value;
     searchAd.carRequestDTO.mileage = this.adSearchForm.get("mileage")?.value;
@@ -72,11 +75,12 @@ export class SearchComponent {
     searchAd.carRequestDTO.interiorColor = this.adSearchForm.get("interiorColor")?.value;
     searchAd.carRequestDTO.damage = this.adSearchForm.get("damage")?.value;
     // addAd.carRequestDTO.isRegistered = this.isRegistered;
-
+    console.log(JSON.stringify(searchAd))
     this.adService.Search(searchAd)
       .subscribe({
         next: (data) => {
-          this.router.navigate(['/Main']);
+          this.newAdsEvent.emit(data);
+          console.log(JSON.stringify(data))
         },
         error: (error) => {
           console.log(error);
@@ -85,9 +89,6 @@ export class SearchComponent {
           this.router.navigate(['/Main'])
         }
       })
-
-    console.log(searchAd)
-
   }
 
   isShowDivSearch: boolean = false;

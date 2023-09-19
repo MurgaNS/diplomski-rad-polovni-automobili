@@ -1,6 +1,6 @@
 package ftn.graduatethesispolovniautomobili.repository;
 
-import ftn.graduatethesispolovniautomobili.model.dto.ad.request.AdRequestDTO;
+import ftn.graduatethesispolovniautomobili.model.dto.ad.request.AdSearchRequestDTO;
 import ftn.graduatethesispolovniautomobili.model.entity.Ad;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -27,8 +27,10 @@ public interface AdRepository extends JpaRepository<Ad, Integer> {
     List<Ad> getUserAds(Integer user_id);
 
     @Query(value = "SELECT ad FROM Ad ad " +
-            "WHERE (:#{#searchParameters.price} IS NULL OR ad.price = :#{#searchParameters.price}) " +
-            "AND (:#{#searchParameters.carRequestDTO.carCategory} IS NULL OR ad.car.carCategory = :#{#searchParameters.carRequestDTO.carCategory}) " +
+            "WHERE ad.status = 'ACTIVE' " +
+            "AND (:#{#searchParameters.priceFrom} IS NULL OR ad.price >= :#{#searchParameters.priceFrom}) " +
+            "AND (:#{#searchParameters.priceTo} IS NULL OR ad.price <= :#{#searchParameters.priceTo}) " +
+            "AND (:#{#searchParameters.carRequestDTO.carCategory} IS NULL OR  ad.car.carCategory = :#{#searchParameters.carRequestDTO.carCategory}) " +
             "AND (:#{#searchParameters.carRequestDTO.carDrive} IS NULL OR ad.car.carDrive = :#{#searchParameters.carRequestDTO.carDrive}) " +
             "AND (:#{#searchParameters.carRequestDTO.carGearbox} IS NULL OR ad.car.carGearbox = :#{#searchParameters.carRequestDTO.carGearbox}) "+
             "AND (:#{#searchParameters.carRequestDTO.steeringWheelSide} IS NULL OR ad.car.steeringWheelSide = :#{#searchParameters.carRequestDTO.steeringWheelSide}) " +
@@ -48,7 +50,7 @@ public interface AdRepository extends JpaRepository<Ad, Integer> {
             "AND (:#{#searchParameters.carRequestDTO.engineCubicle} IS NULL OR ad.car.engineCubicle = :#{#searchParameters.carRequestDTO.engineCubicle}) " +
             "AND (:#{#searchParameters.carRequestDTO.power} IS NULL OR ad.car.power = :#{#searchParameters.carRequestDTO.power}) " +
             "AND (:#{#searchParameters.carRequestDTO.mileage} IS NULL OR ad.car.mileage = :#{#searchParameters.carRequestDTO.mileage}) ")
-    List<Ad> search(@Param("searchParameters")AdRequestDTO searchParameters);
+    List<Ad> search(@Param("searchParameters") AdSearchRequestDTO searchParameters);
 
     @Query(value = "SELECT * " +
             "FROM users_followed_ads LEFT JOIN ad ON ad.id = users_followed_ads.followed_ads_id " +

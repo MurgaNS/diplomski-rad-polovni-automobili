@@ -3,6 +3,7 @@ package ftn.graduatethesispolovniautomobili.controller;
 import ftn.graduatethesispolovniautomobili.exception.BadRequestException;
 import ftn.graduatethesispolovniautomobili.model.dto.ad.request.AdChangeStatusDTO;
 import ftn.graduatethesispolovniautomobili.model.dto.ad.request.AdRequestDTO;
+import ftn.graduatethesispolovniautomobili.model.dto.ad.request.AdSearchRequestDTO;
 import ftn.graduatethesispolovniautomobili.model.dto.ad.response.AdResponseDTO;
 import ftn.graduatethesispolovniautomobili.model.entity.Ad;
 import ftn.graduatethesispolovniautomobili.model.mapper.AdMapper;
@@ -171,10 +172,10 @@ public class AdController {
     }
 
     @PostMapping(value = "/search")
-    public ResponseEntity<List<AdResponseDTO>> search(@RequestBody(required = false) AdRequestDTO adRequestDTO) {
+    public ResponseEntity<List<AdResponseDTO>> search(@RequestBody(required = false) AdSearchRequestDTO adSearchRequestDTO) {
         try {
 
-            List<Ad> ads = adService.search(adRequestDTO);
+            List<Ad> ads = adService.search(adSearchRequestDTO);
 
             List<AdResponseDTO> adResponseDTOS = AdMapper.toDTOs(ads);
 

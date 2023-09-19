@@ -19,7 +19,7 @@ export class CarRequestDTO {
   seatsNumber: number = 0;
   color: string = "";
   interiorColor: string = "";
-  registeredUntil: Date = new Date();
+  registeredUntil: Date | undefined;
   chassisNumber: string = "";
   engineType: string = "";
   engineCubicle: number = 0;

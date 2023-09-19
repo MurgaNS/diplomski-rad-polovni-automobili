@@ -2,6 +2,7 @@ package ftn.graduatethesispolovniautomobili.service;
 
 import ftn.graduatethesispolovniautomobili.model.dto.ad.request.AdChangeStatusDTO;
 import ftn.graduatethesispolovniautomobili.model.dto.ad.request.AdRequestDTO;
+import ftn.graduatethesispolovniautomobili.model.dto.ad.request.AdSearchRequestDTO;
 import ftn.graduatethesispolovniautomobili.model.entity.Ad;
 import org.springframework.security.core.Authentication;
 
@@ -19,7 +20,7 @@ public interface AdService
 
     List<Ad> getAllInactive();
 
-    List<Ad> search(AdRequestDTO adRequestDTO);
+    List<Ad> search(AdSearchRequestDTO adSearchRequestDTO);
 
     List<Ad> getUserAds(Authentication authentication);
 

@@ -11,12 +11,11 @@ import ftn.graduatethesispolovniautomobili.service.AdService;
 import ftn.graduatethesispolovniautomobili.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.security.access.prepost.PreAuthorize;
-
 
 import java.util.List;
 
@@ -35,7 +34,7 @@ public class UserController {
 
     @GetMapping(value = "/myAds")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_REGULAR')")
-    private ResponseEntity<AdResponseDTO> getUserAds(Authentication authentication) {
+    public ResponseEntity<AdResponseDTO> getUserAds(Authentication authentication) {
 
         try {
 
@@ -54,7 +53,7 @@ public class UserController {
 
     @GetMapping(value = "/followedAds")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_REGULAR')")
-    private ResponseEntity<AdResponseDTO> getFollowedAds(Authentication authentication) {
+    public ResponseEntity<AdResponseDTO> getFollowedAds(Authentication authentication) {
 
         try {
 
@@ -72,7 +71,7 @@ public class UserController {
 
     @GetMapping(value = "/myProfile")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_REGULAR')")
-    private ResponseEntity<UserDTO> getProfileInfo(Authentication authentication) {
+    public ResponseEntity<UserDTO> getProfileInfo(Authentication authentication) {
 
         try {
 

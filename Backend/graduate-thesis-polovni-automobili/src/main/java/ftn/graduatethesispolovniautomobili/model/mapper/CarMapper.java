@@ -3,6 +3,7 @@ package ftn.graduatethesispolovniautomobili.model.mapper;
 import ftn.graduatethesispolovniautomobili.model.dto.car.request.CarRequestDTO;
 import ftn.graduatethesispolovniautomobili.model.dto.car.response.CarResponseDTO;
 import ftn.graduatethesispolovniautomobili.model.entity.Car;
+import ftn.graduatethesispolovniautomobili.model.enumeration.ECarCategory;
 
 public class CarMapper {
 
@@ -10,7 +11,7 @@ public class CarMapper {
 
         CarResponseDTO carResponseDTO = new CarResponseDTO();
 
-        carResponseDTO.setCarCategory(car.getCarCategory());
+        carResponseDTO.setCarCategory(ECarCategory.valueOf(String.valueOf(car.getCarCategory())));
         carResponseDTO.setCarDrive(car.getCarDrive());
         carResponseDTO.setCarGearbox(car.getCarGearbox());
         carResponseDTO.setSteeringWheelSide(car.getSteeringWheelSide());

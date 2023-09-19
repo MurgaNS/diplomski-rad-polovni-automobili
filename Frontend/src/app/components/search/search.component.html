@@ -1,12 +1,17 @@
 <div class="row">
   <div class="col-md-6 mx-auto">
-    <form class="p-5" [formGroup]="adSearchForm">
+    <form class="p-5" [formGroup]="adSearchForm" (ngSubmit)="onSubmit()">
       <div class="flex-child1">
         <h2>Search ads</h2>
 
         <div class="mb-3">
-          <mat-label class="form-mat-label">Price(€)</mat-label>
-          <input type="number" class="form-control" formControlName="price">
+          <mat-label class="form-mat-label">Price From(€)</mat-label>
+          <input type="number" class="form-control" formControlName="priceFrom">
+        </div>
+
+        <div class="mb-3">
+          <mat-label class="form-mat-label">Price To(€)</mat-label>
+          <input type="number" class="form-control" formControlName="priceTo">
         </div>
 
         <div>
@@ -207,14 +212,12 @@
       </div>
 
       <div class="flex-child3">
-        <button type="submit" class="mat-btn" mat-raised-button color="primary" (click)="onSubmit()">Search
-        </button>
 
         <button class="mat-btn" mat-raised-button color="primary" (click)="toggleDisplayDivSearch()">
           Additional informations
         </button>
       </div>
-
+      <button type="submit" class="mat-btn" mat-raised-button color="primary">Search</button>
 
     </form>
 
