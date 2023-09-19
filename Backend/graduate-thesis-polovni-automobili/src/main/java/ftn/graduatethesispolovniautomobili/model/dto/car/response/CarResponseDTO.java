@@ -19,9 +19,9 @@ public class CarResponseDTO {
     private EInteriorMaterial interiorMaterial;
     private ECarDamage damage;
     private EExchange exchange;
-    private ECarSafety carSafety;
-    private EVehicleCondition vehicleCondition;
-    private EAdditionalEquipment additionalEquipment;
+    private List<ECarSafety> carSafety;
+    private List<EVehicleCondition> vehicleCondition;
+    private List<EAdditionalEquipment> additionalEquipment;
     private List<String> photos;
     private String brand;
     private String model;
@@ -37,5 +37,7 @@ public class CarResponseDTO {
     private Integer mileage;
     private EEngineEmmisionClass engineEmmisionClass;
     private EFuelType fuelType;
+    private boolean isRegistered;
+
 
 }

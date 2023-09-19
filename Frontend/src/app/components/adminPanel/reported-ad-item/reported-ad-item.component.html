@@ -1,0 +1,18 @@
+<div class="card" style="width: 20rem; height: 30rem" [routerLink]="['/Ad-View', reportedAd.adResponseDTO.id]">
+  <div *ngFor="let photo of reportedAd.adResponseDTO.carResponseDTO.photos; let firstItem = first">
+    <div *ngIf="firstItem">
+      <img class="card-img-top" src="assets/images/{{photo}}" alt="Card image cap">
+    </div>
+  </div>
+  <div class="card-body flex-lg-grow-1">
+
+    <h4>Report reason: <i>{{reportedAd.reportReason.replaceAll("_", " ")| titlecase}}</i></h4>
+    <p class=""><b>{{reportedAd.adResponseDTO.carResponseDTO.brand}} {{reportedAd.adResponseDTO.carResponseDTO.model}}</b></p>
+    <p class="">Posted by: <b>{{reportedAd.adResponseDTO.user.username}}</b></p>
+    <p class="">Author's email address: <b>{{reportedAd.adResponseDTO.user.email}}</b></p>
+
+    <p class="">Contact: <b>{{reportedAd.adResponseDTO.user.phoneNumber}}</b></p>
+
+  </div>
+</div>
+

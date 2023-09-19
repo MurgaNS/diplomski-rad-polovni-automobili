@@ -4,6 +4,7 @@ import ftn.graduatethesispolovniautomobili.exception.AdExistsException;
 import ftn.graduatethesispolovniautomobili.exception.BadRequestException;
 import ftn.graduatethesispolovniautomobili.model.dto.ad.request.AdChangeStatusDTO;
 import ftn.graduatethesispolovniautomobili.model.dto.ad.request.AdRequestDTO;
+import ftn.graduatethesispolovniautomobili.model.dto.ad.request.AdSearchRequestDTO;
 import ftn.graduatethesispolovniautomobili.model.entity.Ad;
 import ftn.graduatethesispolovniautomobili.model.entity.Car;
 import ftn.graduatethesispolovniautomobili.model.entity.User;
@@ -80,13 +81,13 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
-    public List<Ad> search(AdRequestDTO adRequestDTO) {
+    public List<Ad> search(AdSearchRequestDTO adSearchRequestDTO) {
 
        /* if (adRequestDTO == null) {
             throw new BadRequestException("Please provide a valid search parameters!");
         }*/
 
-        return adRepository.search(adRequestDTO);
+        return adRepository.search(adSearchRequestDTO);
     }
 
     @Override

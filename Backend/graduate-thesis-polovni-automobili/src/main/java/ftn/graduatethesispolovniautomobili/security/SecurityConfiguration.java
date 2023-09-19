@@ -68,6 +68,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/auth/signup").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/auth/verify-account").permitAll()
+                .antMatchers(HttpMethod.PUT, "/api/auth/change-password").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/ad/search").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/ad/all").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/ad/{id}").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/ad/active").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/ad/search").permitAll()
+                .antMatchers(HttpMethod.PATCH, "/api/ad/{id}/change-status").permitAll()
+                .antMatchers(HttpMethod.PUT, "/api/ad/{id}").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/ad/{id}/follow").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/ad/create").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/upload-photos").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/report/all").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/report/{id}").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/report/all").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/user/myAds").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/user/followedAds").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/user/myProfile").permitAll()
                 .anyRequest().authenticated();
 
         httpSecurity.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);

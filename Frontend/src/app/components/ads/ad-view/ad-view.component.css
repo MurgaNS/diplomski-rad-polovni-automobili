@@ -1,0 +1,26 @@
+.card {
+  position: absolute;
+  /*margin-top: 1rem;*/
+  top: 10%;
+  left: 10%;
+  margin-right: -50%;
+  /*transform: translate(-50%, -50%);*/
+}
+
+.under-image-div {
+  margin: 1rem;
+}
+
+.mat-btn{
+  margin: 0.2rem;
+}
+
+.report {
+  width: 6rem;
+}
+
+.rightDiv{
+  /*display: inline-block;*/
+  position: absolute;
+
+}

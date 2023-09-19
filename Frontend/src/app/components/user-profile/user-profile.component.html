@@ -1,0 +1,23 @@
+<div class="card" style="width: 50rem; ">
+  <h3>My profile</h3>
+  <br>
+  <p class="">Username:<b> {{user.username}}</b></p>
+  <p class="">First name:<b> {{user.firstName}}</b></p>
+  <p class="">Last Name:<b> {{user.lastName}}</b></p>
+  <p class="">Country:<b> {{user.country}}</b></p>
+  <p class="">City:<b> {{user.city}}</b></p>
+  <p class="">District:<b> {{user.district}}</b></p>
+  <p class="">ZIP:<b> {{user.zip}}</b></p>
+  <p class="">Address:<b> {{user.address}}</b></p>
+  <p class="">Phone number:<b> {{user.phoneNumber}}</b></p>
+  <p class="">Email:<b> {{user.email}}</b></p>
+
+  <a [routerLink]="['/Change-Password']">
+    <button class="mat-btn" mat-raised-button color="primary">
+      <mat-icon>edit</mat-icon>
+      Change password
+    </button>
+  </a>
+
+
+</div>

@@ -1,0 +1,8 @@
+<div class="container">
+  <div class="row">
+    <h1 class="h1">Reported ADS</h1>
+    <div class="col-md-4 col-sm-12 col-lg-4" *ngFor="let reportedAd of reportedAds">
+      <app-reported-ad-item [reportedAd]="reportedAd"></app-reported-ad-item>
+    </div>
+  </div>
+</div>

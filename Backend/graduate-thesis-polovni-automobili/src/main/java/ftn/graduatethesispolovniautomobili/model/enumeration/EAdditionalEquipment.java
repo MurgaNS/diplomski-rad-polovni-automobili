@@ -10,7 +10,7 @@ public enum EAdditionalEquipment {
     CAMERA,
     PANORAMIC_ROOF,
     ELECTRIC_WINDOWS,
-    ELECTRIC_MIRROS,
+    ELECTRIC_MIRRORS,
     SEAT_HEATING,
     SEAT_COOLING,
     SEAT_MEMORY,

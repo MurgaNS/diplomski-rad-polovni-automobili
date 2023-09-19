@@ -12,7 +12,7 @@ public class ReportMapper {
 
         ReportResponseDTO reportResponseDTO = new ReportResponseDTO();
 
-        reportResponseDTO.setAdResponseForReportDTO(AdMapper.toReportDTO(report.getAd()));
+        reportResponseDTO.setAdResponseDTO(AdMapper.toReportDTO(report.getAd()));
         reportResponseDTO.setReportReason(report.getReportReason());
 
         return reportResponseDTO;

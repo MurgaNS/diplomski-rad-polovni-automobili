@@ -1,0 +1,18 @@
+/*.div{*/
+/*  !*margin: 10rem 50rem 75rem 30rem;*!*/
+/*  width: 50%;*/
+/*  padding: 10px;*/
+/*  margin: 10rem auto auto;*/
+/*  pointer-events: none;*/
+
+/*}*/
+
+.card {
+  position: absolute;
+  top: 10%;
+  left: 25%;
+  margin-right: -50%;
+  font-size: large;
+  padding: 1rem;
+}
+

@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -54,17 +56,27 @@ public class Car {
     @Enumerated(EnumType.STRING)
     private EExchange exchange;
 
-    @Column
+    @ElementCollection(targetClass = ECarSafety.class)
+    @JoinTable(name = "car_safety", joinColumns = @JoinColumn(name = "car_id"))
+    @Column(name = "safety", nullable = false)
     @Enumerated(EnumType.STRING)
-    private ECarSafety carSafety;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<ECarSafety> carSafety;
 
-    @Column
+    @ElementCollection(targetClass = EVehicleCondition.class)
+    @JoinTable(name = "car_vehicle_condition", joinColumns = @JoinColumn(name = "car_id"))
+    @Column(name = "vehicle_condition", nullable = false)
     @Enumerated(EnumType.STRING)
-    private EVehicleCondition vehicleCondition;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<EVehicleCondition> vehicleCondition;
 
-    @Column
+
+    @ElementCollection(targetClass = EAdditionalEquipment.class)
+    @JoinTable(name = "car_additional_equipment", joinColumns = @JoinColumn(name = "car_id"))
+    @Column(name = "additional_equipment", nullable = false)
     @Enumerated(EnumType.STRING)
-    private EAdditionalEquipment additionalEquipment;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<EAdditionalEquipment> additionalEquipment;
 
     @Column
     @Enumerated(EnumType.STRING)
@@ -87,6 +99,7 @@ public class Car {
     private Integer engineCubicle;
     private Integer power;
     private Integer mileage;
+    private boolean isRegistered;
 
 
     @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)

@@ -1,13 +1,16 @@
 package ftn.graduatethesispolovniautomobili.controller;
 
+import ftn.graduatethesispolovniautomobili.exception.BadRequestException;
 import ftn.graduatethesispolovniautomobili.model.dto.ad.request.AdChangeStatusDTO;
 import ftn.graduatethesispolovniautomobili.model.dto.ad.request.AdRequestDTO;
+import ftn.graduatethesispolovniautomobili.model.dto.ad.request.AdSearchRequestDTO;
 import ftn.graduatethesispolovniautomobili.model.dto.ad.response.AdResponseDTO;
 import ftn.graduatethesispolovniautomobili.model.entity.Ad;
 import ftn.graduatethesispolovniautomobili.model.mapper.AdMapper;
 import ftn.graduatethesispolovniautomobili.service.AdService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "api/ad")
+@CrossOrigin
 public class AdController {
 
     private final AdService adService;
@@ -25,94 +29,162 @@ public class AdController {
     }
 
     @PostMapping(value = "/create")
-    public ResponseEntity<AdResponseDTO> addNewClient(@Validated @RequestBody AdRequestDTO adRequestDTO,
-                                                      Authentication authentication) {
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_REGULAR')")
+    public ResponseEntity<AdResponseDTO> create(@Validated @RequestBody AdRequestDTO adRequestDTO,
+                                                Authentication authentication) {
 
-        Ad createdAd = adService.addNewAd(adRequestDTO, authentication);
+        try {
 
-        AdResponseDTO clientResponseDTO = AdMapper.toAdResponseDTO(createdAd);
+            Ad createdAd = adService.addNewAd(adRequestDTO, authentication);
 
-        return new ResponseEntity<>(clientResponseDTO, HttpStatus.OK);
+            AdResponseDTO clientResponseDTO = AdMapper.toAdResponseDTO(createdAd);
+
+            return new ResponseEntity<>(clientResponseDTO, HttpStatus.OK);
+
+        } catch (BadRequestException exception) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        }
     }
 
     @GetMapping(value = "/all")
-    public ResponseEntity<AdResponseDTO> getAll(){
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<AdResponseDTO> getAll() {
 
-        List<Ad> ad = adService.getAll();
+        try {
 
-        List<AdResponseDTO> adResponseDTO = AdMapper.toDTOs(ad);
+            List<Ad> ad = adService.getAll();
 
-        return new ResponseEntity(adResponseDTO, HttpStatus.OK);
+            List<AdResponseDTO> adResponseDTO = AdMapper.toDTOs(ad);
+
+            return new ResponseEntity(adResponseDTO, HttpStatus.OK);
+
+        } catch (BadRequestException exception) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        }
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<AdResponseDTO> getById(@PathVariable Integer id){
+    public ResponseEntity<AdResponseDTO> getById(@PathVariable Integer id) {
 
-        Ad ad = adService.getById(id);
+        try {
 
-        AdResponseDTO adResponseDTO = AdMapper.toAdResponseDTO(ad);
+            Ad ad = adService.getById(id);
 
-        return new ResponseEntity<>(adResponseDTO, HttpStatus.OK);
+            AdResponseDTO adResponseDTO = AdMapper.toAdResponseDTO(ad);
+
+            return new ResponseEntity<>(adResponseDTO, HttpStatus.OK);
+
+        } catch (BadRequestException exception) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        }
     }
 
     @GetMapping(value = "/active")
-    public ResponseEntity<AdResponseDTO> getAllActive(){
+    public ResponseEntity<AdResponseDTO> getAllActive() {
 
-        List<Ad> ad =adService.getAllActive();
+        try {
 
-        List<AdResponseDTO> adResponseDTO = AdMapper.toDTOs(ad);
+            List<Ad> ad = adService.getAllActive();
 
-        return new ResponseEntity(adResponseDTO, HttpStatus.OK);
+            List<AdResponseDTO> adResponseDTO = AdMapper.toDTOs(ad);
+
+            return new ResponseEntity(adResponseDTO, HttpStatus.OK);
+
+        } catch (BadRequestException exception) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        }
     }
 
     @GetMapping(value = "/inactive")
-    public ResponseEntity<AdResponseDTO> getAllInactive(){
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<AdResponseDTO> getAllInactive() {
 
-        List<Ad> ad =adService.getAllInactive();
+        try {
 
-        List<AdResponseDTO> adResponseDTO = AdMapper.toDTOs(ad);
+            List<Ad> ad = adService.getAllInactive();
 
-        return new ResponseEntity(adResponseDTO, HttpStatus.OK);
+            List<AdResponseDTO> adResponseDTO = AdMapper.toDTOs(ad);
+
+            return new ResponseEntity(adResponseDTO, HttpStatus.OK);
+
+        } catch (BadRequestException exception) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        }
     }
 
     @PatchMapping(value = "/{id}/change-status")
-    public ResponseEntity<AdResponseDTO> changeStatus(@RequestBody AdChangeStatusDTO adChangeStatusDTO, @PathVariable Integer id){
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_REGULAR')")
+    public ResponseEntity<AdResponseDTO> changeStatus(@RequestBody AdChangeStatusDTO adChangeStatusDTO, @PathVariable Integer id) {
 
-        Ad ad = adService.changeStatus(id,adChangeStatusDTO);
+        try {
 
-        AdResponseDTO adResponseDTO = AdMapper.toAdResponseDTO(ad);
+            Ad ad = adService.changeStatus(id, adChangeStatusDTO);
 
-        return new ResponseEntity(adResponseDTO, HttpStatus.OK);
+            AdResponseDTO adResponseDTO = AdMapper.toAdResponseDTO(ad);
+
+            return new ResponseEntity(adResponseDTO, HttpStatus.OK);
+
+        } catch (BadRequestException exception) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        }
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<AdResponseDTO> updateAd(@RequestBody AdRequestDTO adRequestDTO,@PathVariable Integer id, Authentication authentication){
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_REGULAR')")
+    public ResponseEntity<AdResponseDTO> updateAd(@RequestBody AdRequestDTO adRequestDTO, @PathVariable Integer id, Authentication authentication) {
 
-        Ad updatedAd = adService.updateAd(id,adRequestDTO,authentication);
+        try {
 
-        AdResponseDTO adResponseDTO = AdMapper.toAdResponseDTO(updatedAd);
+            Ad updatedAd = adService.updateAd(id, adRequestDTO, authentication);
 
-        return new ResponseEntity(adResponseDTO, HttpStatus.OK);
+            AdResponseDTO adResponseDTO = AdMapper.toAdResponseDTO(updatedAd);
+
+            return new ResponseEntity(adResponseDTO, HttpStatus.OK);
+
+        } catch (BadRequestException exception) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        }
     }
 
     @PostMapping(value = "/{id}/follow")
-    public ResponseEntity<AdResponseDTO> followAd(@PathVariable Integer id, Authentication authentication){
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_REGULAR')")
+    public ResponseEntity<AdResponseDTO> followAd(@PathVariable Integer id, Authentication authentication) {
 
-        Ad followedAd = adService.followAd(id, authentication);
+        try {
 
-        AdResponseDTO adResponseDTO = AdMapper.toAdResponseDTO(followedAd);
+            Ad followedAd = adService.followAd(id, authentication);
 
-        return new ResponseEntity(adResponseDTO, HttpStatus.OK);
+            AdResponseDTO adResponseDTO = AdMapper.toAdResponseDTO(followedAd);
+
+            return new ResponseEntity(adResponseDTO, HttpStatus.OK);
+
+        } catch (BadRequestException exception) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        }
     }
 
-    @GetMapping(value = "/search")
-    public ResponseEntity<List<AdResponseDTO>> search(@RequestBody(required = false) AdRequestDTO adRequestDTO) {
+    @PostMapping(value = "/search")
+    public ResponseEntity<List<AdResponseDTO>> search(@RequestBody(required = false) AdSearchRequestDTO adSearchRequestDTO) {
+        try {
 
-        List<Ad> ads = adService.search(adRequestDTO);
-        List<AdResponseDTO> adResponseDTOS = AdMapper.toDTOs(ads);
+            List<Ad> ads = adService.search(adSearchRequestDTO);
 
-        return new ResponseEntity(adResponseDTOS, HttpStatus.OK);
+            List<AdResponseDTO> adResponseDTOS = AdMapper.toDTOs(ads);
 
+            return new ResponseEntity(adResponseDTOS, HttpStatus.OK);
+
+        } catch (BadRequestException exception) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        }
     }
 
 

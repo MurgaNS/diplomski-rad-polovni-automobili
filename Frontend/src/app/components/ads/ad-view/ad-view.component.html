@@ -1,0 +1,133 @@
+<script src="ad-view.component.ts"></script>
+<div class="card" style="width: 50rem; ">
+  <ng-image-slider [imagePopup]="false" [imageSize]="{width: 795, height: 650}" [images]="images"
+                   #nav></ng-image-slider>
+
+  <div class="under-image-div">
+    <button class="mat-btn" mat-raised-button color="accent" (click)="follow()" *ngIf="hasLoggedIn() && !isAdCreator()">
+      <mat-icon>favorite</mat-icon>
+      Follow
+    </button>
+    <button class="mat-btn" mat-raised-button color="warn" (click)="toggleDisplayDivIf()"
+            *ngIf="hasLoggedIn() && !isAdCreator()">
+      <mat-icon>report_problem</mat-icon>
+      Report
+    </button>
+    <button class="mat-btn" mat-raised-button color="warn" (click)="deleteAd()" *ngIf="isAdCreator()">
+      <mat-icon>delete_forever</mat-icon>
+      Delete
+    </button>
+    <button class="mat-btn" mat-raised-button color="warn" (click)="toggleDisplayDivReject()"
+            *ngIf="isAdmin() && isRejectedOrApproved()">
+      <mat-icon>remove_circle_outline</mat-icon>
+      Reject
+    </button>
+    <button class="mat-btn" mat-raised-button color="primary" (click)="approveAd()"
+            *ngIf="isAdmin() && isRejectedOrApproved()">
+      <mat-icon>done_outline</mat-icon>
+      Approve
+    </button>
+    <a [routerLink]="['/Ad-Edit', ad_id]">
+      <button class="mat-btn" mat-raised-button color="basic" *ngIf="isAdCreator()">
+        <mat-icon>edit</mat-icon>
+        Edit Ad
+      </button>
+    </a>
+
+    <div class="mb-3" *ngIf="isShowDivIf">
+      <form class="p-5" [formGroup]="reportForm">
+        <label>Please select report reason</label>
+        <mat-select required class="form-control" formControlName="reportReason">
+          <mat-option value="DATA_FILLED_IN_INCORRECTLY">Data filled in incorrectly</mat-option>
+          <mat-option value="VEHICLE_SOLD">Vehicle sold</mat-option>
+          <mat-option value="MULTIPLE_VEHICLES_IN_ONE_AD">Multiple vehicles in one ad</mat-option>
+          <mat-option value="SUSPICION_OF_SCAM">Suspicion of scam</mat-option>
+          <mat-option value="ADVERTISING_SERVICES">Advertising services</mat-option>
+          <mat-option value="INSULTING">Insulting</mat-option>
+          <mat-option value="OTHER">Other</mat-option>
+        </mat-select>
+        <button class="mat-btn" mat-stroked-button color="primary" (click)="report()">Submit</button>
+        <button class="mat-btn" mat-stroked-button color="warn" routerLink="/Main">Cancel</button>
+      </form>
+    </div>
+
+    <div class="mb-3" *ngIf="isShowDivReject">
+      <form class="p-5" [formGroup]="rejectForm">
+        <label>Reason for rejecting the ad</label>
+        <input required class="form-control" formControlName="rejectedReason">
+        <button class="mat-btn" mat-stroked-button color="primary" (click)="rejectAd()">Submit</button>
+        <button class="mat-btn" mat-stroked-button color="warn" routerLink="/Inactive-Ads">Cancel</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="card-body flex-lg-grow-1">
+
+    <h2 class="">{{ad.carResponseDTO.brand}} {{ad.carResponseDTO.model}} - {{ad.carResponseDTO.engineType}}</h2>
+    <p class="">Price: <b>{{ad.price}}€</b></p>
+    <p class="">Posted by: <b>{{ad.user.username}}</b></p>
+    <p class="">Contact: <b>{{ad.user.phoneNumber}}</b></p>
+    <hr style="border: 1px solid">
+
+    <div>
+      <h3>General informations</h3>
+      <br>
+      <p class="">Brand: <b>{{ad.carResponseDTO.brand}}</b></p>
+      <p class="">Model: <b>{{ad.carResponseDTO.model}}</b></p>
+      <p class="">Mileage: <b>{{ad.carResponseDTO.mileage}}</b></p>
+      <p class="">Category: <b>{{ad.carResponseDTO.carCategory}}</b></p>
+      <p class="">Engine type: <b>{{ad.carResponseDTO.engineType}}</b></p>
+      <p class="">Fuel type: <b>{{ad.carResponseDTO.fuelType}}</b></p>
+      <p class="">Engine cubicle: <b>{{ad.carResponseDTO.engineCubicle}}</b></p>
+      <p class="">Power(hp): <b>{{ad.carResponseDTO.power}}</b></p>
+      <p class="">Exchange: <b>{{ad.carResponseDTO.exchange}}</b></p>
+    </div>
+    <hr style="border: 1px solid">
+    <div>
+      <h3>Additional informations</h3>
+      <br>
+      <p class="">Engine emmision class: <b>{{ad.carResponseDTO.engineEmmisionClass}}</b></p>
+      <p class="">Drive: <b>{{ad.carResponseDTO.carDrive}}</b></p>
+      <p class="">Gearbox: <b>{{ad.carResponseDTO.carGearbox}}</b></p>
+      <p class="">Door number: <b>{{ad.carResponseDTO.doorNumber}}</b></p>
+      <p class="">Seats number: <b>{{ad.carResponseDTO.seatsNumber}}</b></p>
+      <p class="">Steering wheel side: <b>{{ad.carResponseDTO.steeringWheelSide}}</b></p>
+      <p class="">Climate: <b>{{ad.carResponseDTO.climate}}</b></p>
+      <p class="">Color: <b>{{ad.carResponseDTO.color}}</b></p>
+      <p class="">Interior material: <b>{{ad.carResponseDTO.interiorMaterial}}</b></p>
+      <p class="">Interior color: <b>{{ad.carResponseDTO.interiorColor}}</b></p>
+      <p class="">Damage: <b>{{ad.carResponseDTO.damage}}</b></p>
+      <p class="">Chasis number: <b>{{ad.carResponseDTO.chassisNumber}}</b></p>
+      <p class="" *ngIf="ad.carResponseDTO.registeredUntil then showData else hideData "></p>
+      <ng-template #showData>Registered until: <b>{{ad.carResponseDTO.registeredUntil | date: 'd/M/yy'}}</b>
+      </ng-template>
+      <ng-template #hideData>Registration: <b>Car is not registered</b></ng-template>
+
+    </div>
+
+    <hr style="border: 1px solid">
+
+
+    <div>
+      <h3>Safety</h3>
+      <p class=""><i>{{ad.carResponseDTO.carSafety.join(", ")}}</i></p>
+    </div>
+
+    <div>
+      <h3>Additional equipment</h3>
+      <p class=""><i>{{ad.carResponseDTO.additionalEquipment.join(", ")}}</i></p>
+    </div>
+
+    <div>
+      <h3>Vehicle condition</h3>
+      <p class=""><i> {{ad.carResponseDTO.vehicleCondition.join(", ")}}</i></p>
+    </div>
+
+    <div>
+      <h3>Description</h3>
+      <p class=""><i>{{ad.description}}</i></p>
+    </div>
+
+  </div>
+
+</div>

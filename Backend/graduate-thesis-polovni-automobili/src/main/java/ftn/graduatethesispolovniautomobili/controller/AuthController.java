@@ -14,6 +14,7 @@ import ftn.graduatethesispolovniautomobili.service.AuthService;
 import ftn.graduatethesispolovniautomobili.service.impl.UserServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -42,43 +43,62 @@ public class AuthController {
     public ResponseEntity<UserTokenState> createAuthenticationToken
             (@Validated @RequestBody LoginRequestDTO employeeLoginRequestDTO) {
 
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                employeeLoginRequestDTO.getEmail(), employeeLoginRequestDTO.getPassword()));
+        try {
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                    employeeLoginRequestDTO.getEmail(), employeeLoginRequestDTO.getPassword()));
 
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        User user = userService.findByEmail(userDetails.getUsername());
-        if (!user.isVerification()) {
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+            User user = userService.findByEmail(userDetails.getUsername());
+            if (!user.isVerification()) {
+                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            }
+
+            String jwt = tokenUtils.generateToken(userDetails.getUsername(), userDetails.getAuthorities().toArray()[0].toString());
+            long expiresIn = tokenUtils.getExpiredIn();
+
+            return ResponseEntity.ok(new UserTokenState(jwt, expiresIn));
+
+        } catch (BadRequestException exception) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
         }
-
-        String jwt = tokenUtils.generateToken(userDetails.getUsername(), userDetails.getAuthorities().toArray()[0].toString());
-        long expiresIn = tokenUtils.getExpiredIn();
-
-        return ResponseEntity.ok(new UserTokenState(jwt, expiresIn));
     }
 
     @PostMapping(value = "/signup")
     public ResponseEntity<UserDTO> signUp(@RequestBody @Validated UserRegistrationRequestDTO userRegistrationRequestDTO) {
 
-        UserDTO createdUser = userService.registerUser(userRegistrationRequestDTO);
-        if (createdUser == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+        try {
 
-        return new ResponseEntity<>(createdUser, HttpStatus.OK);
+            UserDTO createdUser = userService.registerUser(userRegistrationRequestDTO);
+            if (createdUser == null) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+
+            return new ResponseEntity<>(createdUser, HttpStatus.OK);
+
+        } catch (BadRequestException exception) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        }
     }
 
     @PutMapping(value = "/change-password")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_REGULAR')")
     public ResponseEntity<String> changePassword(@RequestBody @Validated ChangePasswordRequestDTO changePasswordDTO, Authentication authentication) {
 
         try {
+
             authService.changePassword(changePasswordDTO, authentication);
+
             return new ResponseEntity<>(HttpStatus.OK);
+
         } catch (BadRequestException | PasswordMatchException exception) {
-            return new ResponseEntity<>(exception.getMessage(),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+
         }
     }
 
@@ -86,11 +106,14 @@ public class AuthController {
     public ResponseEntity<String> signupVerification(@RequestBody @Validated SignupVerificationDTO signupVerificationDTO) {
 
         try {
+
             authService.signupVerification(signupVerificationDTO);
+
             return new ResponseEntity<>(HttpStatus.OK);
 
         } catch (BadRequestException | PasswordMatchException ex) {
             return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+
         }
     }
 

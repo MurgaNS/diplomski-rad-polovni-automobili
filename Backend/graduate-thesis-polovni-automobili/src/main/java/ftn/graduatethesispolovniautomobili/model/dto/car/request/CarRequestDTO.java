@@ -11,30 +11,59 @@ import java.util.List;
 @Setter
 public class CarRequestDTO {
 
+
     private ECarCategory carCategory;
+
     private ECarDrive carDrive;
+
     private ECarGearbox carGearbox;
+
     private ESteeringWheelSide steeringWheelSide;
+
     private EClimate climate;
+
     private EInteriorMaterial interiorMaterial;
+
     private ECarDamage damage;
+
     private EExchange exchange;
-    private ECarSafety carSafety;
-    private EVehicleCondition vehicleCondition;
-    private EAdditionalEquipment additionalEquipment;
+
+    private List<ECarSafety> carSafety;
+
+    private List<EVehicleCondition> vehicleCondition;
+
+    private List<EAdditionalEquipment> additionalEquipment;
+
     private List<String> photos;
+
     private String brand;
+
     private String model;
+
     private Integer doorNumber;
+
     private Integer seatsNumber;
+
     private String color;
+
     private String interiorColor;
+
     private Date registeredUntil;
+
     private String chassisNumber;
+
     private String engineType;
+
     private Integer engineCubicle;
+
     private Integer power;
+
     private Integer mileage;
+
     private EEngineEmmisionClass engineEmmisionClass;
+
     private EFuelType fuelType;
+
+    private Boolean isRegistered;
+
 }

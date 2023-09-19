@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.security.access.prepost.PreAuthorize;
+
 
 import java.util.List;
 
@@ -24,16 +26,20 @@ public class FileUploadController {
 
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_REGULAR')")
     public ResponseEntity<List<String>> uploadPhotos(@RequestParam("photos") MultipartFile[] photos) {
 
         try {
-            String uploadDir = "src/main/resources/images";
+
+            String uploadDir = "../../Frontend/src/assets/images";
+
             List<String> filesNames = fileUploadService.saveFile(uploadDir, photos);
-            return  new ResponseEntity<>(filesNames, HttpStatus.OK);
 
-        }catch (Exception ex) {
+            return new ResponseEntity<>(filesNames, HttpStatus.OK);
 
-            return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } catch (Exception ex) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
         }
     }
 

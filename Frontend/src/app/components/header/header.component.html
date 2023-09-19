@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#" routerLink="/Main">UsedCars
+    <img src="assets/images/car-front-fill.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+  </a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+
+      <li class="nav-item dropdown" *ngIf="hasLoggedIn()">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle='dropdown'
+           aria-haspopup="true" aria-expanded="false">
+          My profile
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#" routerLink="/Create-Ad" *ngIf="hasLoggedIn()">Create New Ad </a>
+          <!--          <div class="dropdown-divider"></div>-->
+          <a class="dropdown-item" href="#" routerLink="/My-Ads">My Ads</a>
+          <a class="dropdown-item" href="#" routerLink="/Following-Ads">Following Ads</a>
+          <a class="dropdown-item" href="#" routerLink="/Reported-Ads">Reported Ads(admin)</a>
+          <a class="dropdown-item" href="#" routerLink="/Inactive-Ads">Approve/Reject Ads(admin)</a>
+          <a class="dropdown-item" href="#" routerLink="/My-Profile" *ngIf="hasLoggedIn()">Profile info</a>
+        </div>
+      </li>
+
+      <li class="nav-item ">
+        <a class="nav-link" href="#" routerLink="/Login" *ngIf="!hasLoggedIn()">Sign in</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" href="#" routerLink="/Registration" *ngIf="!hasLoggedIn()">Sign Up</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" (click)="logout()" *ngIf="hasLoggedIn()">Logout</a>
+      </li>
+
+    </ul>
+  </div>
+</nav>

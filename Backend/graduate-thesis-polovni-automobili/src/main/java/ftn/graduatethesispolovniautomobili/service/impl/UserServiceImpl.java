@@ -49,6 +49,7 @@ public class UserServiceImpl implements UserService {
         return findByEmail(user.getUsername());
     }
 
+    @Override
     public UserDTO registerUser(UserRegistrationRequestDTO userRegistrationRequestDTO) {
 
         User newUser = UserMapper.mapRegistrationRegularUser(userRegistrationRequestDTO);
