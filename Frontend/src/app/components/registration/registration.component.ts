@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthenticationService} from "../../security/authentication/authentication.service";
 import {Router} from "@angular/router";
 import {UserResponseDTO} from "../../models/dto/User/userResponseDTO.model";
@@ -71,6 +71,26 @@ export class RegistrationComponent {
         }
       })
 
+  }
+
+  ngOnInit(): void {
+    this.registrationFormGroup = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
+      password: ['', [Validators.required]],
+      firstName: ['', [Validators.required, Validators.minLength(3)]],
+      lastName: ['', [Validators.required, Validators.minLength(3)]],
+      username: ['', [Validators.required, Validators.minLength(3)]],
+      country: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+      district: ['', [Validators.required]],
+      zip: ['', [Validators.required]],
+      address: ['', [Validators.required, Validators.minLength(3)]],
+      phoneNumber: ['', [Validators.required]],
+    });
+  }
+
+  get f(): { [key: string]: AbstractControl } {
+    return this.registrationFormGroup.controls;
   }
 
 }

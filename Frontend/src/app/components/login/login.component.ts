@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {AuthenticationService} from "../../security/authentication/authentication.service";
 
@@ -14,7 +14,8 @@ export class LoginComponent {
     private authService: AuthenticationService,
     private formBuilder: FormBuilder,
     private router: Router,
-  ) {}
+  ) {
+  }
 
   formGroup: FormGroup = new FormGroup({
     email: new FormControl(''),
@@ -23,8 +24,8 @@ export class LoginComponent {
 
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-      password: ['', [Validators.required, Validators.minLength(3)]]
+      email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
+      password: ['', [Validators.required]],
     });
   }
 
@@ -45,5 +46,11 @@ export class LoginComponent {
       this.forbidden = true;
     })
   }
+
+
+  get f(): { [key: string]: AbstractControl } {
+    return this.formGroup.controls;
+  }
+
 
 }

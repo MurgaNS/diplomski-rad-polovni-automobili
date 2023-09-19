@@ -11,17 +11,26 @@
           type="file"
           multiple
           class="form-control"
-          (change)="onFileChange($event)">
+          (change)="onFileChange($event)" [ngClass]="{ 'is-invalid': submitted && f['file'].errors }">
         <!--        <div *ngIf="f.file.touched && f.file.invalid" class="alert alert-danger">-->
         <!--          <div *ngIf="f.file.errors && f.file.errors.required">File is required.</div>-->
         <!--        </div>-->
+        <div *ngIf="submitted && f['file'].errors" class="invalid-feedback">
+          <div *ngIf="f['file'].errors?.['required']">Photos are required.</div>
+        </div>
       </div>
 
       <br>
 
       <div class="mb-3">
         <mat-label class="form-mat-label">Price(€)</mat-label>
-        <input type="number" class="form-control" formControlName="price">
+        <input type="number" class="form-control" formControlName="price"
+               [ngClass]="{ 'is-invalid': submitted && f['price'].errors }">
+
+        <div *ngIf="submitted && f['price'].errors" class="invalid-feedback">
+          <div *ngIf="f['price'].errors?.['required']">Price is required.</div>
+        </div>
+
       </div>
 
       <div>
@@ -29,22 +38,41 @@
 
         <div class="mb-3">
           <mat-label>Brand</mat-label>
-          <input type="text" class="form-control" formControlName="brand">
+          <input type="text" class="form-control" formControlName="brand"
+                 [ngClass]="{ 'is-invalid': submitted && f['brand'].errors }">
+
+          <div *ngIf="submitted && f['brand'].errors" class="invalid-feedback">
+            <div *ngIf="f['brand'].errors?.['required']">Brand is required.</div>
+          </div>
+
         </div>
 
         <div class="mb-3">
           <mat-label>Model</mat-label>
-          <input type="text" class="form-control" formControlName="model">
+          <input type="text" class="form-control" formControlName="model"
+                 [ngClass]="{ 'is-invalid': submitted && f['model'].errors }">
+
+          <div *ngIf="submitted && f['model'].errors" class="invalid-feedback">
+            <div *ngIf="f['model'].errors?.['required']">Model is required.</div>
+          </div>
+
         </div>
 
         <div class="mb-3">
           <mat-label>Mileage</mat-label>
-          <input type="number" class="form-control" formControlName="mileage">
+          <input type="number" class="form-control" formControlName="mileage"
+                 [ngClass]="{ 'is-invalid': submitted && f['mileage'].errors }">
+
+          <div *ngIf="submitted && f['mileage'].errors" class="invalid-feedback">
+            <div *ngIf="f['mileage'].errors?.['required']">Mileage is required.</div>
+          </div>
+
         </div>
 
         <div class="mb-3">
           <mat-label>Category</mat-label>
-          <mat-select required class="form-control" formControlName="carCategory">
+          <mat-select required class="form-control" formControlName="carCategory"
+                      [ngClass]="{ 'is-invalid': submitted && f['carCategory'].errors }">
             <mat-option value="CABRIOLET">Cabriolet</mat-option>
             <mat-option value="ESTATE">Estate</mat-option>
             <mat-option value="SALOON">Saloon</mat-option>
@@ -54,16 +82,27 @@
             <mat-option value="SMALL_CAR">Small car</mat-option>
             <mat-option value="OFFROAD">Offroad</mat-option>
           </mat-select>
+
+          <div *ngIf="submitted && f['carCategory'].errors" class="invalid-feedback">
+            <div *ngIf="f['carCategory'].errors?.['required']">Car category is required.</div>
+          </div>
         </div>
 
         <div class="mb-3">
           <mat-label>Engine type</mat-label>
-          <input type="text" class="form-control" formControlName="engineType">
+          <input type="text" class="form-control" formControlName="engineType"
+                 [ngClass]="{ 'is-invalid': submitted && f['engineType'].errors }">
+
+          <div *ngIf="submitted && f['engineType'].errors" class="invalid-feedback">
+            <div *ngIf="f['engineType'].errors?.['required']">Engine type is required.</div>
+          </div>
+
         </div>
 
         <div class="mb-3">
           <mat-label>Fuel type</mat-label>
-          <mat-select required class="form-control" formControlName="fuelType">
+          <mat-select required class="form-control" formControlName="fuelType"
+                      [ngClass]="{ 'is-invalid': submitted && f['fuelType'].errors }">
             <mat-option value="DIESEL">Diesel</mat-option>
             <mat-option value="PETROL">Petrol</mat-option>
             <mat-option value="ElECTRIC">Electric</mat-option>
@@ -73,27 +112,48 @@
             <mat-option value="ETHANOL">Ethanol</mat-option>
             <mat-option value="OTHER">Other</mat-option>
           </mat-select>
+
+          <div *ngIf="submitted && f['fuelType'].errors" class="invalid-feedback">
+            <div *ngIf="f['fuelType'].errors?.['required']">Fuel type is required.</div>
+          </div>
         </div>
 
         <div class="mb-3">
           <mat-label>Engine cubicle</mat-label>
-          <input type="number" class="form-control" formControlName="engineCubicle">
+          <input type="number" class="form-control" formControlName="engineCubicle"
+                 [ngClass]="{ 'is-invalid': submitted && f['engineCubicle'].errors }">
+
+          <div *ngIf="submitted && f['engineCubicle'].errors" class="invalid-feedback">
+            <div *ngIf="f['engineCubicle'].errors?.['required']">Engine cubicle is required.</div>
+          </div>
+
         </div>
 
         <div class="mb-3">
           <mat-label>Power(hp)</mat-label>
-          <input type="number" class="form-control" formControlName="power">
+          <input type="number" class="form-control" formControlName="power"
+                 [ngClass]="{ 'is-invalid': submitted && f['power'].errors }">
+
+          <div *ngIf="submitted && f['power'].errors" class="invalid-feedback">
+            <div *ngIf="f['power'].errors?.['required']">Power(hp) is required.</div>
+          </div>
+
         </div>
 
         <div class="mb-3">
           <mat-label>Exchange</mat-label>
-          <mat-select required class="form-control" formControlName="exchange">
+          <mat-select required class="form-control" formControlName="exchange"
+                      [ngClass]="{ 'is-invalid': submitted && f['exchange'].errors }">
             <mat-option value="EXCHANGE_FOR_CHEAPER">Exchange for cheaper</mat-option>
             <mat-option value="EXCHANGE_FOR_MORE_EXPENSIVE">Exchange for more expensive</mat-option>
             <mat-option value="EXCHANGE_IN_THE_SAME_PRICE_RANG">Exchange in the same price rang</mat-option>
             <mat-option value="ANY">Any</mat-option>
             <mat-option value="NO">No</mat-option>
           </mat-select>
+
+          <div *ngIf="submitted && f['exchange'].errors" class="invalid-feedback">
+            <div *ngIf="f['exchange'].errors?.['required']">Exchange is required.</div>
+          </div>
         </div>
       </div>
 
@@ -102,7 +162,8 @@
 
         <div class="mb-3">
           <mat-label>Engine emmision class</mat-label>
-          <mat-select required class="form-control" formControlName="engineEmmisionClass">
+          <mat-select required class="form-control" formControlName="engineEmmisionClass"
+                      [ngClass]="{ 'is-invalid': submitted && f['engineEmmisionClass'].errors }">
             <mat-option value="EURO1">Euro 1</mat-option>
             <mat-option value="EURO2">Euro 2</mat-option>
             <mat-option value="EURO3">Euro 3</mat-option>
@@ -110,55 +171,92 @@
             <mat-option value="EURO5">Euro 5</mat-option>
             <mat-option value="EURO6">Euro 6</mat-option>
           </mat-select>
+
+          <div *ngIf="submitted && f['engineEmmisionClass'].errors" class="invalid-feedback">
+            <div *ngIf="f['engineEmmisionClass'].errors?.['required']">Engine emmision class is required.</div>
+          </div>
         </div>
 
         <div class="mb-3">
           <mat-label>Drive</mat-label>
-          <mat-select required class="form-control" formControlName="carDrive">
+          <mat-select required class="form-control" formControlName="carDrive"
+                      [ngClass]="{ 'is-invalid': submitted && f['carDrive'].errors }">
             <mat-option value="FRONT">Front</mat-option>
             <mat-option value="REAR">Rear</mat-option>
             <mat-option value="ALL_WHEEL">All wheel</mat-option>
           </mat-select>
+
+          <div *ngIf="submitted && f['carDrive'].errors" class="invalid-feedback">
+            <div *ngIf="f['carDrive'].errors?.['required']">Car drive is required.</div>
+          </div>
         </div>
 
         <div class="mb-3">
           <mat-label>Gearbox</mat-label>
-          <mat-select required class="form-control" formControlName="carGearbox">
+          <mat-select required class="form-control" formControlName="carGearbox"
+                      [ngClass]="{ 'is-invalid': submitted && f['carGearbox'].errors }">
             <mat-option value="AUTOMATIC">Automatic</mat-option>
             <mat-option value="SEMI_AUTOMATIC">Semi-automatic</mat-option>
             <mat-option value="MANUAL">Manual</mat-option>
           </mat-select>
+
+          <div *ngIf="submitted && f['carGearbox'].errors" class="invalid-feedback">
+            <div *ngIf="f['carGearbox'].errors?.['required']">Car gearbox is required.</div>
+          </div>
         </div>
 
         <div class="mb-3">
           <mat-label>Door number</mat-label>
-          <input type="number" class="form-control" formControlName="doorNumber">
+          <input type="number" class="form-control" formControlName="doorNumber"
+                 [ngClass]="{ 'is-invalid': submitted && f['doorNumber'].errors }">
+
+          <div *ngIf="submitted && f['doorNumber'].errors" class="invalid-feedback">
+            <div *ngIf="f['doorNumber'].errors?.['required']">Door number is required.</div>
+          </div>
+
         </div>
 
         <div class="mb-3">
           <mat-label>Seats number</mat-label>
-          <input type="number" class="form-control" formControlName="seatsNumber">
+          <input type="number" class="form-control" formControlName="seatsNumber"
+                 [ngClass]="{ 'is-invalid': submitted && f['seatsNumber'].errors }">
+
+          <div *ngIf="submitted && f['seatsNumber'].errors" class="invalid-feedback">
+            <div *ngIf="f['seatsNumber'].errors?.['required']">Seats number is required.</div>
+          </div>
+
         </div>
 
         <div class="mb-3">
           <mat-label>Steering wheel side</mat-label>
-          <mat-select required class="form-control" formControlName="steeringWheelSide">
+          <mat-select required class="form-control" formControlName="steeringWheelSide"
+                      [ngClass]="{ 'is-invalid': submitted && f['steeringWheelSide'].errors }">
             <mat-option value="LEFT">Left</mat-option>
             <mat-option value="RIGHT">Right</mat-option>
           </mat-select>
+
+          <div *ngIf="submitted && f['steeringWheelSide'].errors" class="invalid-feedback">
+            <div *ngIf="f['steeringWheelSide'].errors?.['required']">Steering wheel side is required.</div>
+          </div>
         </div>
 
         <div class="mb-3">
           <mat-label>Climate</mat-label>
-          <mat-select required class="form-control" formControlName="climate">
+          <mat-select required class="form-control" formControlName="climate"
+                      [ngClass]="{ 'is-invalid': submitted && f['climate'].errors }">
             <mat-option value="YES">Yes</mat-option>
             <mat-option value="NO">No</mat-option>
           </mat-select>
+
+          <div *ngIf="submitted && f['climate'].errors" class="invalid-feedback">
+            <div *ngIf="f['climate'].errors?.['required']">Climate is required.</div>
+          </div>
         </div>
 
         <div class="mb-3">
           <mat-label>Color</mat-label>
-          <mat-select required class="form-control" formControlName="color">
+          <mat-select required class="form-control" formControlName="color"
+                      [ngClass]="{ 'is-invalid': submitted && f['color'].errors }">
             <mat-option value="Black">Black</mat-option>
             <mat-option value="Blue">Blue</mat-option>
             <mat-option value="Beige">Beige</mat-option>
@@ -174,22 +272,32 @@
             <mat-option value="White">White</mat-option>
             <mat-option value="Other">Other</mat-option>
           </mat-select>
+
+          <div *ngIf="submitted && f['color'].errors" class="invalid-feedback">
+            <div *ngIf="f['color'].errors?.['required']">Color is required.</div>
+          </div>
         </div>
 
         <div class="mb-3">
           <mat-label>Interior material</mat-label>
-          <mat-select required class="form-control" formControlName="interiorMaterial">
+          <mat-select required class="form-control" formControlName="interiorMaterial"
+                      [ngClass]="{ 'is-invalid': submitted && f['interiorMaterial'].errors }">
             <mat-option value="CLOTH">Cloth</mat-option>
             <mat-option value="NATURAL_LEATHER">Natural leather</mat-option>
             <mat-option value="COMBINED_LEATHER">Combined leather</mat-option>
             <mat-option value="VELOURS">Velours</mat-option>
             <mat-option value="OTHER">Other</mat-option>
           </mat-select>
+
+          <div *ngIf="submitted && f['interiorMaterial'].errors" class="invalid-feedback">
+            <div *ngIf="f['interiorMaterial'].errors?.['required']">Interior material is required.</div>
+          </div>
         </div>
 
         <div class="mb-3">
           <mat-label>Interior color</mat-label>
-          <mat-select required class="form-control" formControlName="interiorColor">
+          <mat-select required class="form-control" formControlName="interiorColor"
+                      [ngClass]="{ 'is-invalid': submitted && f['interiorColor'].errors }">
             <mat-option value="Black">Black</mat-option>
             <mat-option value="Beige">Beige</mat-option>
             <mat-option value="Brown">Brown</mat-option>
@@ -198,11 +306,15 @@
             <mat-option value="White">White</mat-option>
             <mat-option value="Other">Other</mat-option>
           </mat-select>
+          <div *ngIf="submitted && f['interiorColor'].errors" class="invalid-feedback">
+            <div *ngIf="f['interiorColor'].errors?.['required']">Interior color is required.</div>
+          </div>
         </div>
 
         <section class="example-section">
           <mat-label>Is the car registered?</mat-label>
-          <mat-checkbox class="example-margin"  (click)="toggleDisplayRegistered($event)" formControlName="isRegistered"></mat-checkbox>
+          <mat-checkbox class="example-margin" (click)="toggleDisplayRegistered($event)"
+                        formControlName="isRegistered"></mat-checkbox>
         </section>
 
         <div class="mb-3" *ngIf="isShowDivRegistration">
@@ -212,24 +324,41 @@
 
         <div class="mb-3">
           <mat-label>Damage</mat-label>
-          <mat-select required class="form-control" formControlName="damage">
+          <mat-select required class="form-control" formControlName="damage"
+                      [ngClass]="{ 'is-invalid': submitted && f['damage'].errors }">
             <mat-option value="NO_DAMAGE">No damage</mat-option>
             <mat-option value="DAMAGED_IN_DRIVING_CONDITION">Damaged - in driving condition</mat-option>
             <mat-option value="DAMAGED_NOT_IN_DRIVING_CONDITION">Damaged - not in driving condition</mat-option>
           </mat-select>
+
+          <div *ngIf="submitted && f['damage'].errors" class="invalid-feedback">
+            <div *ngIf="f['damage'].errors?.['required']">Damage is required.</div>
+          </div>
         </div>
 
         <div class="mb-3">
           <mat-label>Chassis number</mat-label>
-          <input placeholder="E.g. EXCLKSGXWD9IFVNMU68" type="text" class="form-control" formControlName="chassisNumber">
+          <input placeholder="E.g. EXCLKSGXWD9IFVNMU68" type="text" class="form-control"
+                 formControlName="chassisNumber"
+                 [ngClass]="{ 'is-invalid': submitted && f['chassisNumber'].errors }">
+
+          <div *ngIf="submitted && f['chassisNumber'].errors" class="invalid-feedback">
+            <div *ngIf="f['chassisNumber'].errors?.['required']">Chassis number is required.</div>
+          </div>
+
         </div>
 
         <mat-form-field class="material-form">
           <mat-label>Select Car Safety</mat-label>
           <mat-select multiple [(ngModel)]="selectedCarSafety" (selectionChange)="onSelectionChangeCarSafety()"
-                      formControlName="carSafety">
+                      formControlName="carSafety"
+                      [ngClass]="{ 'is-invalid': submitted && f['carSafety'].errors }">
             <mat-option *ngFor="let item of carSafety" [value]="item">{{ item }} </mat-option>
           </mat-select>
+
+          <div *ngIf="submitted && f['carSafety'].errors" class="invalid-feedback">
+            <div *ngIf="f['carSafety'].errors?.['required']">Car safety is required.</div>
+          </div>
         </mat-form-field>
 
         <br>
@@ -237,9 +366,14 @@
         <mat-form-field class="material-form">
           <mat-label>Select Vehicle Condition</mat-label>
           <mat-select multiple [(ngModel)]="selectedCondition" (selectionChange)="onSelectionChangeVehicleCondition()"
-                      formControlName="vehicleCondition">
+                      formControlName="vehicleCondition"
+                      [ngClass]="{ 'is-invalid': submitted && f['vehicleCondition'].errors }">
             <mat-option *ngFor="let item of vehicleCondition" [value]="item">{{ item }}</mat-option>
           </mat-select>
+
+          <div *ngIf="submitted && f['vehicleCondition'].errors" class="invalid-feedback">
+            <div *ngIf="f['vehicleCondition'].errors?.['required']">Vehicle condition is required.</div>
+          </div>
         </mat-form-field>
 
         <br>
@@ -247,22 +381,34 @@
         <mat-form-field class="material-form">
           <mat-label>Select Additional Equipment</mat-label>
           <mat-select multiple [(ngModel)]="selectedEquipment" (selectionChange)="onSelectionChangeEquipment()"
-                      formControlName="additionalEquipment">
+                      formControlName="additionalEquipment"
+                      [ngClass]="{ 'is-invalid': submitted && f['additionalEquipment'].errors }">
             <mat-option *ngFor="let item of additionalEquipment" [value]="item">{{ item }}</mat-option>
           </mat-select>
+
+          <div *ngIf="submitted && f['additionalEquipment'].errors" class="invalid-feedback">
+            <div *ngIf="f['additionalEquipment'].errors?.['required']">Additional equipment is required.</div>
+          </div>
         </mat-form-field>
 
         <div class="mb-3">
           <mat-label>Description</mat-label>
-          <input type="text" class="form-control" formControlName="description">
+          <textarea type="text" class="form-control" formControlName="description"
+                 [ngClass]="{ 'is-invalid': submitted && f['description'].errors }"></textarea>
+
+          <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
+            <div *ngIf="f['description'].errors?.['required']">Description is required.</div>
+          </div>
+
         </div>
 
       </div>
 
       <div class="button-box col-lg-12">
-        <button type="submit" class="mat-btn" mat-raised-button color="primary"  (click)="onSubmit()">Submit data</button>
+        <button type="submit" class="mat-btn" mat-raised-button color="primary" (click)="onSubmit()">Submit data
+        </button>
         <a routerLink="/Main">
-          <button class="mat-btn" mat-raised-button color="warn" >Back to the main page</button>
+          <button class="mat-btn" mat-raised-button color="warn">Back to the main page</button>
         </a>
       </div>
 
