@@ -59,14 +59,14 @@ export class RegistrationComponent {
     this.authService.Register(register)
       .subscribe({
         next: (data) => {
-          this.router.navigate(['/Verify-Account']);
+          this.router.navigate(['/Login']);
         },
         error: (error) => {
           console.log(error);
           alert("Error in registration")
         },
         complete: () => {
-          this.router.navigate(['/Verify-Account'])
+          this.router.navigate(['/Login'])
           alert("Please check your e-mail address")
         }
       })

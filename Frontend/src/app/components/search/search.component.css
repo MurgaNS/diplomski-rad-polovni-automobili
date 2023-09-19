@@ -45,13 +45,13 @@
 }
 
 .flex-buttons{
-  margin-top: 20%;
+  /*margin-top: 20%;*/
   margin-left: 15rem;
   margin-right: 20rem;
-  position: relative;
+;
 }
 
 .search{
   float: initial;
-  margin-left: 0.3rem;
+  margin: 0.3rem;
 }

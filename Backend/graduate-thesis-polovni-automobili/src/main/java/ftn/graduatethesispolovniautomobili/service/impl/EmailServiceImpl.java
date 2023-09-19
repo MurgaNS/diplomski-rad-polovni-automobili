@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class EmailServiceImpl implements EmailService {
 
     private static final String SENT_FROM = "graduatepolovni.automobili@gmail.com";
-    private static final String VERIFY_API_URL = "http://localhost:4200/verify?token="; //this is the frontend page where the user will enter the new pass
+    private static final String VERIFY_API_URL = "http://localhost:4200/Verify-Account/"; //this is the frontend page where the user will enter the new pass
     private static final String SUBJECT_VERIFICATION = "Verify account";
 
     private final TokenUtils tokenUtils;

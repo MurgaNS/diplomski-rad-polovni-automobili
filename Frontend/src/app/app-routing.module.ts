@@ -28,7 +28,7 @@ const routes: Routes = [
     component: RegistrationComponent
   },
   {
-    path: "Verify-Account",
+    path: "Verify-Account/:token",
     component: VerificationComponent
   },
   {
