@@ -8,7 +8,8 @@
       <mat-icon>favorite</mat-icon>
       Follow
     </button>
-    <button class="mat-btn" mat-raised-button color="warn" (click)="toggleDisplayDivIf()" *ngIf="hasLoggedIn() && !isAdCreator()">
+    <button class="mat-btn" mat-raised-button color="warn" (click)="toggleDisplayDivIf()"
+            *ngIf="hasLoggedIn() && !isAdCreator()">
       <mat-icon>report_problem</mat-icon>
       Report
     </button>
@@ -16,11 +17,13 @@
       <mat-icon>delete_forever</mat-icon>
       Delete
     </button>
-    <button class="mat-btn" mat-raised-button color="warn" (click)="toggleDisplayDivReject()" *ngIf="isAdmin()">
+    <button class="mat-btn" mat-raised-button color="warn" (click)="toggleDisplayDivReject()"
+            *ngIf="isAdmin() && isRejectedOrApproved()">
       <mat-icon>remove_circle_outline</mat-icon>
       Reject
     </button>
-    <button class="mat-btn" mat-raised-button color="primary" (click)="approveAd()" *ngIf="isAdmin()">
+    <button class="mat-btn" mat-raised-button color="primary" (click)="approveAd()"
+            *ngIf="isAdmin() && isRejectedOrApproved()">
       <mat-icon>done_outline</mat-icon>
       Approve
     </button>
