@@ -39,7 +39,7 @@ public class EmailServiceImpl implements EmailService {
     public void sendVerificationEmail(UserRegistrationRequestDTO userRegistrationRequestDTO) {
         SimpleMailMessage message = new SimpleMailMessage();
 
-        String text = "Please check the link bellow and create a password within the next 60 minutes.Thanks!\n" +
+        String text = "Please check the link bellow and verify your account. Thanks!\n" +
                 "Link: " + VERIFY_API_URL + tokenUtils.generateToken(userRegistrationRequestDTO.getEmail(), "ROLE_" + userRegistrationRequestDTO.getRole().toString());
 
         message.setFrom(SENT_FROM);
