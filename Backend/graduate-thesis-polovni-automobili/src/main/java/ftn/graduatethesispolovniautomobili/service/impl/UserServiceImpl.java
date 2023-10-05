@@ -1,10 +1,15 @@
 package ftn.graduatethesispolovniautomobili.service.impl;
 
+import ftn.graduatethesispolovniautomobili.exception.BadRequestException;
+import ftn.graduatethesispolovniautomobili.exception.PasswordMatchException;
+import ftn.graduatethesispolovniautomobili.model.dto.auth.request.ChangePasswordRequestDTO;
+import ftn.graduatethesispolovniautomobili.model.dto.auth.request.SignupVerificationDTO;
 import ftn.graduatethesispolovniautomobili.model.dto.user.request.UserRegistrationRequestDTO;
 import ftn.graduatethesispolovniautomobili.model.dto.user.response.UserDTO;
 import ftn.graduatethesispolovniautomobili.model.entity.User;
 import ftn.graduatethesispolovniautomobili.model.mapper.UserMapper;
 import ftn.graduatethesispolovniautomobili.repository.UserRepository;
+import ftn.graduatethesispolovniautomobili.security.TokenUtils;
 import ftn.graduatethesispolovniautomobili.service.EmailService;
 import ftn.graduatethesispolovniautomobili.service.UserService;
 import org.springframework.security.core.Authentication;
@@ -18,14 +23,18 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+
     private final PasswordEncoder passwordEncoder;
+
+    private final TokenUtils tokenUtils;
 
     private final EmailService emailService;
 
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, EmailService emailService) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, EmailService emailService, TokenUtils tokenUtils) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.emailService = emailService;
+        this.tokenUtils = tokenUtils;
     }
 
 
@@ -39,6 +48,37 @@ public class UserServiceImpl implements UserService {
         Optional<User> user = userRepository.findFirstByEmail(email);
 
         return user.orElse(null);
+    }
+
+    @Override
+    public void changePassword(ChangePasswordRequestDTO changePasswordRequestDTO, Authentication authentication) {
+
+        User currentLoggedUser = findCurrentLoggedUser(authentication);
+
+        if (currentLoggedUser == null) {
+            throw new BadRequestException("Please provide a valid user");
+        }
+
+        if (passwordEncoder.matches(changePasswordRequestDTO.getCurrentPassword(), currentLoggedUser.getPassword()) &&
+                changePasswordRequestDTO.getNewPassword().equals(changePasswordRequestDTO.getConfirmNewPassword())) {
+            currentLoggedUser.setPassword(passwordEncoder.encode(changePasswordRequestDTO.getNewPassword()));
+            save(currentLoggedUser);
+
+        } else {
+            throw new PasswordMatchException("Passwords must match");
+        }
+    }
+
+    @Override
+    public void signupVerification(SignupVerificationDTO signupVerificationDTO) {
+
+        User user = findByEmail(tokenUtils.getEmailFromToken(signupVerificationDTO.getToken()));
+
+        if (tokenUtils.isTokenExpired(signupVerificationDTO.getToken()) || user == null) {
+            throw new BadRequestException("Token is invalid");
+        }
+        user.setVerification(true);
+        save(user);
     }
 
     @Override
@@ -62,11 +102,6 @@ public class UserServiceImpl implements UserService {
         emailService.sendVerificationEmail(userRegistrationRequestDTO);
 
         return UserMapper.mapUserDTO(newUser);
-    }
-
-    @Override
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
     }
 
 

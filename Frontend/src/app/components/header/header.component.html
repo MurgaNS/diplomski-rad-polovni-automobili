@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg">
   <a class="navbar-brand" href="#" routerLink="/Main">UsedCars
     <img src="assets/images/car-front-fill.svg" width="30" height="30" class="d-inline-block align-top" alt="">
   </a>
@@ -17,25 +17,29 @@
           My profile
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#" routerLink="/Create-Ad" *ngIf="hasLoggedIn()">Create New Ad </a>
+<!--          <a class="dropdown-item" href="#" routerLink="/Create-Ad" *ngIf="hasLoggedIn()">Create New Ad </a>-->
           <!--          <div class="dropdown-divider"></div>-->
-          <a class="dropdown-item" href="#" routerLink="/My-Ads">My Ads</a>
-          <a class="dropdown-item" href="#" routerLink="/Following-Ads">Following Ads</a>
-          <a class="dropdown-item" href="#" routerLink="/Reported-Ads">Reported Ads(admin)</a>
-          <a class="dropdown-item" href="#" routerLink="/Inactive-Ads">Approve/Reject Ads(admin)</a>
+          <a class="dropdown-item" href="#" routerLink="/My-Ads" *ngIf="hasLoggedIn()">My Ads</a>
+          <a class="dropdown-item" href="#" routerLink="/Following-Ads" *ngIf="hasLoggedIn()">Following Ads</a>
+          <a class="dropdown-item" href="#" routerLink="/Reported-Ads" *ngIf="isAdmin()">Reported Ads(admin)</a>
+          <a class="dropdown-item" href="#" routerLink="/Inactive-Ads" *ngIf="isAdmin()">Approve/Reject Ads(admin)</a>
           <a class="dropdown-item" href="#" routerLink="/My-Profile" *ngIf="hasLoggedIn()">Profile info</a>
         </div>
       </li>
 
-      <li class="nav-item ">
-        <a class="nav-link" href="#" routerLink="/Login" *ngIf="!hasLoggedIn()">Sign in</a>
+      <li class="nav-item">
+        <a class="nav-link" href="#" routerLink="/Create-Ad" *ngIf="hasLoggedIn()">Create New Ad </a>
       </li>
       <li class="nav-item ">
-        <a class="nav-link" href="#" routerLink="/Registration" *ngIf="!hasLoggedIn()">Sign Up</a>
+        <a class="nav-link" href="#" routerLink="/Login" *ngIf="!hasLoggedIn()">Log in</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" href="#" routerLink="/Registration" *ngIf="!hasLoggedIn()">Create new account</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#" (click)="logout()" *ngIf="hasLoggedIn()">Logout</a>
       </li>
+
 
     </ul>
   </div>
