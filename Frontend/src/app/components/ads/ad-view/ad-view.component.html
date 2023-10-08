@@ -13,10 +13,10 @@
       <mat-icon>report_problem</mat-icon>
       Report
     </button>
-<!--    <button class="mat-btn" mat-raised-button color="warn" (click)="deleteAd()" *ngIf="isAdCreator() && isAdmin()">-->
-<!--      <mat-icon>delete_forever</mat-icon>-->
-<!--      Delete-->
-<!--    </button>-->
+    <button class="mat-btn" mat-raised-button color="warn" (click)="deleteAd()" *ngIf="isAdCreator() && isAdmin()">
+      <mat-icon>delete_forever</mat-icon>
+      Delete
+    </button>
     <button class="mat-btn" mat-raised-button color="warn" (click)="toggleDisplayDivReject()"
             *ngIf="isAdmin() && isRejectedOrApproved()">
       <mat-icon>remove_circle_outline</mat-icon>
@@ -27,12 +27,12 @@
       <mat-icon>done_outline</mat-icon>
       Approve
     </button>
-<!--    <a [routerLink]="['/Ad-Edit', ad_id]">-->
-<!--      <button class="mat-btn" mat-raised-button color="basic" *ngIf="isAdCreator()">-->
-<!--        <mat-icon>edit</mat-icon>-->
-<!--        Edit Ad-->
-<!--      </button>-->
-<!--    </a>-->
+    <a [routerLink]="['/Ad-Edit', ad_id]">
+      <button class="mat-btn" mat-raised-button color="basic" *ngIf="isAdCreator()">
+        <mat-icon>edit</mat-icon>
+        Edit Ad
+      </button>
+    </a>
 
     <div class="mb-3" *ngIf="isShowDivIf">
       <form class="p-5" [formGroup]="reportForm">
