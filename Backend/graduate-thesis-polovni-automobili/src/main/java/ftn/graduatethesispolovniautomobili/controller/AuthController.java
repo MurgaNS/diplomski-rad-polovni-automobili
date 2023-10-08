@@ -10,7 +10,6 @@ import ftn.graduatethesispolovniautomobili.model.dto.user.request.UserRegistrati
 import ftn.graduatethesispolovniautomobili.model.dto.user.response.UserDTO;
 import ftn.graduatethesispolovniautomobili.model.entity.User;
 import ftn.graduatethesispolovniautomobili.security.TokenUtils;
-import ftn.graduatethesispolovniautomobili.service.AuthService;
 import ftn.graduatethesispolovniautomobili.service.impl.UserServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,16 +26,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "api/auth")
 public class AuthController {
     private final AuthenticationManager authenticationManager;
+
     private final TokenUtils tokenUtils;
+
     private final UserServiceImpl userService;
 
-    private final AuthService authService;
-
-    public AuthController(TokenUtils tokenUtils, UserServiceImpl userService, AuthenticationManager authenticationManager, AuthService authService) {
+    public AuthController(TokenUtils tokenUtils, UserServiceImpl userService, AuthenticationManager authenticationManager) {
         this.tokenUtils = tokenUtils;
         this.userService = userService;
         this.authenticationManager = authenticationManager;
-        this.authService = authService;
     }
 
     @PostMapping(value = "/login")
@@ -92,7 +90,7 @@ public class AuthController {
 
         try {
 
-            authService.changePassword(changePasswordDTO, authentication);
+            userService.changePassword(changePasswordDTO, authentication);
 
             return new ResponseEntity<>(HttpStatus.OK);
 
@@ -107,7 +105,7 @@ public class AuthController {
 
         try {
 
-            authService.signupVerification(signupVerificationDTO);
+            userService.signupVerification(signupVerificationDTO);
 
             return new ResponseEntity<>(HttpStatus.OK);
 

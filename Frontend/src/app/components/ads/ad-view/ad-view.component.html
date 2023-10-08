@@ -13,7 +13,7 @@
       <mat-icon>report_problem</mat-icon>
       Report
     </button>
-    <button class="mat-btn" mat-raised-button color="warn" (click)="deleteAd()" *ngIf="isAdCreator()">
+    <button class="mat-btn" mat-raised-button color="warn" (click)="deleteAd()" *ngIf="isAdCreator() && isAdmin()">
       <mat-icon>delete_forever</mat-icon>
       Delete
     </button>

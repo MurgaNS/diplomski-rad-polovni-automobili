@@ -13,60 +13,22 @@ import {RegistrationComponent} from "./components/registration/registration.comp
 import {VerificationComponent} from "./components/verification/verification.component";
 import {ChangePasswordComponent} from "./components/change-password/change-password.component";
 import {UserProfileComponent} from "./components/user-profile/user-profile.component";
+import {CanActivateAuthGuard} from "./security/authentication/can-activate-auth.guard";
 
 const routes: Routes = [
-  {
-    path: "Main",
-    component: AdsComponent
-  },
-  {
-    path: "Login",
-    component: LoginComponent
-  },
-  {
-    path: "Registration",
-    component: RegistrationComponent
-  },
-  {
-    path: "Verify-Account/:token",
-    component: VerificationComponent
-  },
-  {
-    path: "Change-Password",
-    component: ChangePasswordComponent
-  },
-  {
-    path: "My-Profile",
-    component: UserProfileComponent
-  },
-  {
-    path: "Ad-View/:id",
-    component: AdViewComponent
-  },
-  {
-    path: "Create-Ad",
-    component: AdAddComponent,
-  },
-  {
-    path: "My-Ads",
-    component: MyAdsComponent,
-  },
-  {
-    path: "Following-Ads",
-    component: FollowingAdsComponent,
-  },
-  {
-    path: "Reported-Ads",
-    component: ReportedAdsComponent
-  },
-  {
-    path: "Inactive-Ads",
-    component: InactiveAdsComponent
-  },
-  {
-    path: "Ad-Edit/:id",
-    component: AddEditComponent
-  }
+  {path: "Main", component: AdsComponent},
+  {path: "Login", component: LoginComponent},
+  {path: "Registration", component: RegistrationComponent},
+  {path: "Verify-Account/:token", component: VerificationComponent},
+  {path: "Change-Password", component: ChangePasswordComponent},
+  {path: "My-Profile", component: UserProfileComponent, canActivate: [CanActivateAuthGuard], title: 'Used Cars | My Profile'},
+  {path: "Ad-View/:id", component: AdViewComponent},
+  {path: "Create-Ad", component: AdAddComponent, canActivate: [CanActivateAuthGuard], title: 'Used Cars | Create Ad'},
+  {path: "My-Ads", component: MyAdsComponent, canActivate: [CanActivateAuthGuard], title: 'Used Cars | My Ads'},
+  {path: "Following-Ads", component: FollowingAdsComponent, canActivate: [CanActivateAuthGuard], title: 'Used Cars | Following ads'},
+  {path: "Reported-Ads", component: ReportedAdsComponent, canActivate: [CanActivateAuthGuard], title: 'Used Cars | Reported Ads'},
+  {path: "Inactive-Ads", component: InactiveAdsComponent, canActivate: [CanActivateAuthGuard], title: 'Used Cars | Inactive ads'},
+  {path: "Ad-Edit/:id", component: AddEditComponent, canActivate: [CanActivateAuthGuard], title: 'Used Cars | Edit Ad'}
 ];
 
 @NgModule({
