@@ -19,4 +19,8 @@ export class HeaderComponent {
     return this.authService.hasLoggedIn();
   }
 
+  isAdmin(){
+    return this.authService.isAdmin();
+  }
+
 }

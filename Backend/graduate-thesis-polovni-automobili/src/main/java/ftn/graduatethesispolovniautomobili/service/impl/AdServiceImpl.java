@@ -83,10 +83,6 @@ public class AdServiceImpl implements AdService {
     @Override
     public List<Ad> search(AdSearchRequestDTO adSearchRequestDTO) {
 
-       /* if (adRequestDTO == null) {
-            throw new BadRequestException("Please provide a valid search parameters!");
-        }*/
-
         return adRepository.search(adSearchRequestDTO);
     }
 

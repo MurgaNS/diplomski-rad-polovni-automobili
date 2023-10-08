@@ -1,3 +1,8 @@
 .mat-btn {
   margin: 0.2rem
 }
+
+.mainDiv{
+  background-color: coral;
+  margin-top: 4rem;
+}
